@@ -30,7 +30,7 @@
 
         .table1 {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 10px;
             border: 1px solid black;
             /* text-align: center; */
             font-size: 12px;
@@ -83,7 +83,9 @@
         Uang Muka Kerja Umum Tanggal {{ $tanggal }} :
     </p>
     <p>
-        Stempel Kasir/Teller dengan kelebihan sebesar Rp.{{ $selisih }} ({{ $terbilang }})
+        dengan Nomor Pengajuan : <strong>{{ $nomor }}</strong>.
+    <p>
+        Stempel Kasir/Teller dengan kelebihan sebesar Rp.{{ $total_selisih }} ({{ $terbilang }})
     </p>
     <p>Dengan rincian sebagai berikut :</p>
 
@@ -113,11 +115,11 @@
                         @endphp
                         <tr class="border">
                             <td class="border">{{ $no++ }}</td>
-                            <td class="border">{{ $transaksi->akun_bpr ?? 'N/A' }}</td>
+                            <td class="border">{{ $transaksi->kode_akun ?? 'N/A' }}</td>
                             <td class="border">{{ $transaksi->nama_akun }}</td>
-                            <td class="border">{{ number_format($transaksi->nominal, 0, ',', '.') }}</td>
-                            <td class="border">{{ number_format($totalNominal, 0, ',', '.') }}</td>
-                            <td class="border">{{ number_format($transaksi->nominal - $totalNominal, 0, ',', '.') }}</td>
+                            <td class="border">{{ number_format($transaksi->pengajuan, 0, ',', '.') }}</td>
+                            <td class="border">{{ number_format($transaksi->realisasi, 0, ',', '.') }}</td>
+                            <td class="border">{{ number_format($transaksi->selisih, 0, ',', '.') }}</td>
                         </tr>
             @endforeach
             @php
@@ -133,8 +135,8 @@
             <tr class="border">
                 <td class="border" colspan="3"><strong>Total</strong></td>
                 <td class="border">{{ number_format($total_pengajuan, 0, ',', '.') }}</td>
-                <td class="border">{{ number_format($totalNominalSum, 0, ',', '.') }}</td>
-                <td class="border">{{ number_format($total_pengajuan - $totalNominalSum, 0, ',', '.') }}</td>
+                <td class="border">{{ number_format($total_realisasi, 0, ',', '.') }}</td>
+                <td class="border">{{ number_format($total_selisih, 0, ',', '.') }}</td>
             </tr>
         </tfoot>
     </table>
@@ -149,7 +151,7 @@
         Demikian, atas perhatian dan kerjasamanya diucapkan, Terima kasih.
     </p>
 
-    <table style="width: 100%; border-color: #ffff; margin-top: 50px; border-collapse: collapse; border:none;">
+    <table style="width: 100%; border-color: #ffff; margin-top: 25px; border-collapse: collapse; border:none;">
         <tr>
             <td style="padding: 20px; text-align: center">
                 <p style="margin: 0">Menyetujui</p>

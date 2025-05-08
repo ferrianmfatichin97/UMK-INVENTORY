@@ -30,7 +30,7 @@
 
         .table1 {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 10px;
             border: 1px solid black;
             /* text-align: center; */
             font-size: 12px;
@@ -82,8 +82,8 @@
     <br>
 
     <p>
-        Menunjuk perihal diatas, dengan ini diajukan Uang Muka Kerja Umum sebesar Rp.{{ $total_pengajuan }}
-        ({{ $terbilang }})
+        Menunjuk perihal diatas, dengan ini diajukan Uang Muka Kerja Umum sebesar Rp. 10.000.000,-
+        ({{ $terbilang }}), dengan Nomor Pengajuan : {{ $nomor }}.
     </p>
     <p>Uang Muka Tersebut membebani akun sebagai berikut :</p>
 
@@ -114,7 +114,7 @@
                             <td class="border">{{ $transaksi->kode_akun ?? 'N/A' }}</td>
                             <td class="border">{{ $transaksi->nama_akun }}</td>
                             <td class="border">{{ number_format($transaksi->jumlah, 0, ',', '.') }}</td>
-                            <td class="border">{{ $transaksi->keterangan}}</td>
+                            <td class="border">-</td>
                         </tr>
             @endforeach
             @php
@@ -148,7 +148,7 @@
         Demikian, atas perhatian dan kerjasamanya diucapkan, Terima kasih.
     </p>
 
-    <table style="width: 100%; border-color: #ffff; margin-top: 50px; border-collapse: collapse; border:none;">
+    <table style="width: 100%; border-color: #ffff; margin-top: 25px; border-collapse: collapse; border:none;">
         <tr>
             <td style="padding: 20px; text-align: center">
                 <p style="margin: 0">Menyetujui</p>
@@ -177,9 +177,9 @@
     </table>
     <p>
         Sesuai dengan pengajuan surat pembayaran uang muka kerja umum nomor : {{ $nomor }} , telah diserahkan
-        muka kerja sebesar Rp. {{ $total_pengajuan }},- pada tanggal {{ $formattedDate }}.
+        muka kerja sebesar Rp. 10.000.000,- pada tanggal {{ $formattedDate }}.
     </p>
-    <table style="width: 100%; border-color: #ffff; margin-top: 50px; border-collapse: collapse; border:none;">
+    <table style="width: 100%; border-color: #ffff; margin-top: 25px; border-collapse: collapse; border:none;">
         <tr>
             <td style="padding: 20px; text-align: center">
                 <p style="margin: 0">Menyerahkan</p>

@@ -31,6 +31,7 @@ class ListPengajuanUMKS extends ListRecords
                     Select::make('nomor_pengajuan')
                         ->label('Pengajuan')
                         ->options(PengajuanUMK::query()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
+                        ->searchable()
                         ->required(),
                 ])
                 ->action(function (array $data) {

@@ -42,6 +42,7 @@ class TransaksiUMKResource extends Resource
                             ->options(PengajuanUMK::all()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
                             //->options(PengajuanUMK::all()->pluck('nomor_pengajuan', 'id')->toArray())
                             ->required()
+                            ->searchable()
                             ->columnSpanFull()
                             ->afterStateUpdated(function ($state) {
                                 Log::info('Selected no_pengajuan: ' . $state);
