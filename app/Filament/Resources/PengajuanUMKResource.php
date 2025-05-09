@@ -193,23 +193,6 @@ class PengajuanUMKResource extends Resource
             ]);
     }
 
-    // public static function infolist(\Filament\Infolists\Infolist $infolist): \Filament\Infolists\Infolist
-    // {
-    //     return $infolist
-    //         ->schema([
-    //             \Filament\Infolists\Components\Section::make('PDF Viewer')
-    //                 ->description('Prevent the PDF from being downloaded')
-    //                 ->collapsible()
-    //                 ->schema([
-    //                     PdfViewerEntry::make('file')
-    //                         ->label('View the PDF')
-    //                         ->minHeight('40svh')
-    //                         ->fileUrl(Storage::url('LPJWB.pdf'))
-    //                         ->columnSpanFull(),
-    //                 ]),
-    //         ]);
-    // }
-
     public static function updateTotals($get, $set): void
     {
         $invoiceItems = collect($get('pengajuan_detail'))->filter(fn($item) => !empty($item['jumlah']));

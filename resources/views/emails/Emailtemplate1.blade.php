@@ -76,36 +76,29 @@
 </head>
 
 <body>
-    {{-- {{ print_r($reminderGroups) }}--}}
-    {{-- {{ dd($reminderGroups, $today) }} --}}
+    
     <div class="container">
         <div class="header">
             <h1>Reminder Pembayaran Pajak Kendaraan</h1>
-            {{-- <h2>Hari ini tanggal : {{ $today['today'] }}</h2> --}}
             <h2>Hari ini tanggal : </h2>
         </div>
-        {{-- @if (count($reminderGroups) > 0) --}}
         <div class="content">
             <p>Berikut adalah Data kendaraan yang perlu dibayarkan dalam {{ $reminderGroups['selisih_hari'] }} hari ke depan:</p>
             <table>
                 <tr>
                     {{-- <th>No</th> --}}
                     <th>Jenis Kendaraan</th>
+                    <th>Tipe Kendaraan</th>
                     <th>Nomor Kendaraan</th>
                     <th>Kantor Cabang</th>
                     <th>Tanggal Jatuh Tempo Pajak</th>
                 </tr>
-                {{-- @foreach ($reminderGroups as $index => $kendaraan) --}}
-                {{-- @foreach ($reminderGroups as $kendaraan) --}}
+                
 
                 <tr>
-                    {{-- <td>{{ $index + 1 }}</td> --}}
-                    {{-- <td>no</td> --}}
-                    {{-- <td>{{ $kendaraan->jenis_kendaraan }}</td>
-                    <td>{{ $kendaraan->no_registrasi }}</td>
-                    <td>{{ $kendaraan->kantor_cabang }}</td>
-                    <td>{{ $kendaraan->jadwal_pajak }}</td> --}}
+                    
                     <td>{{ $reminderGroups['jenis_kendaraan'] }}</td>
+                    <td>{{ $reminderGroups['type'] }}</td>
                     <td>{{ $reminderGroups['no_registrasi'] }}</td>
                     <td>{{ $reminderGroups['kantor_cabang'] }}</td>
                     <td>{{ $reminderGroups['jadwal_pajak'] }}</td>
@@ -116,9 +109,5 @@
         <div class="footer">
             <p>&copy; 2025 PT Bank BPR dp Taspen.</p>
         </div>
-        {{-- @else
-        <div class="content">
-            <p>Tidak ada kendaraan yang akan jatuh tempo pajak dalam 10 hari ke depan.</p>
-        </div>
-        @endif --}}
+       
     </div>

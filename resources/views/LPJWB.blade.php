@@ -41,6 +41,11 @@
             text-align: center;
         }
 
+        .border1 {
+            border: 1px solid black;
+            text-align: left;
+        }
+
         .warna {
             background-color: #f2f2f2;
             border: 1px solid black;
@@ -115,11 +120,11 @@
                         @endphp
                         <tr class="border">
                             <td class="border">{{ $no++ }}</td>
-                            <td class="border">{{ $transaksi->kode_akun ?? 'N/A' }}</td>
-                            <td class="border">{{ $transaksi->nama_akun }}</td>
-                            <td class="border">{{ number_format($transaksi->pengajuan, 0, ',', '.') }}</td>
-                            <td class="border">{{ number_format($transaksi->realisasi, 0, ',', '.') }}</td>
-                            <td class="border">{{ number_format($transaksi->selisih, 0, ',', '.') }}</td>
+                            <td class="border">{{ $transaksi['A'] }}</td>
+                            <td class="border1">  - {{ $transaksi['B'] }}</td>
+                            <td class="border">{{ number_format($transaksi['Pengajuan'], 0, ',', '.') }}</td>
+                            <td class="border">{{ number_format($transaksi['Transaksi'], 0, ',', '.') }}</td>
+                            <td class="border">{{ number_format($transaksi['Pengajuan'] - $transaksi['Transaksi'], 0, ',', '.') }}</td>
                         </tr>
             @endforeach
             @php

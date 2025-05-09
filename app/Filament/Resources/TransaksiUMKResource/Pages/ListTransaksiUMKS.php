@@ -33,37 +33,53 @@ class ListTransaksiUMKS extends ListRecords
                         ->required(),
                 ])
                 ->action(function (array $data) {
-                    $nomor_pengajuan_detail = $data['nomor_pengajuan'];
-                    
-                    $pengajuan = DB::table('pengajuanumk')
-                    ->where('nomor_pengajuan', $nomor_pengajuan_detail)
-                    ->get();
+                    $nomor_pengajuan = $data['nomor_pengajuan'];
+                    $formattedTanggal = DB::table('pengajuanumk')
+                        ->where('nomor_pengajuan', $nomor_pengajuan)
+                        ->value('tanggal_pengajuan');
 
-                    $tanggal_pengajuan = $pengajuan->first()->tanggal_pengajuan;
-                    $tanggal = Carbon::parse($tanggal_pengajuan)->translatedFormat('d F Y');
+                    $tanggal = Carbon::parse($formattedTanggal)->translatedFormat('d F Y');
 
-                    //dd($pengajuan);
+                    $pengajuan = pengajuan_detail::select(
+                        'kode_akun AS A',
+                        'nama_akun AS B',
+                        'nomor_pengajuan AS C',
+                        DB::raw('SUM(jumlah) AS D'),
+                        DB::raw("'Pengajuan' AS Sumber")
+                    )
+                        ->where('nomor_pengajuan', $nomor_pengajuan)
+                        ->groupBy('kode_akun', 'nama_akun', 'nomor_pengajuan');
+                    $transaksi = Transaksiumk::select(
+                        'akun_bpr AS A',
+                        'nama_akun AS B',
+                        'no_pengajuan AS C',
+                        DB::raw('SUM(nominal) AS D'),
+                        DB::raw("'Transaksi' AS Sumber")
+                    )
+                        ->where('no_pengajuan', $nomor_pengajuan)
+                        ->groupBy('akun_bpr', 'nama_akun', 'no_pengajuan');
 
-                    $detail = DB::table('transaksiumk as pd')
-                        ->select(
-                            DB::raw('ROW_NUMBER() OVER (ORDER BY pd.akun_bpr) AS No'),
-                            'pd.akun_bpr AS kode_akun',
-                            'pd.nama_akun AS nama_akun',
-                            DB::raw('COALESCE(t.jumlah, 0) AS pengajuan'),
-                            DB::raw('COALESCE(SUM(pd.nominal), 0) AS realisasi'),
-                            DB::raw('(COALESCE(t.jumlah, 0) - COALESCE(SUM(pd.nominal), 0)) AS selisih')
-                        )
-                        ->leftJoin('pengajuan_details as t', function ($join) {
-                            $join->on('pd.akun_bpr', '=', 't.kode_akun')
-                                ->on(DB::raw('SUBSTRING(pd.no_pengajuan, 12, 5)'), '=', 't.nomor_pengajuan');
-                        })
-                        ->where('pd.no_pengajuan', $nomor_pengajuan_detail)
-                        ->groupBy('pd.akun_bpr', 'pd.nama_akun', 't.jumlah')
-                        ->get();
+                    $data = $pengajuan->unionAll($transaksi)->get();
 
-                    $totalpengajuan = $detail->sum('pengajuan');
-                    $totalrealisasi = $detail->sum('realisasi');
-                    $totalselisih = $detail->sum('selisih');
+                    $pivoted = [];
+                    foreach ($data as $row) {
+                        $key = $row->C . '|' . $row->A;
+                        if (!isset($pivoted[$key])) {
+                            $pivoted[$key] = [
+                                'C' => $row->C,
+                                'A' => $row->A,
+                                'B' => $row->B,
+                                'Transaksi' => 0,
+                                'Pengajuan' => 0,
+                            ];
+                        }
+                        $pivoted[$key][$row->Sumber] = $row->D;
+                    }
+                    $detail = array_values($pivoted);
+                    //dd($detail);
+                    $totalpengajuan = collect($detail)->sum('Pengajuan'); 
+                    $totalrealisasi = collect($detail)->sum('Transaksi');
+                    $totalselisih = $totalpengajuan - $totalrealisasi;
 
                     Config::set('terbilang.locale', 'id');
                     $terbilang = Terbilang::make($totalselisih, ' rupiah');
@@ -76,15 +92,15 @@ class ListTransaksiUMKS extends ListRecords
                     $data = file_get_contents($path);
                     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-                    $filename = "Laporan UMK_$nomor_pengajuan_detail.pdf";
+                    $filename = "Laporan UMK_$nomor_pengajuan.pdf";
 
-                    return response()->stream(function () use ($detail, $base64,$totalselisih, $tanggal, $totalrealisasi, $nomor_pengajuan_detail, $totalpengajuan, $userName, $terbilang) {
+                    return response()->stream(function () use ($detail, $base64, $tanggal, $totalselisih, $totalrealisasi, $nomor_pengajuan, $totalpengajuan, $userName, $terbilang) {
                         echo Pdf::loadView('LPJWB', [
                             'image' => $base64,
                             'transaksis' => $detail,
                             'userName' => $userName,
                             'tanggal' => $tanggal,
-                            'nomor' => $nomor_pengajuan_detail,
+                            'nomor' => $nomor_pengajuan,
                             'total_pengajuan' => $totalpengajuan,
                             'total_realisasi' => $totalrealisasi,
                             'total_selisih' => $totalselisih,
