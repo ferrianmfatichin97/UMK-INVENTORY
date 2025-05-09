@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Numeric;
 use Illuminate\Validation\Rules\Max;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Hidden;
 use Filament\Infolists\Components\TextEntry;
 
 class PengajuanUMKResource extends Resource
@@ -63,26 +64,24 @@ class PengajuanUMKResource extends Resource
                 TableRepeater::make('pengajuan_detail')
                     ->relationship('pengajuan_detail')
                     ->headers([
-                        Header::make('No Pengajuan')->width('250px')
+                        // Header::make('No Pengajuan')->width('250px')
+                        //     ->align(Alignment::Center),
+                        Header::make('Akun Master')->width('300px')
                             ->align(Alignment::Center),
-                        Header::make('Akun Master')->width('250px')
+                        Header::make('Kode Akun')->width('200px')
                             ->align(Alignment::Center),
-                        Header::make('Kode Akun')->width('150px')
-                            ->align(Alignment::Center),
-                        Header::make('Nama Akun')->width('150px')
+                        Header::make('Nama Akun')->width('200px')
                             ->align(Alignment::Center),
                         Header::make('Jumlah')->width('200px')
                             ->align(Alignment::Center)->markAsRequired(),
-                        Header::make('Keterangan')->width('200px')
-                            ->align(Alignment::Center),
+                        // Header::make('Keterangan')->width('200px')
+                        //     ->align(Alignment::Center),
                     ])
                     ->schema([
-                        Forms\Components\TextInput::make('nomor_pengajuan')
-                            ->readOnly()
-                            ->maxLength(255)
+                        Hidden::make('nomor_pengajuan')
                             ->default(function ($get) {
                                 $bulanTahun = date('m') . date('y');
-                                $lastPengajuan = PengajuanUMK::orderBy('nomor_pengajuan', 'desc')->first();
+                                $lastPengajuan = PengajuanUMK::orderBy('id', 'desc')->first();
                                 $nomorUrut = $lastPengajuan ? intval(substr($lastPengajuan->nomor_pengajuan, 8, 5)) + 1 : 1;
                                 $formattedNomorUrut = str_pad($nomorUrut, 5, '0', STR_PAD_LEFT);
                                 return "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
@@ -121,13 +120,14 @@ class PengajuanUMKResource extends Resource
                             ->prefix('Rp ')
                             // ->money('IDR', true)
                             ->numeric()
-                            ->debounce(500)
                             ->columnSpanFull()
                             ->minValue(0)
                             ->maxValue(10000000)
                             ->inputMode('decimal')
                             ->rules([
-                                
+                                // 'numeric',
+                                // 'max:10000000',
+                                // 'min:0',
                                 function ($get) {
                                     return function ($attribute, $value, $fail) use ($get) {
                                         $total = collect($get('pengajuan_detail'))->sum(fn($item) => $item['jumlah'] ?? 0);
@@ -155,8 +155,8 @@ class PengajuanUMKResource extends Resource
                                         ->send();
                                 }
                             }),
-                        Forms\Components\TextArea::make('keterangan')
-                            ->columnSpanFull(),
+                        // Forms\Components\TextArea::make('keterangan')
+                        //     ->columnSpanFull(),
                     ])
                     ->defaultItems(1)
                     ->live()
@@ -193,6 +193,22 @@ class PengajuanUMKResource extends Resource
             ]);
     }
 
+    // public static function infolist(\Filament\Infolists\Infolist $infolist): \Filament\Infolists\Infolist
+    // {
+    //     return $infolist
+    //         ->schema([
+    //             \Filament\Infolists\Components\Section::make('PDF Viewer')
+    //                 ->description('Prevent the PDF from being downloaded')
+    //                 ->collapsible()
+    //                 ->schema([
+    //                     PdfViewerEntry::make('file')
+    //                         ->label('View the PDF')
+    //                         ->minHeight('40svh')
+    //                         ->fileUrl(Storage::url('LPJWB.pdf'))
+    //                         ->columnSpanFull(),
+    //                 ]),
+    //         ]);
+    // }
 
     public static function updateTotals($get, $set): void
     {

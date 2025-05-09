@@ -43,6 +43,24 @@ class pengajuan_detail extends Model
         return $data;
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if ($model->pengajuan) {
+                $model->nomor_pengajuan = $model->pengajuan->nomor_pengajuan;
+            }
+        });
+    }
+
+    public function generateNomorPengajuan()
+    {
+        $bulanTahun = date('m') . date('y');
+        $lastPengajuan = PengajuanUMK::orderBy('id', 'desc')->first();
+        $nomorUrut = $lastPengajuan ? intval(substr($lastPengajuan->nomor_pengajuan, 8, 5)) + 1 : 1;
+        $formattedNomorUrut = str_pad($nomorUrut, 5, '0', STR_PAD_LEFT);
+        return "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
+    }
 
     public function pengajuan()
     {

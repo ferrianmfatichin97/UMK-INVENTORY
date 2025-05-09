@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->varchar('nomor_pengajuan');
             $table->date('tanggal_pengajuan');
+            $table->decimal('total_pengajuan', 15, 2);
             $table->enum('status', ['acc', 'waiting', 'revisi'])->default('waiting');
             $table->timestamps();
         });
