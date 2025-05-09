@@ -108,6 +108,7 @@ class TransaksiUMKResource extends Resource
                             ->required()
                             ->reactive()
                             ->prefix('Rp ')
+                            ->debounce(500)
                             ->numeric(),
 
                         Forms\Components\Textarea::make('keterangan')
@@ -118,29 +119,12 @@ class TransaksiUMKResource extends Resource
             ]);
     }
 
-    // public static function infolist(\Filament\Infolists\Infolist $infolist): \Filament\Infolists\Infolist
-    // {
-    //     return $infolist
-    //         ->schema([
-    //             \Filament\Infolists\Components\Section::make('PDF Viewer')
-    //                 ->description('Prevent the PDF from being downloaded')
-    //                 ->collapsible()
-    //                 ->schema([
-    //                     PdfViewerEntry::make('file')
-    //                         ->label('View the PDF')
-    //                         ->minHeight('40svh')
-    //                         ->fileUrl(Storage::url('LPJWB.pdf'))
-    //                         ->columnSpanFull(),
-    //                 ]),
-    //         ]);
-    // }
-
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                // Tables\Columns\TextColumn::make('no_pengajuan')
-                //     ->searchable(),
+                Tables\Columns\TextColumn::make('no_pengajuan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('akun_bpr')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nama_akun')
@@ -167,6 +151,7 @@ class TransaksiUMKResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('no_pengajuan', 'desc')
             ->filters([
                 //
             ])

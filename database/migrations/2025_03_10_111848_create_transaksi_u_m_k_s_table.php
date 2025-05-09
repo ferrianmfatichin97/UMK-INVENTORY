@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transaksiumk', function (Blueprint $table) {
             $table->id();
-            $table->char('no_pengajuan');
+            $table->varchar('no_pengajuan');
             $table->string('akun_bpr');
             $table->text('nama_akun');
             $table->date('tanggal');

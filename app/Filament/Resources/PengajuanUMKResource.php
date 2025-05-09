@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Numeric;
 use Illuminate\Validation\Rules\Max;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
 
 class PengajuanUMKResource extends Resource
 {
@@ -39,7 +40,7 @@ class PengajuanUMKResource extends Resource
     public static function form(Form $form): Form
     {
         $bulanTahun = date('m') . date('y');
-        $lastPengajuan = PengajuanUMK::orderBy('id', 'desc')->first();
+        $lastPengajuan = PengajuanUMK::orderBy('nomor_pengajuan', 'desc')->first();
         $nomorUrut = $lastPengajuan ? intval(substr($lastPengajuan->nomor_pengajuan, 8, 5)) + 1 : 1;
         $formattedNomorUrut = str_pad($nomorUrut, 5, '0', STR_PAD_LEFT);
         $nomorPengajuan = "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
@@ -81,7 +82,7 @@ class PengajuanUMKResource extends Resource
                             ->maxLength(255)
                             ->default(function ($get) {
                                 $bulanTahun = date('m') . date('y');
-                                $lastPengajuan = PengajuanUMK::orderBy('id', 'desc')->first();
+                                $lastPengajuan = PengajuanUMK::orderBy('nomor_pengajuan', 'desc')->first();
                                 $nomorUrut = $lastPengajuan ? intval(substr($lastPengajuan->nomor_pengajuan, 8, 5)) + 1 : 1;
                                 $formattedNomorUrut = str_pad($nomorUrut, 5, '0', STR_PAD_LEFT);
                                 return "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
@@ -118,15 +119,15 @@ class PengajuanUMKResource extends Resource
                             ->required()
                             ->reactive()
                             ->prefix('Rp ')
+                            // ->money('IDR', true)
                             ->numeric()
+                            ->debounce(500)
                             ->columnSpanFull()
                             ->minValue(0)
                             ->maxValue(10000000)
                             ->inputMode('decimal')
                             ->rules([
-                                // 'numeric',
-                                // 'max:10000000',
-                                // 'min:0',
+                                
                                 function ($get) {
                                     return function ($attribute, $value, $fail) use ($get) {
                                         $total = collect($get('pengajuan_detail'))->sum(fn($item) => $item['jumlah'] ?? 0);
@@ -192,22 +193,6 @@ class PengajuanUMKResource extends Resource
             ]);
     }
 
-    // public static function infolist(\Filament\Infolists\Infolist $infolist): \Filament\Infolists\Infolist
-    // {
-    //     return $infolist
-    //         ->schema([
-    //             \Filament\Infolists\Components\Section::make('PDF Viewer')
-    //                 ->description('Prevent the PDF from being downloaded')
-    //                 ->collapsible()
-    //                 ->schema([
-    //                     PdfViewerEntry::make('file')
-    //                         ->label('View the PDF')
-    //                         ->minHeight('40svh')
-    //                         ->fileUrl(Storage::url('LPJWB.pdf'))
-    //                         ->columnSpanFull(),
-    //                 ]),
-    //         ]);
-    // }
 
     public static function updateTotals($get, $set): void
     {
@@ -230,29 +215,20 @@ class PengajuanUMKResource extends Resource
                     ->prefix('Rp ')
                     ->sortable()
                     ->formatStateUsing(fn($state) => number_format($state, 2, ',', '.')),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->color(fn(string $state): string => match ($state) {
-                        'waiting' => 'warning',
-                        'acc' => 'success',
-                        'revisi' => 'danger',
-                    }),
+                // Tables\Columns\TextColumn::make('status')
+                //     ->badge()
+                //     ->color(fn(string $state): string => match ($state) {
+                //         'waiting' => 'warning',
+                //         'acc' => 'success',
+                //         'revisi' => 'danger',
+                //     }),
             ])
+            ->defaultSort('nomor_pengajuan', 'desc')
             ->filters([
-                // Add filters if needed
+
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                // Tables\Actions\Action::make('viewPdf')
-                //     ->label('View PDF')
-                //     ->action(function ($record) {
-                //         // Create a new Infolist instance
-                //         $infolist = new \Filament\Infolists\Infolist();
-
-                //         // Call the infolist method with the new instance
-                //         return static::infolist($infolist);
-                //     })
-                //     ->icon('heroicon-o-eye'),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
