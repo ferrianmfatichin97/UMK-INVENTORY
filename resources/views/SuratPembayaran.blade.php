@@ -10,8 +10,7 @@
     <style>
         body {
             font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif, sans-serif;
-            /* font-size: 10px; */
-            /* margin: 12px; */
+         
         }
 
         p{
@@ -30,15 +29,19 @@
 
         .table1 {
             width: 100%;
-            margin-top: 10px;
+            margin-top: 8px;
             border: 1px solid black;
-            /* text-align: center; */
             font-size: 12px;
         }
 
         .border {
             border: 1px solid black;
             text-align: center;
+        }
+
+        .border1 {
+            border: 1px solid black;
+            text-align: left;
         }
 
         .warna {
@@ -58,7 +61,6 @@
         }
 
         .logo {
-            /* display: block; */
             margin: 0 auto;
             width: 250px;
         }
@@ -66,20 +68,17 @@
 </head>
 
 <body>
-    {{-- <img src="{{ asset('logo.png') }}" alt="Logo" class="logo" /> --}}
-    {{-- <img src="{{ asset('logo.png') }}" alt="Logo"/> --}}
     <img src="<?php echo $image?>" width="250" height="40"/>
 
     <br />
     <br />
 
     <h4>SURAT PEMBAYARAN UANG MUKA KERJA UMUM</h4>
-    <h5>Nomor : {{ $nomor }}</h5>
+    <h5>Nomor : <strong>{{ $nomor }}</strong></h5>
 
     <p>Dari : Staff Umum</p>
     <p>Kepada Yth : General Manajer Keuangan</p>
     <p>Perihal : Uang Muka Kerja Umum</p>
-    <br>
 
     <p>
         Menunjuk perihal diatas, dengan ini diajukan Uang Muka Kerja Umum sebesar Rp. 10.000.000,-
@@ -112,28 +111,19 @@
                         <tr class="border">
                             <td class="border">{{ $no++ }}</td>
                             <td class="border">{{ $transaksi->kode_akun ?? 'N/A' }}</td>
-                            <td class="border">{{ $transaksi->nama_akun }}</td>
+                            <td class="border1"> - {{ $transaksi->nama_akun }}</td>
                             <td class="border">{{ number_format($transaksi->jumlah, 0, ',', '.') }}</td>
                             <td class="border">-</td>
                         </tr>
             @endforeach
             @php
                 use Carbon\Carbon;
-                //$remainingTotal = $total_pengajuan - $totalNominalSum;
 
                 $tanggal = Carbon::now();
                 Carbon::setLocale('id');
                 $formattedDate = $tanggal->translatedFormat('d F Y');
             @endphp
         </tbody>
-        {{-- <tfoot>
-            <tr class="border">
-                <td class="border" colspan="3"><strong>Total</strong></td>
-                <td class="border">{{ number_format($total_pengajuan, 0, ',', '.') }}</td>
-                <td class="border">{{ number_format($totalNominalSum, 0, ',', '.') }}</td>
-                <td class="border">{{ number_format($selisih, 0, ',', '.') }}</td>
-            </tr>
-        </tfoot> --}}
     </table>
     <br />
 
@@ -148,7 +138,7 @@
         Demikian, atas perhatian dan kerjasamanya diucapkan, Terima kasih.
     </p>
 
-    <table style="width: 100%; border-color: #ffff; margin-top: 25px; border-collapse: collapse; border:none;">
+    <table style="width: 100%; border-color: #ffff; margin-top: 20px; border-collapse: collapse; border:none;">
         <tr>
             <td style="padding: 20px; text-align: center">
                 <p style="margin: 0">Menyetujui</p>
@@ -179,7 +169,7 @@
         Sesuai dengan pengajuan surat pembayaran uang muka kerja umum nomor : {{ $nomor }} , telah diserahkan
         muka kerja sebesar Rp. 10.000.000,- pada tanggal {{ $formattedDate }}.
     </p>
-    <table style="width: 100%; border-color: #ffff; margin-top: 25px; border-collapse: collapse; border:none;">
+    <table style="width: 100%; border-color: #ffff; margin-top: 20px; border-collapse: collapse; border:none;">
         <tr>
             <td style="padding: 20px; text-align: center">
                 <p style="margin: 0">Menyerahkan</p>

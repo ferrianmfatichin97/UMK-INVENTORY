@@ -122,6 +122,7 @@ class PengajuanUMKResource extends Resource
                             ->numeric()
                             ->columnSpanFull()
                             ->minValue(0)
+                            ->debounce(500)
                             ->maxValue(10000000)
                             ->inputMode('decimal')
                             ->rules([

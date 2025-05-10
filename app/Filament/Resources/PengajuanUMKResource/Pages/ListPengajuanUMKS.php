@@ -35,40 +35,35 @@ class ListPengajuanUMKS extends ListRecords
                         ->required(),
                 ])
                 ->action(function (array $data) {
-                    $nomor_pengajuan_detail = $data['nomor_pengajuan'];
-                    $pengajuan = PengajuanUMK::where('nomor_pengajuan', 'LIKE', "%{$nomor_pengajuan_detail}%")->first();
+                    $nomor_pengajuan = $data['nomor_pengajuan'];
+                    $pengajuan = DB::table('pengajuan_details')
+                        ->where('nomor_pengajuan', $nomor_pengajuan)
+                        ->get();
 
-                    if (!$pengajuan) {
-                        return response()->json(['message' => 'Pengajuan tidak ditemukan'], 404);
-                    }
-
-                    $detail = $pengajuan->pengajuan_detail;
 
                     // dd([
-                    //     'nomor_pengajuan' => $nomor_pengajuan_detail,
+                    //     'nomor_pengajuan' => $nomor_pengajuan,
                     //     'pengajuan' => $pengajuan,
-                    //     'detail' => $detail,
                     // ]);
 
-                    $total_pengajuan = $pengajuan->total_pengajuan;
+                    $total_pengajuan = $pengajuan->sum('jumlah');
 
-                    $duit = 5000000;
                     Config::set('terbilang.locale', 'id');
                     $terbilang = Terbilang::make($total_pengajuan, ' rupiah');
 
                     $user = Auth::user();
                     $userName = $user ? $user->name : 'Admin';
 
-                    $tanggal = $pengajuan->created_at;
-                    Carbon::setLocale('id');
-                    $carbonDate = Carbon::createFromFormat('Y-m-d H:i:s', $tanggal);
-                    $formattedDate = $carbonDate->translatedFormat('d F Y');
+                    $tanggal = DB::table('pengajuanumk')
+                        ->where('nomor_pengajuan', $nomor_pengajuan)
+                        ->value('tanggal_pengajuan');
+                    $formattedDate = Carbon::parse($tanggal)->translatedFormat('d F Y');
 
                     // dd([
-                    //     'transaksis' => $detail,
+                    //     'transaksis' => $pengajuan,
                     //     'userName' => $userName,
                     //     'tanggal' => $formattedDate,
-                    //     'nomor' => $nomor_pengajuan_detail,
+                    //     'nomor' => $nomor_pengajuan,
                     //     'total_pengajuan' => $total_pengajuan,
                     //     'terbilang' => $terbilang,
                     // ]);
@@ -77,15 +72,15 @@ class ListPengajuanUMKS extends ListRecords
                     $type = pathinfo($path, PATHINFO_EXTENSION);
                     $data = file_get_contents($path);
                     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                    $filename = "Pembayaran UMK_$nomor_pengajuan_detail.pdf";
+                    $filename = "Pembayaran UMK_$nomor_pengajuan.pdf";
 
-                    return response()->stream(function () use ($detail, $base64, $formattedDate, $nomor_pengajuan_detail, $total_pengajuan, $userName, $terbilang) {
+                    return response()->stream(function () use ($pengajuan, $base64, $formattedDate, $nomor_pengajuan, $total_pengajuan, $userName, $terbilang) {
                         echo Pdf::loadView('SuratPembayaran', [
-                            'transaksis' => $detail,
+                            'transaksis' => $pengajuan,
                             'image' => $base64,
                             'userName' => $userName,
                             'tanggal' => $formattedDate,
-                            'nomor' => $nomor_pengajuan_detail,
+                            'nomor' => $nomor_pengajuan,
                             'total_pengajuan' => $total_pengajuan,
                             'terbilang' => $terbilang,
                         ])->output();
