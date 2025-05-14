@@ -62,8 +62,13 @@ class pengajuan_detail extends Model
         return "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
     }
 
-    public function pengajuan()
+    // public function pengajuan()
+    // {
+    //     return $this->belongsTo(PengajuanUMK::class, 'nomor_pengajuan');
+    // }
+
+    public function pengajuanumk()
     {
-        return $this->belongsTo(PengajuanUMK::class, 'nomor_pengajuan');
+        return $this->belongsTo(PengajuanUMK::class, 'nomor_pengajuan', 'nomor_pengajuan');
     }
 }

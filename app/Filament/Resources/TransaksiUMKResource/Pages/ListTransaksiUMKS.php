@@ -40,6 +40,12 @@ class ListTransaksiUMKS extends ListRecords
 
                     $tanggal = Carbon::parse($formattedTanggal)->translatedFormat('d F Y');
 
+                    if (preg_match('/000(\d+)/', $nomor_pengajuan, $matches)) {
+                        $angka = $matches[1];
+                    } else {
+                        $angka = null;
+                    }
+
                     $pengajuan = pengajuan_detail::select(
                         'kode_akun AS A',
                         'nama_akun AS B',
@@ -47,7 +53,7 @@ class ListTransaksiUMKS extends ListRecords
                         DB::raw('SUM(jumlah) AS D'),
                         DB::raw("'Pengajuan' AS Sumber")
                     )
-                        ->where('nomor_pengajuan', $nomor_pengajuan)
+                        ->where('nomor_pengajuan', $angka)
                         ->groupBy('kode_akun', 'nama_akun', 'nomor_pengajuan');
                     $transaksi = Transaksiumk::select(
                         'akun_bpr AS A',
@@ -76,8 +82,25 @@ class ListTransaksiUMKS extends ListRecords
                         $pivoted[$key][$row->Sumber] = $row->D;
                     }
                     $detail = array_values($pivoted);
+
+                    $grouped = [];
+                    foreach ($detail as $row) {
+                        $key = $row['A'] . '|' . $row['B'];
+                        if (!isset($grouped[$key])) {
+                            $grouped[$key] = [
+                                'C' => $row['C'], 
+                                'A' => $row['A'],
+                                'B' => $row['B'],
+                                'Pengajuan' => 0,
+                                'Transaksi' => 0,
+                            ];
+                        }
+                        $grouped[$key]['Pengajuan'] += $row['Pengajuan'];
+                        $grouped[$key]['Transaksi'] += $row['Transaksi'];
+                    }
+                    $finalDetail = array_values($grouped);
                     //dd($detail);
-                    $totalpengajuan = collect($detail)->sum('Pengajuan'); 
+                    $totalpengajuan = collect($detail)->sum('Pengajuan');
                     $totalrealisasi = collect($detail)->sum('Transaksi');
                     $totalselisih = $totalpengajuan - $totalrealisasi;
 
@@ -94,10 +117,10 @@ class ListTransaksiUMKS extends ListRecords
 
                     $filename = "Laporan UMK_$nomor_pengajuan.pdf";
 
-                    return response()->stream(function () use ($detail, $base64, $tanggal, $totalselisih, $totalrealisasi, $nomor_pengajuan, $totalpengajuan, $userName, $terbilang) {
+                    return response()->stream(function () use ($finalDetail, $base64, $tanggal, $totalselisih, $totalrealisasi, $nomor_pengajuan, $totalpengajuan, $userName, $terbilang) {
                         echo Pdf::loadView('LPJWB', [
                             'image' => $base64,
-                            'transaksis' => $detail,
+                            'transaksis' => $finalDetail,
                             'userName' => $userName,
                             'tanggal' => $tanggal,
                             'nomor' => $nomor_pengajuan,

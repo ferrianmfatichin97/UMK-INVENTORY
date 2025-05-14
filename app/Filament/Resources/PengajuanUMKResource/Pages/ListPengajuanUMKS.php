@@ -29,21 +29,31 @@ class ListPengajuanUMKS extends ListRecords
                 ->icon('heroicon-o-folder-arrow-down')
                 ->form([
                     Select::make('nomor_pengajuan')
-                        ->label('Pengajuan')
+                        ->label('Nomor Pengajuan')
                         ->options(PengajuanUMK::query()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
                         ->searchable()
                         ->required(),
                 ])
                 ->action(function (array $data) {
                     $nomor_pengajuan = $data['nomor_pengajuan'];
+                    // $pengajuan = DB::table('pengajuan_details')
+                    //     ->where('nomor_pengajuan', $nomor_pengajuan)
+                    //     ->get();
+
+                    if (preg_match('/000(\d+)/', $nomor_pengajuan, $matches)) {
+                        $angka = $matches[1];
+                    } else {
+                        $angka = null;
+                    }
+
                     $pengajuan = DB::table('pengajuan_details')
-                        ->where('nomor_pengajuan', $nomor_pengajuan)
+                        ->where('nomor_Pengajuan', $angka)
                         ->get();
 
 
                     // dd([
-                    //     'nomor_pengajuan' => $nomor_pengajuan,
                     //     'pengajuan' => $pengajuan,
+                    //     'nomor_pengajuan' => $nomor_pengajuan,  
                     // ]);
 
                     $total_pengajuan = $pengajuan->sum('jumlah');
@@ -58,15 +68,6 @@ class ListPengajuanUMKS extends ListRecords
                         ->where('nomor_pengajuan', $nomor_pengajuan)
                         ->value('tanggal_pengajuan');
                     $formattedDate = Carbon::parse($tanggal)->translatedFormat('d F Y');
-
-                    // dd([
-                    //     'transaksis' => $pengajuan,
-                    //     'userName' => $userName,
-                    //     'tanggal' => $formattedDate,
-                    //     'nomor' => $nomor_pengajuan,
-                    //     'total_pengajuan' => $total_pengajuan,
-                    //     'terbilang' => $terbilang,
-                    // ]);
 
                     $path = 'logo.jpg';
                     $type = pathinfo($path, PATHINFO_EXTENSION);

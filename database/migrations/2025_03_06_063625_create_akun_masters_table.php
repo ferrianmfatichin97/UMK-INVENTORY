@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('akun_bpr')->nullable();
             $table->text('nama_akun')->nullable();
             $table->timestamps();
+            $table->timestamps('deleted_at');
         });
     }
 

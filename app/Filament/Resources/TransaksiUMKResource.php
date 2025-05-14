@@ -39,11 +39,14 @@ class TransaksiUMKResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('no_pengajuan')
                             ->label('Nomor Pengajuan')
-                            ->options(PengajuanUMK::all()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
-                            //->options(PengajuanUMK::all()->pluck('nomor_pengajuan', 'id')->toArray())
+                            ->options(
+                                PengajuanUMK::orderByDesc('nomor_pengajuan')->pluck('nomor_pengajuan', 'nomor_pengajuan')
+                            )
+                            //->options(PengajuanUMK::all()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
                             ->required()
                             ->searchable()
                             ->columnSpanFull()
+
                             ->afterStateUpdated(function ($state) {
                                 Log::info('Selected no_pengajuan: ' . $state);
                             }),

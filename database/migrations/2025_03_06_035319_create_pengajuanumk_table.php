@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengajuanumk', function (Blueprint $table) {
             $table->id();
-            $table->varchar('nomor_pengajuan');
+            $table->string('nomor_pengajuan')->unique();
             $table->date('tanggal_pengajuan');
             $table->decimal('total_pengajuan', 15, 2);
             $table->enum('status', ['acc', 'waiting', 'revisi'])->default('waiting');

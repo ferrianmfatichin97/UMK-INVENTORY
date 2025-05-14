@@ -228,7 +228,10 @@ class PengajuanUMKResource extends Resource
 
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make('/records')
+                    ->label('Detail')
+                    ->icon('heroicon-o-eye'),
+                    //->url(fn(PengajuanUMK $record): string => route('filament.resources.pengajuan-umk-resource.pages.view', $record)),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
