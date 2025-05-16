@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('akun_masters', function (Blueprint $table) {
             $table->id();
-            $table->string('akun_bpr')->nullable();
-            $table->text('nama_akun')->nullable();
+            $table->string('akun_bpr');
+            $table->text('nama_akun');
             $table->timestamps();
-            $table->timestamps('deleted_at');
+            $table->softDeletes();
         });
     }
 

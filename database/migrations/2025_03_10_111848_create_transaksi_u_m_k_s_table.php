@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('nama_akun');
             $table->date('tanggal');
             $table->text('keterangan');
-            $table->string('qty');
-            $table->text('satuan');
+            $table->string('qty')->nullable();
+            $table->text('satuan')->nullable();
             $table->string('nominal');
             $table->timestamps();
         });
