@@ -23,6 +23,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\MenuItem;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -36,6 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->spa()
             ->login()
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -70,6 +73,37 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->authGuard('web')
+            ->sidebarCollapsibleOnDesktop()
+            ->collapsedSidebarWidth('9rem')
+            ->userMenuItems([
+           'profile' => MenuItem::make()->label('Edit profile'),
+            'logout' => MenuItem::make()->label('Log out'),
+        ])
+            ->navigationGroups([
+
+                NavigationGroup::make()
+                    ->label('Pengadaan Barang'),
+                //->icon('heroicon-o-archive-box-arrow-down'),
+                //heroicon-o-archive-box-arrow-down
+
+                NavigationGroup::make()
+                    //->label('Pengajuan Uang Muka'),
+                    //->icon('heroicon-o-cash'),
+                    ->label(fn(): string => __('navigation.Pengajuan Uang Muka'))
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->collapsed(),
+
+                NavigationGroup::make()
+                    ->label('Inventaris Kendaraan'),
+                //->icon('heroicon-o-cash'),
+
+                NavigationGroup::make()
+                    ->label('Settings')
+                    //->icon('heroicon-o-cog-6-tooth')
+                    ->collapsed(),
+            ])
+
             ->resources([
                 config('filament-logger.activity_resource')
             ]);
