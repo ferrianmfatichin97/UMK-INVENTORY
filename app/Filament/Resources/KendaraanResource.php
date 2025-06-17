@@ -2,30 +2,36 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use App\Models\Kendaraan;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\KendaraanResource\Pages;
-use Filament\Support\Enums\Alignment;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\KendaraanResource\RelationManagers;
 use App\Models\Data_kendaraan;
+use App\Models\Kendaraan;
+use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Support\Facades\FilamentIcon;
 
 class KendaraanResource extends Resource
 {
     protected static ?string $model = Data_kendaraan::class;
     protected static ?string $navigationGroup = 'Inventaris Kendaraan';
+    protected static ?string $navigationLabel = 'Data Kendaraan';
+    protected static ?string $navigationIcon = 'heroicon-m-truck';
+    protected static ?string $slug = 'inventaris-kendaraan/kendaraan';
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {

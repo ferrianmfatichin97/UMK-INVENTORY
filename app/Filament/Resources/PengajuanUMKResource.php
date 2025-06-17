@@ -16,13 +16,14 @@ use Awcodes\TableRepeater\Header;
 use Filament\Notifications\Notification;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Hidden;
-use Filament\Infolists\Components\TextEntry;
 
 class PengajuanUMKResource extends Resource
 {
     protected static ?string $model = PengajuanUMK::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
     protected static ?string $navigationLabel = 'Pengajuan UMK';
+    protected static ?string $navigationGroup = 'Pengajuan Uang Muka';
+    protected static ?int $navigationSort = 1;
 
     public static function getNavigationBadge(): ?string
     {
@@ -49,8 +50,8 @@ class PengajuanUMKResource extends Resource
                 ->schema([
                     TextInput::make('nomor_pengajuan')
                         ->default($nomorPengajuan)
-                        ->readOnly()
-                        ->maxLength(255),
+                        ->readOnly(),
+
                     Forms\Components\DatePicker::make('tanggal_pengajuan')
                         ->required()
                         ->date(),
@@ -65,14 +66,7 @@ class PengajuanUMKResource extends Resource
                     Header::make('Jumlah')->width('200px')->align(Alignment::Center)->markAsRequired(),
                 ])
                 ->schema([
-                    Hidden::make('nomor_pengajuan')
-                        ->default(function () {
-                            $bulanTahun = date('m') . date('y');
-                            $lastPengajuan = PengajuanUMK::orderBy('id', 'desc')->first();
-                            $nomorUrut = $lastPengajuan ? intval(substr($lastPengajuan->nomor_pengajuan, 8, 5)) + 1 : 1;
-                            $formattedNomorUrut = str_pad($nomorUrut, 5, '0', STR_PAD_LEFT);
-                            return "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
-                        }),
+                    Hidden::make('nomor_pengajuan')->default($nomorPengajuan),
 
                     Forms\Components\Select::make('akun_master')
                         ->label('Akun Master')
@@ -90,62 +84,39 @@ class PengajuanUMKResource extends Resource
 
                     TextInput::make('kode_akun')->hiddenLabel()->readOnly(),
                     TextInput::make('nama_akun')->hiddenLabel()->readOnly(),
+
                     TextInput::make('jumlah')
                         ->label('Jumlah')
                         ->required()
+                        ->live()
+                        ->debounce(500)
                         ->reactive()
                         ->prefix('Rp ')
                         ->numeric()
-                        ->columnSpanFull()
-                        ->minValue(0)
-                        ->maxValue(10000000)
-                        ->debounce(500)
                         ->inputMode('decimal')
                         ->placeholder('Input Nominal')
-                        ->rules([
-                            function ($get) {
-                                return function ($attribute, $value, $fail) use ($get) {
-                                    $total = collect($get('pengajuan_detail'))->sum(fn($item) => $item['jumlah'] ?? 0);
-                                    if ($total > 10000000) {
-                                        $fail('Total pengajuan tidak boleh lebih dari Rp 10.000.000');
-                                    }
-                                };
-                            },
-                        ])
-                        ->validationMessages([
-                            'max' => 'Jumlah maksimal yang bisa diajukan hanya Rp 10.000.000',
-                        ])
-                        ->formatStateUsing(fn($state) => is_numeric($state) ? number_format((int)$state, 0, ',', '.') : $state)
                         ->dehydrateStateUsing(fn($state) => preg_replace('/[^0-9]/', '', $state))
-                        ->formatStateUsing(function ($state) {
-                            if (!$state) return null;
-                            return number_format((int)preg_replace('/[^0-9]/', '', $state), 0, ',', '.');
-                        })
-                        ->dehydrateStateUsing(function ($state) {
-                            return preg_replace('/[^0-9]/', '', $state);
-                        })
+                        ->formatStateUsing(fn($state) => $state !== null ? number_format((int) $state, 0, ',', '.') : null)
                         ->afterStateUpdated(function ($state, callable $set, $get) {
-                            $total = collect($get('pengajuan_detail'))->sum(fn($item) => (int)preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
+                            $total = collect($get('pengajuan_detail'))->sum(fn($item) => (int) preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
                             $set('total_pengajuan', $total);
-                            self::updateTotals($get, $set);
+                            $set('sisa', 10000000 - $total);
 
-                            if ($total >= 10000000) {
+                            if ($total > 10000000) {
                                 Notification::make()
-                                    ->title('Total Terpenuhi')
-                                    ->success()
-                                    ->body('Maksimal jumlah yang bisa diajukan hanya Rp 10.000.000')
+                                    ->title('Total Melebihi Batas')
+                                    ->body('Maksimal jumlah yang bisa diajukan adalah Rp 10.000.000')
+                                    ->danger()
                                     ->send();
                             }
                         }),
                 ])
                 ->defaultItems(1)
-                ->live()
                 ->reorderable(false)
                 ->columns(3)
                 ->columnSpan('full')
                 ->deleteAction(
-                    fn($action) =>
-                    $action->after(fn($get, $set) => self::updateTotals($get, $set))
+                    fn($action) => $action->after(fn($get, $set) => self::updateTotals($get, $set))
                 ),
 
             Forms\Components\Section::make()
@@ -154,22 +125,19 @@ class PengajuanUMKResource extends Resource
                 ->schema([
                     TextInput::make('total_pengajuan')
                         ->label('Total Pengajuan')
-                        ->numeric()
                         ->readOnly()
                         ->prefix('Rp ')
-                        ->minValue(10000000)
-                        ->maxValue(10000000)
-                        ->validationMessages([
-                            'max' => 'Maksimal jumlah yang bisa diajukan hanya Rp 10.000.000',
-                            'min' => 'Jumlah yang diajukan Harus Rp 10.000.000',
-                        ])
-                        ->afterStateHydrated(fn($get, $set) => self::updateTotals($get, $set)),
+                        ->reactive()
+                        ->live()
+                        ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
 
                     TextInput::make('sisa')
                         ->label('Sisa Kuota')
-                        ->numeric()
                         ->readOnly()
-                        ->prefix('Rp'),
+                        ->prefix('Rp ')
+                        ->reactive()
+                        ->live()
+                        ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
                 ]),
         ]);
     }
@@ -177,10 +145,10 @@ class PengajuanUMKResource extends Resource
     public static function updateTotals($get, $set): void
     {
         $invoiceItems = collect($get('pengajuan_detail'))->filter(fn($item) => !empty($item['jumlah']));
-        $subtotal = $invoiceItems->sum('jumlah');
+        $subtotal = $invoiceItems->sum(fn($item) => (int) preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
 
-        $set('total_pengajuan', number_format($subtotal, 2, '.', ''));
-        $set('sisa', number_format(10000000 - $subtotal, 2, '.', ''));
+        $set('total_pengajuan', $subtotal);
+        $set('sisa', 10000000 - $subtotal);
     }
 
     public static function table(Table $table): Table
@@ -194,14 +162,12 @@ class PengajuanUMKResource extends Resource
                     ->money('IDR', true)
                     ->prefix('Rp ')
                     ->sortable()
-                    ->formatStateUsing(fn($state) => number_format($state, 2, ',', '.')),
+                    ->formatStateUsing(fn($state) => number_format($state, 0, ',', '.')),
             ])
             ->defaultSort('nomor_pengajuan', 'desc')
             ->filters([])
             ->actions([
-                Tables\Actions\ViewAction::make('/records')
-                    ->label('Detail')
-                    ->icon('heroicon-o-eye'),
+                Tables\Actions\ViewAction::make()->label('Detail')->icon('heroicon-o-eye'),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
