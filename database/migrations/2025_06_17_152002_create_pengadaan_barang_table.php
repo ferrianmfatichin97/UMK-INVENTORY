@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('lampiran_nodin')->nullable();
             $table->string('lampiran_1')->nullable();
             $table->string('lampiran_2')->nullable();
-            $table->enum('status', ['diajukan', 'disetujui', 'ditolak', 'dibeli'])->default('diajukan');
+            $table->enum('status', ['diproses', 'selesai', 'ditolak',])->default('diproses');
             $table->timestamps();
         });
     }
