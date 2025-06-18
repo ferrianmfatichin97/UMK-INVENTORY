@@ -13,8 +13,13 @@ class PengadaanDashboardController extends Controller
             ->latest()
             ->take(10)
             ->get();
-        
-        
+
+        $pengadaans = PengadaanBarang::with(['details'])
+            ->latest()
+            ->take(10)
+            ->get();
+
+
 
         $stats = [
             'total'     => PengadaanBarang::count(),

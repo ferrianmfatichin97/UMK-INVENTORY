@@ -39,7 +39,8 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card border-0 shadow-sm bg-info text-white">
+                {{-- <div class="card border-0 shadow-sm bg-info text-white"> --}}
+                <div class="card border-0 shadow-sm bg-warning text-white">
                     <div class="card-body text-center">
                         <h6>Diproses</h6>
                         <h3 class="fw-bold">{{ $stats['diproses'] }}</h3>
@@ -75,18 +76,19 @@
                         <thead class="table-light text-center">
                             <tr>
                                 <th>Divisi</th>
-                                <th>Nota Dinas</th>
                                 <th>Urgensi</th>
-                                <th>Status</th>
+                                <th>Nota Dinas</th>
+                                <th>Nama Barang</th>
+                                <th>Nota Dinas</th>
                                 <th>Tanggal Dibutuhkan</th>
                                 <th>Sisa Hari</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($pengadaans as $item)
                                 <tr class="text-center">
                                     <td>{{ $item->divisi }}</td>
-                                    <td>{{ $item->nota_dinas }}</td>
                                     <td>
                                         <span
                                             class="badge-urgensi status-badge bg-{{ match ($item->urgensi) {
@@ -97,17 +99,29 @@
                                             {{ ucfirst($item->urgensi) }}
                                         </span>
                                     </td>
+                                    <td>{{ $item->nota_dinas }}</td>
                                     <td>
-                                        <span
-                                            class="status-badge text-white bg-{{ match ($item->status) {
-                                                'diproses' => 'warning',
-                                                'ditolak' => 'danger',
-                                                'selesai' => 'success',
-                                                default => 'secondary',
-                                            } }}">
-                                            {{ ucfirst($item->status) }}
-                                        </span>
+                                        @if ($item->details->isNotEmpty())
+                                            <ul class="mb-0 text-start">
+                                                @foreach ($item->details as $detail)
+                                                    <li>{{ $detail->nama_barang }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
                                     </td>
+                                    <td>
+                                        @if ($item->lampiran_nodin)
+                                            <a href="{{ Storage::url($item->lampiran_nodin) }}" target="_blank">
+                                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/file-earmark-pdf.svg"
+                                                    alt="PDF" width="24">
+                                            </a>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
+                                    </td>
+                                    
                                     <td>{{ \Carbon\Carbon::parse($item->tanggal_dibutuhkan)->translatedFormat('d M Y') }}
                                     </td>
                                     <td>
@@ -125,6 +139,17 @@
                                         @else
                                             <span class="text-success fw-semibold">{{ $daysLeft }} hari lagi</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <span
+                                            class="status-badge text-white bg-{{ match ($item->status) {
+                                                'diproses' => 'warning',
+                                                'ditolak' => 'danger',
+                                                'selesai' => 'success',
+                                                default => 'secondary',
+                                            } }}">
+                                            {{ ucfirst($item->status) }}
+                                        </span>
                                     </td>
                                 </tr>
                             @empty
