@@ -121,23 +121,30 @@
                                             <span class="text-muted">-</span>
                                         @endif
                                     </td>
-                                    
+
                                     <td>{{ \Carbon\Carbon::parse($item->tanggal_dibutuhkan)->translatedFormat('d M Y') }}
                                     </td>
                                     <td>
-                                        @php
-                                            $today = \Carbon\Carbon::today();
-                                            $deadline = \Carbon\Carbon::parse($item->tanggal_dibutuhkan)->startOfDay();
-                                            $daysLeft = $today->diffInDays($deadline, false);
-                                        @endphp
-
-                                        @if ($daysLeft < 0)
-                                            <span class="text-danger fw-semibold">Lewat {{ abs($daysLeft) }}
-                                                hari</span>
-                                        @elseif ($daysLeft === 0)
-                                            <span class="text-warning fw-semibold">Hari ini</span>
+                                        @if ($item->status === 'selesai')
+                                            <span class="text-muted">-</span>
                                         @else
-                                            <span class="text-success fw-semibold">{{ $daysLeft }} hari lagi</span>
+                                            @php
+                                                $today = \Carbon\Carbon::today();
+                                                $deadline = \Carbon\Carbon::parse(
+                                                    $item->tanggal_dibutuhkan,
+                                                )->startOfDay();
+                                                $daysLeft = $today->diffInDays($deadline, false);
+                                            @endphp
+
+                                            @if ($daysLeft < 0)
+                                                <span class="text-danger fw-semibold">Lewat {{ abs($daysLeft) }}
+                                                    hari</span>
+                                            @elseif ($daysLeft === 0)
+                                                <span class="text-warning fw-semibold">Hari ini</span>
+                                            @else
+                                                <span class="text-success fw-semibold">{{ $daysLeft }} hari
+                                                    lagi</span>
+                                            @endif
                                         @endif
                                     </td>
                                     <td>
