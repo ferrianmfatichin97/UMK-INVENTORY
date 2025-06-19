@@ -16,6 +16,7 @@
 
         .badge-urgensi {
             font-weight: 600;
+            color: #fff;
         }
     </style>
 </head>
@@ -25,8 +26,9 @@
 <body class="bg-light min-vh-100 d-flex flex-column">
 
     <div class="container py-5">
-        <h1 class="mb-4 text-center fw-bold text-primary">📊 Dashboard Pengadaan Barang</h1>
-        <h5 class="mb-4 text-center fw-bold text-primary">Divisi UMUM Bank DP Taspen</h5>
+        {{-- <h1 class="mb-4 text-center fw-bold text-primary">📊 Dashboard Pengadaan Barang</h1> --}}
+        <h1 class="mb-4 text-center fw-bold text-primary">Dashboard Pengadaan Barang</h1>
+        <h5 class="mb-4 text-center fw-bold text-primary">(Divisi Umum Bank DP Taspen)</h5>
 
         {{-- Ringkasan Statistik --}}
         <div class="row g-4 mb-5">
@@ -176,7 +178,7 @@
     {{-- Footer --}}
     <footer class="bg-dark bg-opacity-75 text-white text-center py-3 mt-auto">
         <div class="container">
-            <small>© {{ now()->year }} Divisi IT – Bank DP Taspen. All rights reserved.</small>
+            <small>© {{ now()->year }} || Create By : Divisi IT – Bank DP Taspen. All rights reserved.</small>
         </div>
     </footer>
 

@@ -3,19 +3,23 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PengajuanUMKResource\Pages;
-use App\Models\PengajuanUMK;
 use App\Models\akun_master;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Support\Enums\Alignment;
+use App\Models\PengajuanUMK;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
-use Filament\Notifications\Notification;
-use Filament\Forms\Components\TextInput;
+use Filament\Forms;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
+use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Table;
 
 class PengajuanUMKResource extends Resource
 {
@@ -35,6 +39,8 @@ class PengajuanUMKResource extends Resource
         return 'Total Pengajuan';
     }
 
+
+
     public static function form(Form $form): Form
     {
         $bulanTahun = date('m') . date('y');
@@ -44,112 +50,134 @@ class PengajuanUMKResource extends Resource
         $nomorPengajuan = "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
 
         return $form->schema([
-            Forms\Components\Section::make()
+            Forms\Components\Section::make('Informasi Pengajuan')
                 ->columns(2)
-                ->maxWidth('1/2')
+                ->maxWidth('7xl')
                 ->schema([
                     TextInput::make('nomor_pengajuan')
+                        ->label('Nomor Pengajuan')
                         ->default($nomorPengajuan)
                         ->readOnly(),
 
                     Forms\Components\DatePicker::make('tanggal_pengajuan')
+                        ->label('Tanggal Pengajuan')
                         ->required()
                         ->date(),
                 ]),
 
-            TableRepeater::make('pengajuan_detail')
-                ->relationship('pengajuan_detail')
-                ->headers([
-                    Header::make('Akun Master')->width('300px')->align(Alignment::Center),
-                    Header::make('Kode Akun')->width('200px')->align(Alignment::Center),
-                    Header::make('Nama Akun')->width('200px')->align(Alignment::Center),
-                    Header::make('Jumlah')->width('200px')->align(Alignment::Center)->markAsRequired(),
-                ])
+            Forms\Components\Section::make('Pengajuan Detail')
+                ->maxWidth('7xl')
                 ->schema([
-                    Hidden::make('nomor_pengajuan')->default($nomorPengajuan),
-
-                    Forms\Components\Select::make('akun_master')
-                        ->label('Akun Master')
-                        ->options(
-                            akun_master::all()->mapWithKeys(fn($akun) => [$akun->id => $akun->akun_bpr . ' - ' . $akun->nama_akun])
-                        )
+                    TableRepeater::make('pengajuan_detail')
+                        ->relationship('pengajuan_detail')
                         ->columnSpanFull()
-                        ->searchable()
-                        ->reactive()
-                        ->afterStateUpdated(function ($state, callable $set) {
-                            $akun = akun_master::find($state);
-                            $set('kode_akun', $akun?->akun_bpr);
-                            $set('nama_akun', $akun?->nama_akun);
-                        }),
+                        ->headers([
+                            Header::make('Akun Master')->width('300px'),
+                            Header::make('Kode Akun')->width('200px'),
+                            Header::make('Nama Akun')->width('200px'),
+                            Header::make('Jumlah')->width('200px')->markAsRequired(),
+                        ])
+                        ->schema([
+                            Hidden::make('nomor_pengajuan')->default($nomorPengajuan),
 
-                    TextInput::make('kode_akun')->hiddenLabel()->readOnly(),
-                    TextInput::make('nama_akun')->hiddenLabel()->readOnly(),
+                            Select::make('akun_master')
+                                ->label('Akun Master')
+                                ->options(
+                                    akun_master::all()->mapWithKeys(fn($akun) => [
+                                        $akun->id => $akun->akun_bpr . ' - ' . $akun->nama_akun
+                                    ])
+                                )
+                                ->searchable()
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, callable $set) {
+                                    $akun = akun_master::find($state);
+                                    $set('kode_akun', $akun?->akun_bpr);
+                                    $set('nama_akun', $akun?->nama_akun);
+                                })
+                                ->columnSpan(2),
 
-                    TextInput::make('jumlah')
-                        ->label('Jumlah')
-                        ->required()
+                            TextInput::make('kode_akun')
+                                ->hiddenLabel()
+                                ->readOnly()
+                                ->columnSpan(1),
+
+                            TextInput::make('nama_akun')
+                                ->hiddenLabel()
+                                ->readOnly()
+                                ->columnSpan(1),
+
+                            TextInput::make('jumlah')
+                                ->label('Jumlah')
+                                ->required()
+                                ->prefix('Rp ')
+                                ->debounce(300)
+                                ->live(onBlur: true)
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, callable $set) {
+                                    $numericValue = preg_replace('/[^0-9]/', '', $state);
+
+                                    if ($numericValue !== '') {
+                                        $formattedValue = number_format((int) $numericValue, 0, ',', '.');
+                                        $set('jumlah', $formattedValue);
+                                    }
+                                })
+                                ->dehydrateStateUsing(fn($state) => preg_replace('/[^0-9]/', '', $state))
+                                ->formatStateUsing(function ($state) {
+                                    if (is_numeric($state)) {
+                                        return number_format((int) $state, 0, ',', '.');
+                                    }
+                                    return $state;
+                                })
+                                ->columnSpan(2),
+                        ])
+                        ->columns(6)
+                        ->defaultItems(1)
                         ->live()
-                        ->debounce(500)
-                        ->reactive()
-                        ->prefix('Rp ')
-                        ->numeric()
-                        ->inputMode('decimal')
-                        ->placeholder('Input Nominal')
-                        ->dehydrateStateUsing(fn($state) => preg_replace('/[^0-9]/', '', $state))
-                        ->formatStateUsing(fn($state) => $state !== null ? number_format((int) $state, 0, ',', '.') : null)
-                        ->afterStateUpdated(function ($state, callable $set, $get) {
-                            $total = collect($get('pengajuan_detail'))->sum(fn($item) => (int) preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
-                            $set('total_pengajuan', $total);
-                            $set('sisa', 10000000 - $total);
+                        ->reorderable(false)
+                        ->afterStateUpdated(fn(Get $get, Set $set) => self::updateTotals($get, $set))
+                        ->deleteAction(
+                            fn($action) => $action->after(fn(Get $get, Set $set) => self::updateTotals($get, $set))
+                        ),
+                ]),
 
-                            if ($total > 10000000) {
-                                Notification::make()
-                                    ->title('Total Melebihi Batas')
-                                    ->body('Maksimal jumlah yang bisa diajukan adalah Rp 10.000.000')
-                                    ->danger()
-                                    ->send();
-                            }
-                        }),
-                ])
-                ->defaultItems(1)
-                ->reorderable(false)
-                ->columns(3)
-                ->columnSpan('full')
-                ->deleteAction(
-                    fn($action) => $action->after(fn($get, $set) => self::updateTotals($get, $set))
-                ),
-
-            Forms\Components\Section::make()
-                ->columns(1)
-                ->maxWidth('1/2')
+            Forms\Components\Section::make('Total & Sisa Kuota')
+                ->columns(2)
+                ->maxWidth('7xl')
                 ->schema([
                     TextInput::make('total_pengajuan')
                         ->label('Total Pengajuan')
                         ->readOnly()
                         ->prefix('Rp ')
-                        ->reactive()
-                        ->live()
                         ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
 
                     TextInput::make('sisa')
                         ->label('Sisa Kuota')
                         ->readOnly()
                         ->prefix('Rp ')
-                        ->reactive()
-                        ->live()
                         ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
                 ]),
         ]);
     }
 
-    public static function updateTotals($get, $set): void
+    public static function updateTotals(Get $get, Set $set): void
     {
-        $invoiceItems = collect($get('pengajuan_detail'))->filter(fn($item) => !empty($item['jumlah']));
-        $subtotal = $invoiceItems->sum(fn($item) => (int) preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
+        $items = collect($get('pengajuan_detail'))
+            ->filter(fn($item) => !empty($item['jumlah']));
 
-        $set('total_pengajuan', $subtotal);
-        $set('sisa', 10000000 - $subtotal);
+        $total = $items->sum(fn($item) => (int) preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
+
+        $set('total_pengajuan', $total);
+        $set('sisa', 10000000 - $total);
+
+        if ($total > 10000000) {
+            Notification::make()
+                ->title('Total Melebihi Batas')
+                ->body('Maksimal jumlah yang bisa diajukan adalah Rp 10.000.000')
+                ->danger()
+                ->send();
+        }
     }
+
 
     public static function table(Table $table): Table
     {

@@ -4,22 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\PengadaanBarang;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PengadaanDashboardController extends Controller
 {
     public function index()
     {
-        $pengadaans = PengadaanBarang::withCount('details')
-            ->latest()
-            ->take(10)
-            ->get();
+        $pengadaans = PengadaanBarang::with('details')->get();
 
-        $pengadaans = PengadaanBarang::with(['details'])
-            ->latest()
-            ->take(10)
-            ->get();
+        $pengadaans = $pengadaans->sortBy([
+            fn ($a, $b) => self::urgensiValue($b->urgensi) <=> self::urgensiValue($a->urgensi),
+            fn ($a, $b) => Carbon::parse($a->tanggal_dibutuhkan)->timestamp 
+                        <=> Carbon::parse($b->tanggal_dibutuhkan)->timestamp
+        ]);
 
-
+        $pengadaans = $pengadaans->take(10);
 
         $stats = [
             'total'     => PengadaanBarang::count(),
@@ -29,5 +28,15 @@ class PengadaanDashboardController extends Controller
         ];
 
         return view('pengadaan_dashboard', compact('pengadaans', 'stats'));
+    }
+
+    private static function urgensiValue(string $urgensi): int
+    {
+        return match (strtolower($urgensi)) {
+            'tinggi' => 3,
+            'sedang' => 2,
+            'rendah' => 1,
+            default => 0,
+        };
     }
 }
