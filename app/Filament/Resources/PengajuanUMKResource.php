@@ -16,10 +16,12 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\Alignment;
+// use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
+use Filament\Support\Enums\Alignment;
+use Filament\Forms\Components\Field;
 
 class PengajuanUMKResource extends Resource
 {
@@ -73,9 +75,9 @@ class PengajuanUMKResource extends Resource
                         ->columnSpanFull()
                         ->headers([
                             Header::make('Akun Master')->width('300px'),
-                            Header::make('Kode Akun')->width('200px'),
-                            Header::make('Nama Akun')->width('200px'),
-                            Header::make('Jumlah')->width('200px')->markAsRequired(),
+                            Header::make('Kode Akun')->width('200px')->align(Alignment::Center),
+                            Header::make('Nama Akun')->width('200px')->align(Alignment::Center),
+                            Header::make('Jumlah')->width('200px')->align(Alignment::Center)->markAsRequired(),
                         ])
                         ->schema([
                             Hidden::make('nomor_pengajuan')->default($nomorPengajuan),
@@ -106,28 +108,36 @@ class PengajuanUMKResource extends Resource
                                 ->readOnly()
                                 ->columnSpan(1),
 
-                            TextInput::make('jumlah')
-                                ->label('Jumlah')
-                                ->required()
-                                ->prefix('Rp ')
-                                ->debounce(300)
-                                ->live(onBlur: true)
-                                ->reactive()
-                                ->afterStateUpdated(function ($state, callable $set) {
-                                    $numericValue = preg_replace('/[^0-9]/', '', $state);
+                            // Field::make('jumlah')
+                            //     ->label('Jumlah')
+                            //     ->view('components.input-rupiah') // memanggil Blade tadi
+                            //     ->required()
 
-                                    if ($numericValue !== '') {
-                                        $formattedValue = number_format((int) $numericValue, 0, ',', '.');
-                                        $set('jumlah', $formattedValue);
-                                    }
-                                })
-                                ->dehydrateStateUsing(fn($state) => preg_replace('/[^0-9]/', '', $state))
-                                ->formatStateUsing(function ($state) {
-                                    if (is_numeric($state)) {
-                                        return number_format((int) $state, 0, ',', '.');
-                                    }
-                                    return $state;
-                                })
+                            
+
+                                TextInput::make('jumlah')
+                                    ->label('Jumlah')
+                                    ->required()
+                                    ->prefix('Rp ')
+                                    //->debounce(350)
+                                    //->live(debounce: 300)
+                                    ->live(onBlur: true)
+                                    ->reactive()
+                                    ->afterStateUpdated(function ($state, callable $set) {
+                                        $numericValue = preg_replace('/[^0-9]/', '', $state);
+
+                                        if ($numericValue !== '') {
+                                            $formattedValue = number_format((int) $numericValue, 0, ',', '.');
+                                            $set('jumlah', $formattedValue);
+                                        }
+                                    })
+                                    ->dehydrateStateUsing(fn($state) => preg_replace('/[^0-9]/', '', $state))
+                                    ->formatStateUsing(function ($state) {
+                                        if (is_numeric($state)) {
+                                            return number_format((int) $state, 0, ',', '.');
+                                        }
+                                        return $state;
+                                    })
                                 ->columnSpan(2),
                         ])
                         ->columns(6)

@@ -10,15 +10,17 @@ class PengadaanDashboardController extends Controller
 {
     public function index()
     {
-        $pengadaans = PengadaanBarang::with('details')->get();
-
-        $pengadaans = $pengadaans->sortBy([
-            fn ($a, $b) => self::urgensiValue($b->urgensi) <=> self::urgensiValue($a->urgensi),
-            fn ($a, $b) => Carbon::parse($a->tanggal_dibutuhkan)->timestamp 
-                        <=> Carbon::parse($b->tanggal_dibutuhkan)->timestamp
-        ]);
-
-        $pengadaans = $pengadaans->take(10);
+        $pengadaans = PengadaanBarang::with('details')
+            ->orderByRaw("
+                CASE
+                    WHEN status = 'diproses' THEN 1
+                    WHEN status = 'ditolak' THEN 2
+                    WHEN status = 'selesai' THEN 3
+                    ELSE 4
+                END
+            ")
+            ->latest('tanggal_dibutuhkan') 
+            ->paginate(10);
 
         $stats = [
             'total'     => PengadaanBarang::count(),
@@ -28,15 +30,5 @@ class PengadaanDashboardController extends Controller
         ];
 
         return view('pengadaan_dashboard', compact('pengadaans', 'stats'));
-    }
-
-    private static function urgensiValue(string $urgensi): int
-    {
-        return match (strtolower($urgensi)) {
-            'tinggi' => 3,
-            'sedang' => 2,
-            'rendah' => 1,
-            default => 0,
-        };
     }
 }

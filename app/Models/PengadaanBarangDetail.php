@@ -19,6 +19,7 @@ class PengadaanBarangDetail extends Model
         'spesifikasi',
         'link',
         'catatan',
+        'harga',
     ];
 
     // Relasi ke pengadaan barang

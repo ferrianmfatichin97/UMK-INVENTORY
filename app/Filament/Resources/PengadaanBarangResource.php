@@ -70,6 +70,19 @@ class PengadaanBarangResource extends Resource
                 ->schema([
                     TextInput::make('nama_barang')->label('Nama Barang')->required(),
                     TextInput::make('jumlah')->numeric()->required()->minValue(1),
+                    TextInput::make('harga')
+    ->label('Harga')
+    ->required()
+    ->numeric()  // validasi dan casting sebagai angka
+    ->prefix('Rp ')
+    ->mask(fn ($mask) => $mask
+        ->numeric()
+        ->decimalPlaces(0)         // tanpa desimal
+        ->thousandsSeparator('.')  // pemisah ribuan
+        ->mapToDecimalSeparator([',']) // masukkan koma sebagai tens separator jika pengguna salah ketik
+        ->normalizeZeros()         // ekuilibrium angka seperti "1.0" → "1"
+    )
+    ->stripCharacters(['Rp', '.', ',']), 
                     TextInput::make('spesifikasi')->nullable(),
                     TextInput::make('link')->label('Link Toko')->nullable(),
                     TextInput::make('catatan')->nullable(),

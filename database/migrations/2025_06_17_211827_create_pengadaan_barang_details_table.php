@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('spesifikasi')->nullable();
             $table->string('link')->nullable();
             $table->text('catatan')->nullable();
+            $table->decimal('harga', 15, 2);
             $table->timestamps();
         });
     }

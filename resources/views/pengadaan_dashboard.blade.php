@@ -32,7 +32,7 @@
 
         {{-- Ringkasan Statistik --}}
         <div class="row g-4 mb-5">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body text-center">
                         <h6 class="text-muted">Total Pengadaan</h6>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 {{-- <div class="card border-0 shadow-sm bg-info text-white"> --}}
                 <div class="card border-0 shadow-sm bg-warning text-white">
                     <div class="card-body text-center">
@@ -49,19 +49,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card border-0 shadow-sm bg-success text-white">
                     <div class="card-body text-center">
                         <h6>Selesai</h6>
                         <h3 class="fw-bold">{{ $stats['selesai'] }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card border-0 shadow-sm bg-danger text-white">
-                    <div class="card-body text-center">
-                        <h6>Ditolak</h6>
-                        <h3 class="fw-bold">{{ $stats['ditolak'] }}</h3>
                     </div>
                 </div>
             </div>
@@ -70,7 +62,7 @@
         {{-- Tabel Pengadaan --}}
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white fw-semibold">
-                Pengadaan Terbaru
+                Pengadaan
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -78,97 +70,58 @@
                         <thead class="table-light text-center">
                             <tr>
                                 <th>Divisi</th>
-                                <th>Urgensi</th>
-                                <th>Nota Dinas</th>
+                                <th>Nomor Surat</th>
+                                <th>Tanggal</th>
                                 <th>Nama Barang</th>
-                                <th>Nota Dinas</th>
-                                <th>Tanggal Dibutuhkan</th>
-                                <th>Sisa Hari</th>
+                                <th>QTY</th>
+                                <th>Keterangan</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($pengadaans as $item)
-                                <tr class="text-center">
-                                    <td>{{ $item->divisi }}</td>
-                                    <td>
-                                        <span
-                                            class="badge-urgensi status-badge bg-{{ match ($item->urgensi) {
-                                                'tinggi' => 'danger',
-                                                'sedang' => 'warning',
-                                                'rendah' => 'success',
-                                            } }}">
-                                            {{ ucfirst($item->urgensi) }}
-                                        </span>
-                                    </td>
-                                    <td>{{ $item->nota_dinas }}</td>
-                                    <td>
-                                        @if ($item->details->isNotEmpty())
-                                            <ul class="mb-0 text-start">
-                                                @foreach ($item->details as $detail)
-                                                    <li>{{ $detail->nama_barang }}</li>
-                                                @endforeach
-                                            </ul>
-                                        @else
-                                            <span class="text-muted">-</span>
+                                @php
+                                    $detailCount = $item->details->count();
+                                @endphp
+                                @foreach ($item->details as $index => $detail)
+                                    <tr class="text-center">
+                                        @if ($index === 0)
+                                            <td rowspan="{{ $detailCount }}">{{ $item->divisi }}</td>
+                                            <td rowspan="{{ $detailCount }}">{{ $item->nota_dinas }}</td>
+                                            <td rowspan="{{ $detailCount }}">
+                                                {{ \Carbon\Carbon::parse($item->tanggal_dibutuhkan)->format('d/m/Y') }}
+                                            </td>
                                         @endif
-                                    </td>
-                                    <td>
-                                        @if ($item->lampiran_nodin)
-                                            <a href="{{ Storage::url($item->lampiran_nodin) }}" target="_blank">
-                                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/file-earmark-pdf.svg"
-                                                    alt="PDF" width="24">
-                                            </a>
-                                        @else
-                                            <span class="text-muted">-</span>
+                                        <td class="text-start">{{ $loop->iteration }}. {{ $detail->nama_barang }}</td>
+                                        <td>{{ $detail->jumlah }}</td>
+                                        <td>{{ $detail->catatan }}</td>
+                                        @if ($index === 0)
+                                            <td rowspan="{{ $detailCount }}">
+                                                <span
+                                                    class="status-badge text-white bg-{{ match ($item->status) {
+                                                        'diproses' => 'warning',
+                                                        'ditolak' => 'danger',
+                                                        'selesai' => 'success',
+                                                        default => 'secondary',
+                                                    } }}">
+                                                    {{ ucfirst($item->status) }}
+                                                </span>
+                                            </td>
                                         @endif
-                                    </td>
-
-                                    <td>{{ \Carbon\Carbon::parse($item->tanggal_dibutuhkan)->translatedFormat('d M Y') }}
-                                    </td>
-                                    <td>
-                                        @if ($item->status === 'selesai')
-                                            <span class="text-muted">-</span>
-                                        @else
-                                            @php
-                                                $today = \Carbon\Carbon::today();
-                                                $deadline = \Carbon\Carbon::parse(
-                                                    $item->tanggal_dibutuhkan,
-                                                )->startOfDay();
-                                                $daysLeft = $today->diffInDays($deadline, false);
-                                            @endphp
-
-                                            @if ($daysLeft < 0)
-                                                <span class="text-danger fw-semibold">Lewat {{ abs($daysLeft) }}
-                                                    hari</span>
-                                            @elseif ($daysLeft === 0)
-                                                <span class="text-warning fw-semibold">Hari ini</span>
-                                            @else
-                                                <span class="text-success fw-semibold">{{ $daysLeft }} hari
-                                                    lagi</span>
-                                            @endif
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <span
-                                            class="status-badge text-white bg-{{ match ($item->status) {
-                                                'diproses' => 'warning',
-                                                'ditolak' => 'danger',
-                                                'selesai' => 'success',
-                                                default => 'secondary',
-                                            } }}">
-                                            {{ ucfirst($item->status) }}
-                                        </span>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                @endforeach
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center text-muted py-4">Tidak ada data pengadaan.
+                                    <td colspan="7" class="text-center text-muted py-4">Tidak ada data pengadaan.
                                     </td>
                                 </tr>
                             @endforelse
+
                         </tbody>
                     </table>
+                    <div class="p-3">
+                        {{ $pengadaans->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -184,6 +137,11 @@
 
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        setInterval(function() {
+            window.location.reload();
+        }, 60000);
+    </script>
 </body>
 
 </html>
