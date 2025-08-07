@@ -22,6 +22,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Filament\Support\Enums\Alignment;
 use Filament\Forms\Components\Field;
+use Filament\Support\RawJs;
 
 class PengajuanUMKResource extends Resource
 {
@@ -108,85 +109,59 @@ class PengajuanUMKResource extends Resource
                                 ->readOnly()
                                 ->columnSpan(1),
 
-                            // Field::make('jumlah')
-                            //     ->label('Jumlah')
-                            //     ->view('components.input-rupiah') // memanggil Blade tadi
-                            //     ->required()
-
-                            
-
                                 TextInput::make('jumlah')
                                     ->label('Jumlah')
                                     ->required()
                                     ->prefix('Rp ')
-                                    //->debounce(350)
-                                    //->live(debounce: 300)
-                                    ->live(onBlur: true)
-                                    ->reactive()
-                                    ->afterStateUpdated(function ($state, callable $set) {
-                                        $numericValue = preg_replace('/[^0-9]/', '', $state);
-
-                                        if ($numericValue !== '') {
-                                            $formattedValue = number_format((int) $numericValue, 0, ',', '.');
-                                            $set('jumlah', $formattedValue);
-                                        }
-                                    })
-                                    ->dehydrateStateUsing(fn($state) => preg_replace('/[^0-9]/', '', $state))
-                                    ->formatStateUsing(function ($state) {
-                                        if (is_numeric($state)) {
-                                            return number_format((int) $state, 0, ',', '.');
-                                        }
-                                        return $state;
-                                    })
+                                    ->mask(RawJs::make('$money($input)'))
+                                    ->stripCharacters(',')
+                                    // ->live(onBlur: true)
+                                    // ->reactive()
                                 ->columnSpan(2),
                         ])
                         ->columns(6)
                         ->defaultItems(1)
-                        ->live()
-                        ->reorderable(false)
-                        ->afterStateUpdated(fn(Get $get, Set $set) => self::updateTotals($get, $set))
-                        ->deleteAction(
-                            fn($action) => $action->after(fn(Get $get, Set $set) => self::updateTotals($get, $set))
-                        ),
+                        // ->live()
+                        ->reorderable(false),
                 ]),
 
-            Forms\Components\Section::make('Total & Sisa Kuota')
-                ->columns(2)
-                ->maxWidth('7xl')
-                ->schema([
-                    TextInput::make('total_pengajuan')
-                        ->label('Total Pengajuan')
-                        ->readOnly()
-                        ->prefix('Rp ')
-                        ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
+            // Forms\Components\Section::make('Total & Sisa Kuota')
+            //     ->columns(2)
+            //     ->maxWidth('7xl')
+            //     ->schema([
+            //         TextInput::make('total_pengajuan')
+            //             ->label('Total Pengajuan')
+            //             ->readOnly()
+            //             ->prefix('Rp ')
+            //             ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
 
-                    TextInput::make('sisa')
-                        ->label('Sisa Kuota')
-                        ->readOnly()
-                        ->prefix('Rp ')
-                        ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
-                ]),
+            //         TextInput::make('sisa')
+            //             ->label('Sisa Kuota')
+            //             ->readOnly()
+            //             ->prefix('Rp ')
+            //             ->formatStateUsing(fn($state) => number_format((int) $state, 0, ',', '.')),
+            //     ]),
         ]);
     }
 
-    public static function updateTotals(Get $get, Set $set): void
-    {
-        $items = collect($get('pengajuan_detail'))
-            ->filter(fn($item) => !empty($item['jumlah']));
+    // public static function updateTotals(Get $get, Set $set): void
+    // {
+    //     $items = collect($get('pengajuan_detail'))
+    //         ->filter(fn($item) => !empty($item['jumlah']));
 
-        $total = $items->sum(fn($item) => (int) preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
+    //     $total = $items->sum(fn($item) => (int) preg_replace('/[^0-9]/', '', $item['jumlah'] ?? 0));
 
-        $set('total_pengajuan', $total);
-        $set('sisa', 10000000 - $total);
+    //     $set('total_pengajuan', $total);
+    //     $set('sisa', 10000000 - $total);
 
-        if ($total > 10000000) {
-            Notification::make()
-                ->title('Total Melebihi Batas')
-                ->body('Maksimal jumlah yang bisa diajukan adalah Rp 10.000.000')
-                ->danger()
-                ->send();
-        }
-    }
+    //     if ($total > 10000000) {
+    //         Notification::make()
+    //             ->title('Total Melebihi Batas')
+    //             ->body('Maksimal jumlah yang bisa diajukan adalah Rp 10.000.000')
+    //             ->danger()
+    //             ->send();
+    //     }
+    // }
 
 
     public static function table(Table $table): Table

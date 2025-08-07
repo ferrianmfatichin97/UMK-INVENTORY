@@ -24,6 +24,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Storage;
+use Filament\Support\RawJs;
 
 class PengadaanBarangResource extends Resource
 {
@@ -52,7 +53,7 @@ class PengadaanBarangResource extends Resource
                             'sedang' => 'Sedang',
                             'rendah' => 'Rendah',
                         ]),
-                    DatePicker::make('tanggal_dibutuhkan')->required(),
+                    DatePicker::make('tanggal_dibutuhkan')->required()->label('Tanggal'),
                 ]),
 
             TableRepeater::make('details')
@@ -63,28 +64,23 @@ class PengadaanBarangResource extends Resource
                 ->headers([
                     Header::make('Nama Barang')->width('200px'),
                     Header::make('Jumlah')->width('100px'),
-                    Header::make('Spesifikasi')->width('200px'),
-                    Header::make('Link')->width('200px'),
+                    Header::make('Harga')->width('200px'),
+                    Header::make('Spesifikasi')->width('100px'),
+                    // Header::make('Link')->width('200px'),
                     Header::make('Catatan')->width('200px'),
                 ])
                 ->schema([
                     TextInput::make('nama_barang')->label('Nama Barang')->required(),
                     TextInput::make('jumlah')->numeric()->required()->minValue(1),
                     TextInput::make('harga')
-    ->label('Harga')
-    ->required()
-    ->numeric()  // validasi dan casting sebagai angka
-    ->prefix('Rp ')
-    ->mask(fn ($mask) => $mask
-        ->numeric()
-        ->decimalPlaces(0)         // tanpa desimal
-        ->thousandsSeparator('.')  // pemisah ribuan
-        ->mapToDecimalSeparator([',']) // masukkan koma sebagai tens separator jika pengguna salah ketik
-        ->normalizeZeros()         // ekuilibrium angka seperti "1.0" → "1"
-    )
-    ->stripCharacters(['Rp', '.', ',']), 
+                        ->label('Harga')
+                        ->required()
+                        ->prefix('Rp ')
+                        ->mask(RawJs::make('$money($input)'))
+                        ->stripCharacters(',')
+                        ->required(),
                     TextInput::make('spesifikasi')->nullable(),
-                    TextInput::make('link')->label('Link Toko')->nullable(),
+                    // TextInput::make('link')->label('Link Toko')->nullable(),
                     TextInput::make('catatan')->nullable(),
                 ])
                 ->defaultItems(1)

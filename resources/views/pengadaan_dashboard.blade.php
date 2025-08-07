@@ -32,28 +32,33 @@
 
         {{-- Ringkasan Statistik --}}
         <div class="row g-4 mb-5">
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm">
+            <div class="col-md-4" >
+                <div class="card shadow-sm text-white">
+                    <div class="card-header bg-info text-center">
+                        <h6 class="mb-0 text-white"><strong>Total Pengadaan</strong></h6>
+                    </div>
                     <div class="card-body text-center">
-                        <h6 class="text-muted">Total Pengadaan</h6>
                         <h3 class="fw-bold text-dark">{{ $stats['total'] }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                {{-- <div class="card border-0 shadow-sm bg-info text-white"> --}}
-                <div class="card border-0 shadow-sm bg-warning text-white">
+                <div class="card shadow-sm text-white">
+                     <div class="card-header bg-warning text-center">
+                        <h6 class="mb-0 text-white"><strong>Diproses</strong></h6>
+                    </div>
                     <div class="card-body text-center">
-                        <h6>Diproses</h6>
-                        <h3 class="fw-bold">{{ $stats['diproses'] }}</h3>
+                        <h3 class="fw-bold text-dark">{{ $stats['diproses'] }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm bg-success text-white">
+                <div class="card shadow-sm text-white">
+                    <div class="card-header bg-success text-center">
+                        <h6 class="mb-0 text-white"><strong>Selesai</strong></h6>
+                    </div>
                     <div class="card-body text-center">
-                        <h6>Selesai</h6>
-                        <h3 class="fw-bold">{{ $stats['selesai'] }}</h3>
+                        <h3 class="fw-bold text-dark">{{ $stats['selesai'] }}</h3>
                     </div>
                 </div>
             </div>
