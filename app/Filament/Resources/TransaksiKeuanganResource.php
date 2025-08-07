@@ -11,6 +11,7 @@ use Filament\Tables\Table;
 use Filament\Tables;
 use Illuminate\Support\Carbon;
 use Filament\Tables\Enums\FiltersLayout;
+use Filament\Support\RawJs;
 
 class TransaksiKeuanganResource extends Resource
 {
@@ -53,8 +54,10 @@ class TransaksiKeuanganResource extends Resource
 
                 Forms\Components\TextInput::make('amount')
                     ->label('Jumlah')
-                    ->numeric()
-                    ->required(),
+                    ->required()
+                    ->prefix('Rp ')
+                    ->mask(RawJs::make('$money($input)'))
+                    ->stripCharacters(','),
 
                 Forms\Components\DatePicker::make('trans_date')
                     ->label('Tanggal Transaksi')
