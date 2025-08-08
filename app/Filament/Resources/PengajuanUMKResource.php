@@ -115,13 +115,10 @@ class PengajuanUMKResource extends Resource
                                     ->prefix('Rp ')
                                     ->mask(RawJs::make('$money($input)'))
                                     ->stripCharacters(',')
-                                    // ->live(onBlur: true)
-                                    // ->reactive()
                                 ->columnSpan(2),
                         ])
                         ->columns(6)
                         ->defaultItems(1)
-                        // ->live()
                         ->reorderable(false),
                 ]),
 

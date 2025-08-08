@@ -2,19 +2,20 @@
 
 namespace App\Filament\Resources\TransaksiUMKResource\Pages;
 
+use App\Filament\Resources\TransaksiUMKResource;
 use App\Models\pengajuan_detail;
+use App\Models\PengajuanUMK;
+use App\Models\TransaksiUMK;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Filament\Actions;
-use App\Models\PengajuanUMK;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
-use Illuminate\Support\Facades\Config;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Riskihajar\Terbilang\Facades\Terbilang;
-use App\Filament\Resources\TransaksiUMKResource;
-use App\Models\TransaksiUMK;
 
 class ListTransaksiUMKS extends ListRecords
 {
@@ -40,12 +41,21 @@ class ListTransaksiUMKS extends ListRecords
                         ->options(PengajuanUMK::query()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
                         ->searchable()
                         ->required(),
-                    
+
                 ])
                 ->action(function (array $data) {
                     $nomor_pengajuan = $data['nomor_pengajuan'];
                     $jenis_laporan = $data['jenis_laporan'];
-                    $filename = "Laporan UMK_{$nomor_pengajuan}.pdf";
+                    $jenisNamaFile = match ($jenis_laporan) {
+                        'laporan_1' => 'Laporan_PertanggungJawaban',
+                        'laporan_2' => 'Laporan_TransaksiUMK',
+                        'laporan_3' => 'Laporan_3',
+                        'laporan_4' => 'Laporan_4',
+                        default => 'Laporan_UMK',
+                    };
+
+                    $filename = "{$jenisNamaFile}_{$nomor_pengajuan}.pdf";
+                    // $filename = "Laporan UMK_{$nomor_pengajuan}.pdf";
 
                     return response()->stream(function () use ($nomor_pengajuan, $jenis_laporan) {
                         switch ($jenis_laporan) {
@@ -53,7 +63,7 @@ class ListTransaksiUMKS extends ListRecords
                                 echo $this->generateLaporan1($nomor_pengajuan);
                                 break;
                             case 'laporan_2':
-                                echo $this->generateLaporan2($nomor_pengajuan); 
+                                echo $this->generateLaporan2($nomor_pengajuan);
                                 break;
                             case 'laporan_3':
                                 echo $this->generateLaporan3($nomor_pengajuan);
@@ -177,26 +187,23 @@ class ListTransaksiUMKS extends ListRecords
             ->value('tanggal_pengajuan');
 
         $tanggal = Carbon::parse($formattedTanggal)->translatedFormat('d F Y');
+        Log::info('Download Laporan Transaksi UMK for ' . $nomor_pengajuan);
 
-        $detail = DB::table('pengajuan_details')
+        $details = DB::table('view_pengajuanumk')
             ->select(
-                'nomor_pengajuan',
-                'kode_akun',
-                'nama_akun',
-                'keterangan',
-                'jumlah'
+                'kode_pengajuan AS NO_UMK',
+                'kode_akun AS AKUN_BPR',
+                DB::raw('ROW_NUMBER() OVER (ORDER BY kode_akun) AS NO_URUT'),
+                'nama_akun AS NAMA_AKUN',
+                'keterangan_detail AS KETERANGAN',
+                'jumlah AS JUMLAH'
             )
-            ->where('nomor_pengajuan', $nomor_pengajuan)
+            ->where('kode_pengajuan', $nomor_pengajuan)
             ->orderBy('kode_akun')
+            ->orderBy('nama_akun')
             ->get();
 
-        dd([
-            'details' => $detail,
-            'tanggal' => $tanggal,
-            'nomor' => $nomor_pengajuan,
-        ]);
-
-        $total = $detail->sum('jumlah');
+        $total = $details->sum('JUMLAH');
 
         Config::set('terbilang.locale', 'id');
         $terbilang = Terbilang::make($total, ' rupiah');
@@ -209,9 +216,19 @@ class ListTransaksiUMKS extends ListRecords
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
 
-        return Pdf::loadView('LPJWB_2', [
+        // dd([
+        //     'image' => $base64,
+        //     'details' => $details,
+        //     'total' => $total,
+        //     'terbilang' => $terbilang,
+        //     'userName' => $userName,
+        //     'tanggal' => $tanggal,
+        //     'nomor' => $nomor_pengajuan,
+        // ]);
+
+        return Pdf::loadView('laporantransaksiumk', [
             'image' => $base64,
-            'details' => $detail,
+            'details' => $details,
             'total' => $total,
             'terbilang' => $terbilang,
             'userName' => $userName,
@@ -219,6 +236,7 @@ class ListTransaksiUMKS extends ListRecords
             'nomor' => $nomor_pengajuan,
         ])->output();
     }
+
 
     protected function generateLaporan3($nomor_pengajuan)
     {
