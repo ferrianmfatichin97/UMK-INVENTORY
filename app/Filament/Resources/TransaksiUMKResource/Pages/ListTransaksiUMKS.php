@@ -32,7 +32,7 @@ class ListTransaksiUMKS extends ListRecords
                         ->options([
                             'laporan_1' => 'Laporan PertanggungJawaban',
                             'laporan_2' => 'Laporan Transaksi UMK',
-                            'laporan_3' => 'Laporan 3',
+                            'laporan_3' => 'Laporan Rekap Transaksi UMK',
                             'laporan_4' => 'Laporan 4',
                         ])
                         ->required(),
@@ -49,7 +49,7 @@ class ListTransaksiUMKS extends ListRecords
                     $jenisNamaFile = match ($jenis_laporan) {
                         'laporan_1' => 'Laporan_PertanggungJawaban',
                         'laporan_2' => 'Laporan_TransaksiUMK',
-                        'laporan_3' => 'Laporan_3',
+                        'laporan_3' => 'Laporan_RekapTransaksiUMK',
                         'laporan_4' => 'Laporan_4',
                         default => 'Laporan_UMK',
                     };
@@ -240,8 +240,49 @@ class ListTransaksiUMKS extends ListRecords
 
     protected function generateLaporan3($nomor_pengajuan)
     {
-        return '';
+        $formattedTanggal = DB::table('pengajuanumk')
+            ->where('nomor_pengajuan', $nomor_pengajuan)
+            ->value('tanggal_pengajuan');
+
+        $tanggal = Carbon::parse($formattedTanggal)->translatedFormat('d F Y');
+
+        $details = DB::table('transaksiumk')
+            ->select(
+                'no_pengajuan AS NO_UMK',
+                'akun_bpr AS AKUN_BPR',
+                'nama_akun AS NAMA_AKUN',
+                DB::raw('SUM(nominal) AS TOTAL')
+            )
+            ->where('no_pengajuan', $nomor_pengajuan)
+            ->groupBy('no_pengajuan', 'akun_bpr', 'nama_akun')
+            ->orderBy('akun_bpr')
+            ->get();
+
+        $grandTotal = $details->sum('TOTAL');
+
+        Config::set('terbilang.locale', 'id');
+        $terbilang = Terbilang::make($grandTotal, ' rupiah');
+
+        $user = Auth::user();
+        $userName = $user ? $user->name : 'Unknown User';
+
+        $path = 'logo.jpg';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $imageData = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
+
+        return Pdf::loadView('laporanrekaptransaksiumk', [
+            'image' => $base64,
+            'details' => $details,
+            'grandTotal' => $grandTotal,
+            'terbilang' => $terbilang,
+            'userName' => $userName,
+            'tanggal' => $tanggal,
+            'nomor' => $nomor_pengajuan,
+        ])->output();
     }
+
+
     protected function generateLaporan4($nomor_pengajuan)
     {
         return '';
