@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Filament\Actions;
 use App\Models\PengajuanUMK;
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Models\Pengajuan_detail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
@@ -28,35 +27,28 @@ class ListPengajuanUMKS extends ListRecords
             Actions\Action::make('Surat Pembayaran')
                 ->icon('heroicon-o-folder-arrow-down')
                 ->form([
-                    Select::make('nomor_pengajuan')
+                    Select::make('kode_pengajuan')
                         ->label('Nomor Pengajuan')
-                        ->options(PengajuanUMK::query()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
+                        ->options(
+                            DB::table('view_pengajuanumk')
+                                ->orderByDesc('tanggal_pengajuan')
+                                ->pluck('kode_pengajuan', 'kode_pengajuan')
+                        )
                         ->searchable()
                         ->required(),
                 ])
                 ->action(function (array $data) {
-                    $nomor_pengajuan = $data['nomor_pengajuan'];
-                    // $pengajuan = DB::table('pengajuan_details')
-                    //     ->where('nomor_pengajuan', $nomor_pengajuan)
-                    //     ->get();
+                    $kode_pengajuan = $data['kode_pengajuan'];
 
-                    if (preg_match('/000(\d+)/', $nomor_pengajuan, $matches)) {
-                        $angka = $matches[1];
-                    } else {
-                        $angka = null;
-                    }
-
-                    $pengajuan = DB::table('pengajuan_details')
-                        ->where('nomor_Pengajuan', $angka)
+                    $pengajuan = DB::table('view_pengajuanumk')
+                        ->where('kode_pengajuan', $kode_pengajuan)
                         ->get();
 
+                    if ($pengajuan->isEmpty()) {
+                        abort(404, 'Data pengajuan tidak ditemukan');
+                    }
 
-                    // dd([
-                    //     'pengajuan' => $pengajuan,
-                    //     'nomor_pengajuan' => $nomor_pengajuan,  
-                    // ]);
-
-                    $total_pengajuan = $pengajuan->sum('jumlah');
+                    $total_pengajuan = $pengajuan->sum('total_pengajuan');
 
                     Config::set('terbilang.locale', 'id');
                     $terbilang = Terbilang::make($total_pengajuan, ' rupiah');
@@ -64,26 +56,25 @@ class ListPengajuanUMKS extends ListRecords
                     $user = Auth::user();
                     $userName = $user ? $user->name : 'Admin';
 
-                    $tanggal = DB::table('pengajuanumk')
-                        ->where('nomor_pengajuan', $nomor_pengajuan)
-                        ->value('tanggal_pengajuan');
+                    $tanggal = $pengajuan->first()->tanggal_pengajuan;
                     $formattedDate = Carbon::parse($tanggal)->translatedFormat('d F Y');
 
                     $path = 'logo.jpg';
                     $type = pathinfo($path, PATHINFO_EXTENSION);
-                    $data = file_get_contents($path);
-                    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                    $filename = "Pembayaran UMK_$nomor_pengajuan.pdf";
+                    $dataImg = file_get_contents($path);
+                    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($dataImg);
 
-                    return response()->stream(function () use ($pengajuan, $base64, $formattedDate, $nomor_pengajuan, $total_pengajuan, $userName, $terbilang) {
+                    $filename = "Pembayaran UMK_$kode_pengajuan.pdf";
+
+                    return response()->stream(function () use ($pengajuan, $base64, $formattedDate, $kode_pengajuan, $total_pengajuan, $userName, $terbilang) {
                         echo Pdf::loadView('SuratPembayaran', [
                             'transaksis' => $pengajuan,
-                            'image' => $base64,
-                            'userName' => $userName,
-                            'tanggal' => $formattedDate,
-                            'nomor' => $nomor_pengajuan,
+                            'image'      => $base64,
+                            'userName'   => $userName,
+                            'tanggal'    => $formattedDate,
+                            'nomor'      => $kode_pengajuan,
                             'total_pengajuan' => $total_pengajuan,
-                            'terbilang' => $terbilang,
+                            'terbilang'  => $terbilang,
                         ])->output();
                     }, 200, [
                         'Content-Type' => 'application/pdf',
