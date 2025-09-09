@@ -75,7 +75,7 @@
         <tr>
             <td style="width: 80px;">Dari</td>
             <td style="width: 10px;">:</td>
-            <td>Staff Umum</td>
+            <td>General Manajer Operasional</td>
         </tr>
         <tr>
             <td>Kepada Yth</td>
