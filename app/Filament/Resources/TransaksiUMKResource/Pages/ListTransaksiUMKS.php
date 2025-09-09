@@ -228,7 +228,7 @@ class ListTransaksiUMKS extends ListRecords
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-
+        Log::info('Download Laporan Transaksi UMK for ' . $nomor_pengajuan.' Oleh: '.$userName);
         // dd([
         //     'image' => $base64,
         //     'details' => $details,
@@ -283,7 +283,7 @@ class ListTransaksiUMKS extends ListRecords
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-
+        Log::info('Download Laporan Rekap Transaksi UMK for ' . $nomor_pengajuan.' Oleh: '.$userName);
         return Pdf::loadView('laporanrekaptransaksiumk', [
             'image' => $base64,
             'details' => $details,
