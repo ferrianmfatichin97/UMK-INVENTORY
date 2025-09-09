@@ -67,7 +67,7 @@
     <h5>SURAT PEMBAYARAN UANG MUKA KERJA UMUM</h5>
     <h6>Nomor : {{ $nomor }}</h6>
 
-    <p>Dari : Staff Umum</p>
+    <p>Dari : General Manager Operasional</p>
     <p>Kepada Yth : General Manajer Keuangan</p>
     <p>Perihal : Pertanggung Jawaban Uang Muka Kerja Umum</p>
     <br>
@@ -116,14 +116,14 @@
                 $formattedDate = $tanggal->translatedFormat('d F Y');
             @endphp
         </tbody>
-        {{-- <tfoot>
+        <tfoot>
             <tr class="border">
                 <td class="border" colspan="3"><strong>Total</strong></td>
                 <td class="border">{{ number_format($total_pengajuan, 0, ',', '.') }}</td>
                 <td class="border">{{ number_format($totalNominalSum, 0, ',', '.') }}</td>
                 <td class="border">{{ number_format($selisih, 0, ',', '.') }}</td>
             </tr>
-        </tfoot> --}}
+        </tfoot>
     </table>
     <br />
 
