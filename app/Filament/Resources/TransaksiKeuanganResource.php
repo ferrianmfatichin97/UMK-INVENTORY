@@ -79,7 +79,7 @@ class TransaksiKeuanganResource extends Resource
                         'delete' => 'Delete',
                     ])
                     ->default('posting')
-                    ->visible(fn() => auth()->user()?->roles === 'admin'),
+                    ->visible(fn() => \Illuminate\Support\Facades\Auth::user()?->roles === 'admin'),
 
                 Forms\Components\Section::make('Pengaturan Recurring')
                     ->visible(fn($get) => $get('is_recurring'))
@@ -120,7 +120,7 @@ class TransaksiKeuanganResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->visible(fn() => auth()->user()?->roles === 'admin'),
+                    ->visible(fn() => \Illuminate\Support\Facades\Auth::user()?->roles === 'admin'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('kode_akun')

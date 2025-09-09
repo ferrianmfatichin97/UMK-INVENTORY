@@ -8,58 +8,42 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-       body {
-            font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif, sans-serif;
-            /* font-size: 10px; */
-            /* margin: 12px; */
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
         }
 
-        p{
+        p {
             font-size: 12px;
             font-family: 'Times New Roman', Times, serif;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
         h5,
         h6 {
             text-align: center;
+            margin: 0;
         }
 
         .table1 {
             width: 100%;
             margin-top: 10px;
             border: 1px solid black;
-            /* text-align: center; */
             font-size: 12px;
+            border-collapse: collapse;
         }
 
-        .border {
+        .table1 th,
+        .table1 td {
             border: 1px solid black;
-            text-align: center;
-        }
-
-        .border1 {
-            border: 1px solid black;
-            text-align: left;
+            padding: 4px;
         }
 
         .warna {
             background-color: #f2f2f2;
-            border: 1px solid black;
         }
 
-        .signature {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .signature div {
+        /* Center khusus kolom angka */
+        .angka {
             text-align: center;
-            flex: 1;
         }
 
         .logo {
@@ -71,17 +55,31 @@
 </head>
 
 <body>
-    <img src="<?php echo $image?>" width="250" height="40"/>
-    <br />
-    <br />
+    <img src="<?php echo $image; ?>" width="250" height="40" />
+    <br /><br />
 
     <h5>SURAT PERTANGGUNG JAWABAN UANG MUKA KERJA UMUM</h5>
     <h6>Nomor : {{ $nomor }}</h6>
 
-    <p>Dari : Staff Umum</p>
-    <p>Kepada Yth : General Manajer Keuangan</p>
-    <p>Perihal : Pertanggung Jawaban Uang Muka Kerja Umum</p>
-    <br>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px;">
+        <tr>
+            <td style="width: 80px;">Dari</td>
+            <td style="width: 10px;">:</td>
+            <td>General Manager Operasional</td>
+        </tr>
+        <tr>
+            <td>Kepada Yth</td>
+            <td>:</td>
+            <td>General Manajer Keuangan</td>
+        </tr>
+        <tr>
+            <td>Perihal</td>
+            <td>:</td>
+            <td>Pertanggung Jawaban Uang Muka Kerja Umum</td>
+        </tr>
+    </table>
+
+    <br />
 
     <p>
         Menunjuk perihal diatas, dengan ini diajukan Pertanggung jawaban
@@ -89,6 +87,7 @@
     </p>
     <p>
         dengan Nomor Pengajuan : <strong>{{ $nomor }}</strong>.
+    </p>
     <p>
         Stempel Kasir/Teller dengan kelebihan sebesar Rp.{{ $total_selisih }} ({{ $terbilang }})
     </p>
@@ -96,7 +95,7 @@
 
     <table class="table1">
         <thead>
-            <tr class="border">
+            <tr>
                 <th class="warna">No</th>
                 <th class="warna">Kode Akun</th>
                 <th class="warna">Nama Akun</th>
@@ -105,48 +104,56 @@
                 <th class="warna">Selisih</th>
             </tr>
         </thead>
-        <tbody class="border">
-            @php
-                $no = 1;
-                $totalNominalSum = 0;
-                $nominalpengajuan = $total_pengajuan;
-                // $selisih = $remainingAmount;
-            @endphp
+        <tbody>
+            @php $no = 1; @endphp
             @foreach ($transaksis as $transaksi)
-                        @php
-                            $totalNominal = $transaksi->nominal ?? 0;
-                            $totalNominalSum += $totalNominal;
-
-                        @endphp
-                        <tr class="border">
-                            <td class="border">{{ $no++ }}</td>
-                            <td class="border">{{ $transaksi['A'] }}</td>
-                            <td class="border1">  - {{ $transaksi['B'] }}</td>
-                            <td class="border">{{ number_format($transaksi['Pengajuan'], 0, ',', '.') }}</td>
-                            <td class="border">{{ number_format($transaksi['Transaksi'], 0, ',', '.') }}</td>
-                            <td class="border">{{ number_format($transaksi['Pengajuan'] - $transaksi['Transaksi'], 0, ',', '.') }}</td>
-                        </tr>
+                @php
+                    $selisih = $transaksi['Pengajuan'] - $transaksi['Transaksi'];
+                @endphp
+                <tr>
+                    <td class="angka">{{ $no++ }}</td>
+                    <td class="angka">{{ $transaksi['A'] }}</td>
+                    <td>- {{ $transaksi['B'] }}</td>
+                    <td class="angka">
+                        {{ $transaksi['Pengajuan'] == 0 ? '-' : number_format($transaksi['Pengajuan'], 0, ',', '.') }}
+                    </td>
+                    <td class="angka">
+                        {{ $transaksi['Transaksi'] == 0 ? '-' : number_format($transaksi['Transaksi'], 0, ',', '.') }}
+                    </td>
+                    <td class="angka">
+                        @if ($selisih == 0)
+                            -
+                        @elseif ($selisih < 0)
+                            ({{ number_format(abs($selisih), 0, ',', '.') }})
+                        @else
+                            {{ number_format($selisih, 0, ',', '.') }}
+                        @endif
+                    </td>
+                </tr>
             @endforeach
-            @php
-            use Carbon\Carbon;
-                //$remainingTotal = $total_pengajuan - $totalNominalSum;
-
-                $tanggal = Carbon::now();
-                Carbon::setLocale('id');
-                $formattedDate = $tanggal->translatedFormat('d F Y');
-            @endphp
         </tbody>
         <tfoot>
-            <tr class="border">
-                <td class="border" colspan="3"><strong>Total</strong></td>
-                <td class="border">{{ number_format($total_pengajuan, 0, ',', '.') }}</td>
-                <td class="border">{{ number_format($total_realisasi, 0, ',', '.') }}</td>
-                <td class="border">{{ number_format($total_selisih, 0, ',', '.') }}</td>
+            @php $totalSelisih = $total_selisih; @endphp
+            <tr>
+                <td colspan="3"><strong>Total</strong></td>
+                <td class="angka">{{ $total_pengajuan == 0 ? '-' : number_format($total_pengajuan, 0, ',', '.') }}
+                </td>
+                <td class="angka">{{ $total_realisasi == 0 ? '-' : number_format($total_realisasi, 0, ',', '.') }}
+                </td>
+                <td class="angka">
+                    @if ($totalSelisih == 0)
+                        -
+                    @elseif ($totalSelisih < 0)
+                        ({{ number_format(abs($totalSelisih), 0, ',', '.') }})
+                    @else
+                        {{ number_format($totalSelisih, 0, ',', '.') }}
+                    @endif
+                </td>
             </tr>
         </tfoot>
     </table>
-    <br />
 
+    <br />
 
     <p>
         Terlampir kami sampaikan bukti-bukti pengeluaran sesuai dengan ketentuan yang berlaku.
@@ -156,33 +163,38 @@
         Demikian, atas perhatian dan kerjasamanya diucapkan, Terima kasih.
     </p>
 
-    <table style="width: 100%; border-color: #ffff; margin-top: 25px; border-collapse: collapse; border:none;">
+    <table style="width: 100%; margin-top: 25px; border-collapse: collapse; font-size: 12px;">
         <tr>
             <td style="padding: 20px; text-align: center">
                 <p style="margin: 0">Menyetujui</p>
             </td>
+            <td style="padding: 20px; text-align: center"></td>
             <td style="padding: 20px; text-align: center">
-                <p style="margin: 0"></p>
-            </td>
-            <td style="padding: 20px; text-align: center">
-                <p style="margin: 0">Bekasi, {{ $formattedDate }}</p>
+                <p style="margin: 0">Bekasi, {{ $tanggal }}</p>
             </td>
         </tr>
         <tr>
-            <td style="padding: 20px; text-align: center"></td>
-            <td style="padding: 20px; text-align: center"></td>
-            <td style="padding: 20px; text-align: center"></td>
+            <td style="padding: 40px; text-align: center"></td>
+            <td style="padding: 40px; text-align: center"></td>
+            <td style="padding: 40px; text-align: center"></td>
         </tr>
         <tr>
-            <td style="padding: 20px; text-align: center">
+            <td style="padding: 10px; text-align: center">
                 <p style="margin: 0">Dwi Sulastri</p>
             </td>
-            <td style="padding: 20px; text-align: center"></td>
+            <td></td>
             <td style="padding: 10px; text-align: center">
-                <p style="margin: 0">Sri Handayani <span style="margin-left: 50px"> </span>{{ $userName }}</p>
+                <table style="margin: 0 auto; border-collapse: collapse; font-size: 10px;">
+                    <tr>
+                        <td style="padding: 0 30px;">Sri Handayani</td>
+                        <td style="padding: 0 30px;">{{ $userName }}</td>
+                    </tr>
+                </table>
             </td>
+
         </tr>
     </table>
+
 </body>
 
 </html>

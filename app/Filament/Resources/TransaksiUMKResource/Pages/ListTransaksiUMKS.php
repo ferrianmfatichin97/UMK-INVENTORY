@@ -38,7 +38,7 @@ class ListTransaksiUMKS extends ListRecords
                         ->required(),
                     Select::make('nomor_pengajuan')
                         ->label('Pengajuan')
-                        ->options(PengajuanUMK::query()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
+                        ->options(PengajuanUMK::query()->orderByDesc('tanggal_pengajuan')->pluck('nomor_pengajuan', 'nomor_pengajuan'))
                         ->searchable()
                         ->required(),
 
@@ -166,6 +166,19 @@ class ListTransaksiUMKS extends ListRecords
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
+        Log::info('Download Laporan PertanggungJawaban for ' . $nomor_pengajuan.' Oleh: '.$userName);
+        
+        // dd([
+        //     'image' => $base64,
+        //     'transaksis' => $finalDetail,
+        //     'userName' => $userName,
+        //     'tanggal' => $tanggal,
+        //     'nomor' => $nomor_pengajuan,
+        //     'total_pengajuan' => $totalpengajuan,
+        //     'total_realisasi' => $totalrealisasi,
+        //     'total_selisih' => $totalselisih,
+        //     'terbilang' => $terbilang,
+        // ]);
 
         return Pdf::loadView('LPJWB', [
             'image' => $base64,
