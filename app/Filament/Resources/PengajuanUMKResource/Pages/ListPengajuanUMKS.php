@@ -66,6 +66,16 @@ class ListPengajuanUMKS extends ListRecords
 
                     $filename = "Pembayaran UMK_$kode_pengajuan.pdf";
 
+                    // dd([    
+                    //     'transaksis' => $pengajuan,
+                    //     'image'      => $base64,
+                    //     'userName'   => $userName,
+                    //     'tanggal'    => $formattedDate,
+                    //     'nomor'      => $kode_pengajuan,
+                    //     'total_pengajuan' => $total_pengajuan,
+                    //     'terbilang'  => $terbilang,
+                    // ]);
+
                     return response()->stream(function () use ($pengajuan, $base64, $formattedDate, $kode_pengajuan, $total_pengajuan, $userName, $terbilang) {
                         echo Pdf::loadView('SuratPembayaran', [
                             'transaksis' => $pengajuan,
