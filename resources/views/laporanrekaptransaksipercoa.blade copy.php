@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Rekap Transaksi UMK</title>
+    <title>Laporan Rekap Transaksi Per COA</title>
     <style>
         body { font-family: sans-serif; font-size: 12px; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -19,7 +19,7 @@
 </head>
 <body>
     <img src="{{ $image }}" width="100">
-    <h3 class="title">Laporan Rekap Transaksi UMK</h3>
+    <h3 class="title">Laporan Rekap Transaksi Per COA</h3>
     <p>No. UMK: {{ $nomor }}</p>
     <p>Tanggal Pengajuan: {{ $tanggal }}</p>
 
@@ -41,7 +41,7 @@
             @endforeach
             <tr>
                 <th colspan="2">Grand Total</th>
-                <th class="text-right">{{ number_format($grandTotal, 0, ',', '.') }}</th>
+                <th class="text-right">Rp. {{ number_format($grandTotal, 0, ',', '.') }}</th>
             </tr>
         </tbody>
     </table>

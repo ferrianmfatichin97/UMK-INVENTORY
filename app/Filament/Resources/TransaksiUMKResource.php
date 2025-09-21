@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TransaksiUMKResource\Pages;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use Joaopaulolndev\FilamentPdfViewer\Infolists\Components\PdfViewerEntry;
+use Filament\Support\RawJs;
 
 class TransaksiUMKResource extends Resource
 {
@@ -111,11 +112,11 @@ class TransaksiUMKResource extends Resource
                             ->label('Satuan'),
 
                         Forms\Components\TextInput::make('nominal')
-                            ->required()
-                            ->reactive()
-                            ->prefix('Rp ')
-                            ->debounce(500)
-                            ->numeric(),
+                                ->label('nominal')
+                                ->required()
+                                ->prefix('Rp ')
+                                ->mask(RawJs::make('$money($input)'))
+                                ->stripCharacters(','),
 
                         Forms\Components\Textarea::make('keterangan')
                             ->required()

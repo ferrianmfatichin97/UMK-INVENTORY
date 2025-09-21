@@ -24,7 +24,7 @@ class ListPengajuanUMKS extends ListRecords
             Actions\CreateAction::make()
                 ->label('Add New'),
 
-            Actions\Action::make('Surat Pembayaran')
+            Actions\Action::make('Surat Permintaan')
                 ->icon('heroicon-o-folder-arrow-down')
                 ->form([
                     Select::make('kode_pengajuan')
@@ -48,7 +48,8 @@ class ListPengajuanUMKS extends ListRecords
                         abort(404, 'Data pengajuan tidak ditemukan');
                     }
 
-                    $total_pengajuan = $pengajuan->sum('total_pengajuan');
+                    // $total_pengajuan = $pengajuan->sum('total_pengajuan');
+                    $total_pengajuan = "10000000.0";
 
                     Config::set('terbilang.locale', 'id');
                     $terbilang = Terbilang::make($total_pengajuan, ' rupiah');
@@ -64,9 +65,9 @@ class ListPengajuanUMKS extends ListRecords
                     $dataImg = file_get_contents($path);
                     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($dataImg);
 
-                    $filename = "Pembayaran UMK_$kode_pengajuan.pdf";
+                    $filename = "Permintaan UMK_$kode_pengajuan.pdf";
 
-                    // dd([    
+                    // dd([
                     //     'transaksis' => $pengajuan,
                     //     'image'      => $base64,
                     //     'userName'   => $userName,

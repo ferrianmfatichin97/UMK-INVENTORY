@@ -109,12 +109,12 @@ class PengajuanUMKResource extends Resource
                                 ->readOnly()
                                 ->columnSpan(1),
 
-                                TextInput::make('jumlah')
-                                    ->label('Jumlah')
-                                    ->required()
-                                    ->prefix('Rp ')
-                                    ->mask(RawJs::make('$money($input)'))
-                                    ->stripCharacters(',')
+                            TextInput::make('jumlah')
+                                ->label('Jumlah')
+                                ->required()
+                                ->prefix('Rp ')
+                                ->mask(RawJs::make('$money($input)'))
+                                ->stripCharacters(',')
                                 ->columnSpan(2),
                         ])
                         ->columns(6)

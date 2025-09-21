@@ -180,14 +180,14 @@
         </tr>
         <tr>
             <td style="padding: 10px; text-align: center">
-                <p style="margin: 0">Dwi Sulastri</p>
+                <p style="margin: 0"><strong> Sulastri</strong></p>
             </td>
             <td></td>
             <td style="padding: 10px; text-align: center">
                 <table style="margin: 0 auto; border-collapse: collapse; font-size: 10px;">
                     <tr>
-                        <td style="padding: 0 30px;">Sri Handayani</td>
-                        <td style="padding: 0 30px;">{{ $userName }}</td>
+                        <td style="padding: 0 30px;"><strong> Handayani</strong></td>
+                        <td style="padding: 0 30px;"><strong>{{ $userName }}</strong></td>
                     </tr>
                 </table>
             </td>

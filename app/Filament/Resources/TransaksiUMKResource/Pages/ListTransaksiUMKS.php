@@ -32,8 +32,8 @@ class ListTransaksiUMKS extends ListRecords
                         ->options([
                             'laporan_1' => 'Laporan PertanggungJawaban',
                             'laporan_2' => 'Laporan Transaksi UMK',
-                            'laporan_3' => 'Laporan Rekap Transaksi UMK',
-                            'laporan_4' => 'Laporan 4',
+                            'laporan_3' => 'Laporan Rekap Transaksi Per COA',
+                            'laporan_4' => 'Laporan Rekap ALL',
                         ])
                         ->required(),
                     Select::make('nomor_pengajuan')
@@ -49,8 +49,8 @@ class ListTransaksiUMKS extends ListRecords
                     $jenisNamaFile = match ($jenis_laporan) {
                         'laporan_1' => 'Laporan_PertanggungJawaban',
                         'laporan_2' => 'Laporan_TransaksiUMK',
-                        'laporan_3' => 'Laporan_RekapTransaksiUMK',
-                        'laporan_4' => 'Laporan_4',
+                        'laporan_3' => 'Laporan_RekapTransaksiPerCOA',
+                        'laporan_4' => 'Laporan_RekapALLTransaksi',
                         default => 'Laporan_UMK',
                     };
 
@@ -166,8 +166,8 @@ class ListTransaksiUMKS extends ListRecords
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-        Log::info('Download Laporan PertanggungJawaban for ' . $nomor_pengajuan.' Oleh: '.$userName);
-        
+        Log::info('Download Laporan PertanggungJawaban ' . $nomor_pengajuan . ' Oleh: ' . $userName);
+
         // dd([
         //     'image' => $base64,
         //     'transaksis' => $finalDetail,
@@ -200,35 +200,31 @@ class ListTransaksiUMKS extends ListRecords
             ->value('tanggal_pengajuan');
 
         $tanggal = Carbon::parse($formattedTanggal)->translatedFormat('d F Y');
-        Log::info('Download Laporan Transaksi UMK for ' . $nomor_pengajuan);
 
-        $details = DB::table('view_pengajuanumk')
+        $details = DB::table('transaksiumk')
             ->select(
-                'kode_pengajuan AS NO_UMK',
-                'kode_akun AS AKUN_BPR',
-                DB::raw('ROW_NUMBER() OVER (ORDER BY kode_akun) AS NO_URUT'),
+                DB::raw("SUBSTRING_INDEX(SUBSTRING_INDEX(no_pengajuan, '-', -1), '/', 1) AS NO_UMK"),
+                'akun_bpr AS AKUN_BPR',
+                DB::raw('ROW_NUMBER() OVER (ORDER BY id) AS NO_URUT'),
                 'nama_akun AS NAMA_AKUN',
-                'keterangan_detail AS KETERANGAN',
-                'jumlah AS JUMLAH'
+                'keterangan AS KETERANGAN',
+                'nominal AS TOTAL'
             )
-            ->where('kode_pengajuan', $nomor_pengajuan)
-            ->orderBy('kode_akun')
-            ->orderBy('nama_akun')
+            ->where('no_pengajuan', $nomor_pengajuan)
             ->get();
 
-        $total = $details->sum('JUMLAH');
 
+        $total = $details->sum('TOTAL');
         Config::set('terbilang.locale', 'id');
         $terbilang = Terbilang::make($total, ' rupiah');
-
         $user = Auth::user();
         $userName = $user ? $user->name : 'Unknown User';
-
         $path = 'logo.jpg';
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-        Log::info('Download Laporan Transaksi UMK for ' . $nomor_pengajuan.' Oleh: '.$userName);
+        Log::info('Download Laporan Transaksi UMK ' . $nomor_pengajuan . ' Oleh: ' . $userName);
+
         // dd([
         //     'image' => $base64,
         //     'details' => $details,
@@ -263,12 +259,15 @@ class ListTransaksiUMKS extends ListRecords
             ->select(
                 'no_pengajuan AS NO_UMK',
                 'akun_bpr AS AKUN_BPR',
+                DB::raw('ROW_NUMBER() OVER (ORDER BY akun_bpr) AS NO_URUT'),
                 'nama_akun AS NAMA_AKUN',
+                DB::raw('GROUP_CONCAT(keterangan SEPARATOR ", ") AS KETERANGAN'),
                 DB::raw('SUM(nominal) AS TOTAL')
             )
             ->where('no_pengajuan', $nomor_pengajuan)
             ->groupBy('no_pengajuan', 'akun_bpr', 'nama_akun')
             ->orderBy('akun_bpr')
+            ->orderBy('nama_akun')
             ->get();
 
         $grandTotal = $details->sum('TOTAL');
@@ -283,8 +282,8 @@ class ListTransaksiUMKS extends ListRecords
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-        Log::info('Download Laporan Rekap Transaksi UMK for ' . $nomor_pengajuan.' Oleh: '.$userName);
-        return Pdf::loadView('laporanrekaptransaksiumk', [
+        Log::info('Download Laporan Rekap Transaksi Per COA for ' . $nomor_pengajuan . ' Oleh: ' . $userName);
+        return Pdf::loadView('laporanrekaptransaksipercoa', [
             'image' => $base64,
             'details' => $details,
             'grandTotal' => $grandTotal,
@@ -298,6 +297,59 @@ class ListTransaksiUMKS extends ListRecords
 
     protected function generateLaporan4($nomor_pengajuan)
     {
-        return '';
+        $formattedTanggal = DB::table('pengajuanumk')
+            ->where('nomor_pengajuan', $nomor_pengajuan)
+            ->value('tanggal_pengajuan');
+
+        $tanggal = Carbon::parse($formattedTanggal)->translatedFormat('d F Y');
+        $details = DB::table('transaksiumk')
+            ->select(
+                'no_pengajuan AS NO_UMK',
+                'akun_bpr AS AKUN_BPR',
+                DB::raw('ROW_NUMBER() OVER (PARTITION BY akun_bpr ORDER BY nama_akun) AS NO_URUT'),
+                'nama_akun AS NAMA_AKUN',
+                'keterangan AS KETERANGAN',
+                'nominal AS TOTAL'
+            )
+            ->where('no_pengajuan', $nomor_pengajuan)
+            ->orderBy('akun_bpr')
+            ->orderBy('nama_akun')
+            ->get();
+
+
+
+        $total = $details->sum('TOTAL');
+
+        Config::set('terbilang.locale', 'id');
+        $terbilang = Terbilang::make($total, ' rupiah');
+
+        $user = Auth::user();
+        $userName = $user ? $user->name : 'Unknown User';
+
+        $path = 'logo.jpg';
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $imageData = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
+        Log::info('Download Laporan Rekap ALL Transaksi UMK ' . $nomor_pengajuan . ' Oleh: ' . $userName);
+
+        // dd([
+        //     'image' => $base64,
+        //     'details' => $details,
+        //     'total' => $total,
+        //     'terbilang' => $terbilang,
+        //     'userName' => $userName,
+        //     'tanggal' => $tanggal,
+        //     'nomor' => $nomor_pengajuan,
+        // ]);
+
+        return Pdf::loadView('laporanrekapalltransaksiumk', [
+            'image' => $base64,
+            'details' => $details,
+            'total' => $total,
+            'terbilang' => $terbilang,
+            'userName' => $userName,
+            'tanggal' => $tanggal,
+            'nomor' => $nomor_pengajuan,
+        ])->output();
     }
 }

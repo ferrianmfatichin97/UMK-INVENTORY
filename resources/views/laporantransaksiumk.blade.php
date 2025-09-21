@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <title>Laporan Transaksi UMK</title>
     <style>
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: DejaVu Sans, sans-serif; /* kompatibel untuk PDF */
+            font-size: 11px;
+            margin: 20px;
+        }
+
+        h4 {
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 0;
             font-size: 12px;
         }
 
@@ -14,11 +25,11 @@
             border-collapse: collapse;
             width: 100%;
             margin-top: 10px;
+            font-size: 11px;
         }
 
-        th,
-        td {
-            border: 1px solid black;
+        th, td {
+            border: 1px solid #000;
             padding: 5px;
         }
 
@@ -31,24 +42,32 @@
             vertical-align: top;
         }
 
-        h4 {
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
             text-align: center;
-            margin-bottom: 5px;
+        }
+
+        .footer {
+            font-size: 10px;
+            margin-top: 20px;
+            text-align: right;
+            color: gray;
         }
     </style>
 </head>
-
 <body>
-
-    <h4>LAPORAN TRANSAKSI UMK</h4>
-    <p><strong>No UMK:</strong> {{ $details->first()->NO_UMK ?? '-' }}</p>
+    <h4>Laporan Transaksi UMK</h4>
+    {{-- <p><strong>No UMK:</strong> {{ $details->first()->NO_UMK ?? '-' }}</p> --}}
 
     <table>
         <thead>
             <tr>
-                <th>No Urut</th>
                 <th>Kode Pengajuan</th>
                 <th>Akun BPR</th>
+                <th>No Urut</th>
                 <th>Nama Akun</th>
                 <th>Keterangan</th>
                 <th>Jumlah</th>
@@ -58,26 +77,26 @@
             @php $totalJumlah = 0; @endphp
             @foreach ($details as $row)
                 <tr>
-                    <td style="text-align:center">{{ $row->NO_URUT }}</td>
                     <td>{{ $row->NO_UMK }}</td>
                     <td>{{ $row->AKUN_BPR }}</td>
+                    <td class="text-center">{{ $row->NO_URUT }}</td>
                     <td>{{ $row->NAMA_AKUN }}</td>
                     <td>{{ $row->KETERANGAN }}</td>
-                    <td style="text-align:right">
-                        {{ number_format($row->JUMLAH, 0, ',', '.') }}
-                        @php $totalJumlah += $row->JUMLAH; @endphp
+                    <td class="text-right">
+                        Rp {{ number_format($row->TOTAL, 0, ',', '.') }}
+                        @php $totalJumlah += $row->TOTAL; @endphp
                     </td>
                 </tr>
             @endforeach
             <tr>
-                <td colspan="5" style="text-align:right"><strong>Total</strong></td>
-                <td style="text-align:right"><strong>{{ number_format($totalJumlah, 0, ',', '.') }}</strong></td>
+                <td colspan="5" class="text-right"><strong>Total</strong></td>
+                <td class="text-right"><strong>Rp {{ number_format($totalJumlah, 0, ',', '.') }}</strong></td>
             </tr>
         </tbody>
     </table>
-    <p style="font-size:10px; margin-top:20px; text-align:right; color:gray;">
+
+    <p class="footer">
         Dicetak pada: {{ now()->format('d-m-Y H:i') }} oleh {{ $userName }}
     </p>
 </body>
-
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SURAT PEMBAYARAN UANG MUKA KERJA UMUM</title>
+    <title>SURAT PERMINTAAN UANG MUKA KERJA UMUM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
@@ -169,9 +169,9 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: center">Dwi Sulastri</td>
+            <td style="text-align: center"><strong> Sulastri</strong></td>
             <td></td>
-            <td style="text-align: center">Sri Handayani</td>
+            <td style="text-align: center"><strong> Handayani</strong></td>
         </tr>
     </table>
 
@@ -179,7 +179,7 @@
     <p>
         Sesuai dengan pengajuan surat pembayaran uang muka kerja umum nomor : {{ $nomor }}, telah diserahkan muka
         kerja
-        sebesar Rp. 10.000.000,- pada tanggal {{ $formattedDate }}.
+        sebesar Rp. 10.000.000,- Melalui Transfers ke Rekening MSO 01.101.03287 atas Nama Ade Erlangga pada tanggal {{ $formattedDate }}.
     </p>
 
     <table style="width: 100%; margin-top: 30px; border-collapse: collapse; font-size: 12px;">
@@ -194,9 +194,9 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: center">Renny Meysa</td>
+            <td style="text-align: center"><strong> Meysa</strong></td>
             <td></td>
-            <td style="text-align: center">{{ $userName }}</td>
+            <td style="text-align: center"><strong>{{ $userName }}</strong></td>
         </tr>
     </table>
 </body>
