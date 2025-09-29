@@ -169,9 +169,9 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: center"><strong> Sulastri</strong></td>
+            <td style="text-align: center"><strong>Dwi Sulastri</strong></td>
             <td></td>
-            <td style="text-align: center"><strong> Handayani</strong></td>
+            <td style="text-align: center"><strong>Sri Handayani</strong></td>
         </tr>
     </table>
 
@@ -194,7 +194,7 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: center"><strong> Meysa</strong></td>
+            <td style="text-align: center"><strong>Renny Meysa</strong></td>
             <td></td>
             <td style="text-align: center"><strong>{{ $userName }}</strong></td>
         </tr>
