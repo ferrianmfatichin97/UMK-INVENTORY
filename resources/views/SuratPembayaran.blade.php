@@ -194,7 +194,7 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: center"><strong>Renny Meysa</strong></td>
+            <td style="text-align: center"><strong>Dini Dwi Utami</strong></td>
             <td></td>
             <td style="text-align: center"><strong>{{ $userName }}</strong></td>
         </tr>
