@@ -84,40 +84,50 @@ class ListTransaksiUMKS extends ListRecords
 
     protected function generateLaporan1($nomor_pengajuan)
     {
-        $formattedTanggal = DB::table('pengajuanumk')
-            ->where('nomor_pengajuan', $nomor_pengajuan)
+        // Ambil tanggal pengajuan dari view_pengajuanumk
+        $formattedTanggal = DB::table('view_pengajuanumk')
+            ->where('kode_pengajuan', $nomor_pengajuan)
             ->value('tanggal_pengajuan');
 
         $tanggal = Carbon::parse($formattedTanggal)->translatedFormat('d F Y');
 
-        if (preg_match('/000(\d+)/', $nomor_pengajuan, $matches)) {
-            $angka = $matches[1];
-        } else {
-            $angka = null;
-        }
+        // Ambil data pengajuan dari view_pengajuanumk
+        $pengajuan = DB::table('view_pengajuanumk')
+            ->select(
+                'kode_akun AS A',
+                'nama_akun AS B',
+                'kode_pengajuan AS C',
+                DB::raw('SUM(jumlah) AS D'),
+                DB::raw("'Pengajuan' AS Sumber")
+            )
+            ->where('kode_pengajuan', $nomor_pengajuan)
+            ->groupBy('kode_akun', 'nama_akun', 'kode_pengajuan');
 
-        $pengajuan = pengajuan_detail::select(
-            'kode_akun AS A',
-            'nama_akun AS B',
-            'nomor_pengajuan AS C',
-            DB::raw('SUM(jumlah) AS D'),
-            DB::raw("'Pengajuan' AS Sumber")
-        )
-            ->where('nomor_pengajuan', $angka)
-            ->groupBy('kode_akun', 'nama_akun', 'nomor_pengajuan');
 
-        $transaksi = TransaksiUMK::select(
-            'akun_bpr AS A',
-            'nama_akun AS B',
-            'no_pengajuan AS C',
-            DB::raw('SUM(nominal) AS D'),
-            DB::raw("'Transaksi' AS Sumber")
-        )
+
+        $transaksi = DB::table('transaksiumk')
+            ->select(
+                'akun_bpr AS A',
+                'nama_akun AS B',
+                'no_pengajuan AS C',
+                DB::raw('SUM(nominal) AS D'),
+                DB::raw("'Transaksi' AS Sumber")
+            )
             ->where('no_pengajuan', $nomor_pengajuan)
             ->groupBy('akun_bpr', 'nama_akun', 'no_pengajuan');
 
+
+        // Union kedua data
         $dataGabungan = $pengajuan->unionAll($transaksi)->get();
 
+        // dd([
+        //     'nomor_pengajuan' => $nomor_pengajuan,
+        //     'pengajuan' => $pengajuan,
+        //     'transaksi' => $transaksi,
+        //     'datagabungan' => $dataGabungan,
+        // ]);
+
+        // Pivot data
         $pivoted = [];
         foreach ($dataGabungan as $row) {
             $key = $row->C . '|' . $row->A;
@@ -134,6 +144,8 @@ class ListTransaksiUMKS extends ListRecords
         }
 
         $detail = array_values($pivoted);
+
+        // Group by kode akun + nama akun
         $grouped = [];
         foreach ($detail as $row) {
             $key = $row['A'] . '|' . $row['B'];
@@ -152,20 +164,26 @@ class ListTransaksiUMKS extends ListRecords
 
         $finalDetail = array_values($grouped);
 
+        // Hitung total
         $totalpengajuan = collect($finalDetail)->sum('Pengajuan');
         $totalrealisasi = collect($finalDetail)->sum('Transaksi');
         $totalselisih = $totalpengajuan - $totalrealisasi;
 
+        // Konversi terbilang
         Config::set('terbilang.locale', 'id');
         $terbilang = Terbilang::make($totalselisih, ' rupiah');
 
+        // Ambil user
         $user = Auth::user();
         $userName = $user ? $user->name : 'Unknown User';
 
+        // Encode logo ke base64
         $path = 'logo.jpg';
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $imageData = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
+
+        // Logging
         Log::info('Download Laporan PertanggungJawaban ' . $nomor_pengajuan . ' Oleh: ' . $userName);
 
         // dd([
@@ -180,6 +198,7 @@ class ListTransaksiUMKS extends ListRecords
         //     'terbilang' => $terbilang,
         // ]);
 
+        // Return PDF
         return Pdf::loadView('LPJWB', [
             'image' => $base64,
             'transaksis' => $finalDetail,
@@ -192,6 +211,7 @@ class ListTransaksiUMKS extends ListRecords
             'terbilang' => $terbilang,
         ])->output();
     }
+
 
     protected function generateLaporan2($nomor_pengajuan)
     {
