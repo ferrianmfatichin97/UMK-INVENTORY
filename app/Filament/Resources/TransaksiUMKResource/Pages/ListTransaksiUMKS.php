@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\TransaksiUMKResource\Pages;
 
+
 use App\Filament\Resources\TransaksiUMKResource;
+use App\Filament\Resources\TransaksiUMKResource\Widgets\PengajuanSummaryWidgets;
 use App\Models\pengajuan_detail;
 use App\Models\PengajuanUMK;
 use App\Models\TransaksiUMK;
@@ -20,6 +22,13 @@ use Riskihajar\Terbilang\Facades\Terbilang;
 class ListTransaksiUMKS extends ListRecords
 {
     protected static string $resource = TransaksiUMKResource::class;
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            PengajuanSummaryWidgets::class,
+        ];
+    }
 
     protected function getHeaderActions(): array
     {
@@ -212,7 +221,6 @@ class ListTransaksiUMKS extends ListRecords
             'tanggal_cetak' => Carbon::now()->translatedFormat('d F Y'),
         ])->output();
     }
-
 
     protected function generateLaporan2($nomor_pengajuan)
     {
