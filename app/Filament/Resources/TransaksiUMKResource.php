@@ -43,15 +43,32 @@ class TransaksiUMKResource extends Resource
                         Forms\Components\Select::make('no_pengajuan')
                             ->label('Nomor Pengajuan')
                             ->options(
-                                PengajuanUMK::orderByDesc('nomor_pengajuan')->pluck('nomor_pengajuan', 'nomor_pengajuan')
+                                PengajuanUMK::orderByDesc('nomor_pengajuan')
+                                    ->pluck('nomor_pengajuan', 'nomor_pengajuan')
                             )
                             ->required()
                             ->searchable()
                             ->columnSpanFull()
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                $totalPengajuan = 10000000;
+                                $totalTransaksi = TransaksiUMK::where('no_pengajuan', $state)->sum('nominal');
+                                $sisa = $totalPengajuan - $totalTransaksi;
 
-                            ->afterStateUpdated(function ($state) {
-                                Log::info('Selected no_pengajuan: ' . $state);
+                                $set('total_transaksi', number_format($totalTransaksi, 0, ',', '.'));
+                                $set('sisa_saldo', number_format($sisa, 0, ',', '.'));
                             }),
+
+                        Forms\Components\TextInput::make('total_transaksi')
+                            ->label('Total Transaksi')
+                            ->prefix('Rp ')
+                            ->readOnly(),
+
+                        Forms\Components\TextInput::make('sisa_saldo')
+                            ->label('Sisa Saldo')
+                            ->prefix('Rp ')
+                            ->readOnly(),
+
 
                         Forms\Components\Select::make('akun_master')
                             ->label('Akun Master')
@@ -110,11 +127,11 @@ class TransaksiUMKResource extends Resource
                             ->label('Satuan'),
 
                         Forms\Components\TextInput::make('nominal')
-                                ->label('nominal')
-                                ->required()
-                                ->prefix('Rp ')
-                                ->mask(RawJs::make('$money($input)'))
-                                ->stripCharacters(','),
+                            ->label('nominal')
+                            ->required()
+                            ->prefix('Rp ')
+                            ->mask(RawJs::make('$money($input)'))
+                            ->stripCharacters(','),
 
                         Forms\Components\Textarea::make('keterangan')
                             ->required()
@@ -130,6 +147,23 @@ class TransaksiUMKResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('no_pengajuan')
                     ->searchable(),
+                // Tables\Columns\TextColumn::make('no_pengajuan')
+                //     ->searchable()
+                //     ->description(function ($record) {
+                //         $totalPengajuan = 10000000; // fix 10 juta
+                //         $totalTransaksi = TransaksiUMK::where('no_pengajuan', $record->no_pengajuan)->sum('nominal');
+                //         $sisa = $totalPengajuan - $totalTransaksi;
+
+                //         return "Transaksi: Rp " . number_format($totalTransaksi, 0, ',', '.') .
+                //             " | Sisa: Rp " . number_format($sisa, 0, ',', '.');
+                //     })
+                //     ->color(
+                //         fn($record) =>
+                //         TransaksiUMK::where('no_pengajuan', $record->no_pengajuan)->sum('nominal') >= 10000000
+                //             ? 'success'
+                //             : 'warning'
+                //     ),
+
                 Tables\Columns\TextColumn::make('akun_bpr')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nama_akun')
