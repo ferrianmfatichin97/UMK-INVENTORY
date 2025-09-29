@@ -209,6 +209,7 @@ class ListTransaksiUMKS extends ListRecords
             'total_realisasi' => $totalrealisasi,
             'total_selisih' => $totalselisih,
             'terbilang' => $terbilang,
+            'tanggal_cetak' => Carbon::now()->translatedFormat('d F Y'),
         ])->output();
     }
 
