@@ -51,23 +51,40 @@ class TransaksiUMKResource extends Resource
                             ->columnSpanFull()
                             ->reactive()
                             ->afterStateUpdated(function ($state, callable $set) {
-                                $totalPengajuan = 10000000;
+                                $totalPengajuan = 10000000; // fix 10 juta
                                 $totalTransaksi = TransaksiUMK::where('no_pengajuan', $state)->sum('nominal');
                                 $sisa = $totalPengajuan - $totalTransaksi;
 
-                                $set('total_transaksi', number_format($totalTransaksi, 0, ',', '.'));
-                                $set('sisa_saldo', number_format($sisa, 0, ',', '.'));
+                                $set('total_transaksi', 'Rp ' . number_format($totalTransaksi, 0, ',', '.'));
+                                $set('sisa_saldo', 'Rp ' . number_format($sisa, 0, ',', '.'));
                             }),
 
-                        Forms\Components\TextInput::make('total_transaksi')
-                            ->label('Total Transaksi')
-                            ->prefix('Rp ')
-                            ->readOnly(),
+                        Forms\Components\Fieldset::make('Info Transaksi')
+                            ->schema([
+                                Forms\Components\Placeholder::make('total_transaksi')
+                                    ->label('💳 Total Transaksi')
+                                    ->content(fn($get) => $get('total_transaksi') ?? '-'),
 
-                        Forms\Components\TextInput::make('sisa_saldo')
-                            ->label('Sisa Saldo')
-                            ->prefix('Rp ')
-                            ->readOnly(),
+                                Forms\Components\Placeholder::make('sisa_saldo')
+                                    ->label('💰 Sisa Saldo')
+                                    ->content(fn($get) => $get('sisa_saldo') ?? '-'),
+                            ])
+                            ->columns(2),
+
+
+                        // Forms\Components\Section::make('Info Transaksi')
+                        //     ->schema([
+                        //         Forms\Components\Placeholder::make('total_transaksi')
+                        //             ->label('Total Transaksi')
+                        //             ->content(fn($get) => 'Rp ' . ($get('total_transaksi') ?? '0')),
+
+                        //         Forms\Components\Placeholder::make('sisa_saldo')
+                        //             ->label('Sisa Saldo')
+                        //             ->content(fn($get) => 'Rp ' . ($get('sisa_saldo') ?? '0')),
+                        //     ])
+                        //     ->columns(2)
+                        //     ->collapsible(false),
+
 
 
                         Forms\Components\Select::make('akun_master')
