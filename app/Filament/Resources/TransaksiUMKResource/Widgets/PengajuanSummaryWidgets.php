@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources\TransaksiUMKResource\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -10,40 +11,34 @@ class PengajuanSummaryWidgets extends BaseWidget
 {
     protected function getStats(): array
     {
-        // Ambil 3 pengajuan terakhir
-        $lastThree = DB::table('view_pengajuanumk as p')
-            ->select(
-                'p.kode_pengajuan',
-                DB::raw('MAX(p.tanggal_pengajuan) as tanggal_pengajuan'),
-                DB::raw('SUM(p.total_pengajuan) as total_pengajuan')
-            )
-            ->groupBy('p.kode_pengajuan')
-            ->orderByDesc(DB::raw('MAX(p.tanggal_pengajuan)'))
+        $stats = [];
+        $totalPengajuan = 10000000;
+
+
+        $lastThree = DB::table('transaksiumk')
+            ->select('no_pengajuan', DB::raw('MAX(tanggal) as tanggal'))
+            ->groupBy('no_pengajuan')
+            ->orderByDesc(DB::raw('MAX(tanggal)'))
             ->limit(3)
             ->get();
 
-        $stats = [];
-
-        foreach ($lastThree as $pengajuan) {
-            // Total transaksi dari tabel transaksiumk
+        foreach ($lastThree as $trx) {
             $totalTransaksi = DB::table('transaksiumk')
-                ->where('no_pengajuan', $pengajuan->kode_pengajuan)
+                ->where('no_pengajuan', $trx->no_pengajuan)
                 ->sum('nominal');
 
-            // Hitung sisa saldo
-            $sisa = $pengajuan->total_pengajuan - $totalTransaksi;
+            $sisa = $totalPengajuan - $totalTransaksi;
 
-            // Buat 1 kartu per kode_pengajuan
             $stats[] = Stat::make(
-                $pengajuan->kode_pengajuan, // Judul kartu (kode pengajuan)
-                '💰 Rp ' . number_format($pengajuan->total_pengajuan, 0, ',', '.')
+                $trx->no_pengajuan,
+                '💰 Rp ' . number_format($totalPengajuan, 0, ',', '.')
             )
                 ->description(
                     "📝 Transaksi: Rp " . number_format($totalTransaksi, 0, ',', '.') . "\n" .
                     "📌 Sisa: Rp " . number_format($sisa, 0, ',', '.') . "\n" .
-                    "📅 Tgl: " . Carbon::parse($pengajuan->tanggal_pengajuan)->translatedFormat('d F Y')
+                    "📅 Tgl: " . Carbon::parse($trx->tanggal)->translatedFormat('d F Y')
                 )
-                ->color($sisa > 0 ? 'warning' : 'success');
+                ->color($sisa <= 0 ? 'success' : 'warning');
         }
 
         return $stats;
