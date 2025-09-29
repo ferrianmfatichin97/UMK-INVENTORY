@@ -10,6 +10,7 @@ class PengajuanSummaryWidgets extends BaseWidget
 {
     protected function getStats(): array
     {
+        // Ambil 3 pengajuan terakhir
         $lastThree = DB::table('view_pengajuanumk as p')
             ->select(
                 'p.kode_pengajuan',
@@ -24,20 +25,23 @@ class PengajuanSummaryWidgets extends BaseWidget
         $stats = [];
 
         foreach ($lastThree as $pengajuan) {
+            // Total transaksi dari tabel transaksiumk
             $totalTransaksi = DB::table('transaksiumk')
                 ->where('no_pengajuan', $pengajuan->kode_pengajuan)
                 ->sum('nominal');
 
+            // Hitung sisa saldo
             $sisa = $pengajuan->total_pengajuan - $totalTransaksi;
 
+            // Buat 1 kartu per kode_pengajuan
             $stats[] = Stat::make(
-                $pengajuan->kode_pengajuan,
-                'Transaksi: Rp ' . number_format($totalTransaksi, 0, ',', '.')
+                $pengajuan->kode_pengajuan, // Judul kartu (kode pengajuan)
+                '💰 Rp ' . number_format($pengajuan->total_pengajuan, 0, ',', '.')
             )
                 ->description(
-                    'Sisa saldo: Rp ' . number_format($sisa, 0, ',', '.') .
-                    ' | Total pengajuan: Rp ' . number_format($pengajuan->total_pengajuan, 0, ',', '.') .
-                    ' | Tgl: ' . Carbon::parse($pengajuan->tanggal_pengajuan)->translatedFormat('d F Y')
+                    "📝 Transaksi: Rp " . number_format($totalTransaksi, 0, ',', '.') . "\n" .
+                    "📌 Sisa: Rp " . number_format($sisa, 0, ',', '.') . "\n" .
+                    "📅 Tgl: " . Carbon::parse($pengajuan->tanggal_pengajuan)->translatedFormat('d F Y')
                 )
                 ->color($sisa > 0 ? 'warning' : 'success');
         }
