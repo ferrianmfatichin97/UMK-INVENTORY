@@ -37,7 +37,6 @@ class TransaksiUMKResource extends Resource
     {
         return $form
             ->schema([
-                // $data = PengajuanUMK::all()->pluck('nomor_pengajuan', 'id'),
                 // dd($data),
                 Fieldset::make('Form Input Transaksi UMK')
                     ->schema([
@@ -46,7 +45,6 @@ class TransaksiUMKResource extends Resource
                             ->options(
                                 PengajuanUMK::orderByDesc('nomor_pengajuan')->pluck('nomor_pengajuan', 'nomor_pengajuan')
                             )
-                            //->options(PengajuanUMK::all()->pluck('nomor_pengajuan', 'nomor_pengajuan'))
                             ->required()
                             ->searchable()
                             ->columnSpanFull()

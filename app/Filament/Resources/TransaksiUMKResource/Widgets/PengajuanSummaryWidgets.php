@@ -34,9 +34,9 @@ class PengajuanSummaryWidgets extends BaseWidget
                 '💰 Rp ' . number_format($totalPengajuan, 0, ',', '.')
             )
                 ->description(
-                    "📝 Transaksi: Rp " . number_format($totalTransaksi, 0, ',', '.') . "\n" .
-                    "📌 Sisa: Rp " . number_format($sisa, 0, ',', '.') . "\n" .
-                    "📅 Tgl: " . Carbon::parse($trx->tanggal)->translatedFormat('d F Y')
+                    "Transaksi: Rp " . number_format($totalTransaksi, 0, ',', '.') . "\n" .
+                    "Sisa: Rp " . number_format($sisa, 0, ',', '.') . "\n"
+
                 )
                 ->color($sisa <= 0 ? 'success' : 'warning');
         }
