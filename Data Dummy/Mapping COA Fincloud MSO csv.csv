@@ -1,0 +1,1291 @@
+akun_bpr;nama_akun
+1011000;Main Cash
+1021000;Teller Cash
+1051000;IA Escrow TELLER
+1051001;IA Escrow SKN/RTGS
+1051002;IA Escrow PAC
+1051002;IA Escrow EDC
+1051004;IA Escrow ATM INTERNAL BANK
+1051005;IA Escrow ATMB
+1051006;IA Escrow PRIMA
+1051007;IA Escrow BIFAST
+1051008;IA Escrow CBS
+1051009;IA Escrow BILLER RINTIS
+1051010;IA Escrow BILLER GOPAY
+1051011;IA Escrow BILLER PAC
+1051012;IA Escrow BILLER XL PREPAID/POSTPAID
+1051013;IA Escrow FEE ATMB
+1051014;IA Escrow FEE PRIMA
+1051015;IA Escrow FEE BIFAST
+1051016;IA Escrow BILLER FEE RINTIS
+1051017;IA Escrow BILLER FEE GOPAY
+1051018;IA Escrow BILLER FEE PAC
+1051019;IA Escrow BILLER FEE XL PREPAID/POSTPAID
+1061000;Cash ATM 001
+111101101;Current Account Danamon 01
+111101102;Current Account Danamon 02
+111101201;Current Account Mandiri 01
+111101202;Current Account Mandiri 02
+111101203;Current Account Mandiri 03
+111101204;Current Account Mandiri 04
+111101205;Current Account Mandiri 05
+111101206;Current Account Mandiri 06
+111101207;Current Account Mandiri 07
+111101301;Current Account Permata 01
+111101601;Current Account J-trust 01
+111101801;Current Account BRI 01
+111101802;Current Account BRI 02
+111101803;Current Account BRI 03
+111101804;Current Account BRI 04
+111101805;Current Account BRI 05
+111101806;Current Account BRI 06
+111101807;Current Account BRI 07
+111101808;Current Account BRI 08
+111101809;Current Account BRI 09
+111101810;Current Account BRI 10
+111101901;Current Account BPD Jawa Barat 01
+111101902;Current Account BPD Jawa Barat 02
+111101903;Current Account BPD Jawa Barat 03
+111101904;Current Account BPD Jawa Barat 04
+111102001;Current Account Maybank 01
+111102002;Current Account Maybank 02
+111102101;Current Account Mandiri Taspen 01
+111102102;Current Account Mandiri Taspen 02
+111102201;Current Account Aladin Syariah 01
+111102301;Current Account BNI 01
+111102401;Current Account Niaga 01
+111102501;Current Account BSI 01
+111102601;Current Account BTN 01
+111102701;Current Account Bank Tabungan Pensiunan Nasional 01
+111102801;Current Account Woori Indonesia 01
+111102901;Current Account DKI 01
+111103001;Current Account BPD Jawa Tengah 01
+112110201;Savings Account Mandiri 01
+112110202;Savings Account Mandiri 02
+112110801;Savings Account BRI 01
+112111101;Savings Account Mandiri Taspen 01
+112112001;Savings Account BPD Jawa Tengah 01
+112112101;Savings Account BPR Sukawati Pancakanti 01
+112112102;Savings Account BPR Sukawati Pancakanti 02
+112112103;Savings Account BPR Sukawati Pancakanti 03
+112112104;Savings Account BPR Sukawati Pancakanti 04
+112112105;Savings Account BPR Sukawati Pancakanti 05
+112112106;Savings Account BPR Sukawati Pancakanti 06
+112112201;Savings Account BPRS MULIA BERKAH ABADI TGR 01
+112112301;Savings Account BPR LESTARI BALI 01
+112112401;Savings Account BPR ULIMA DJUMPA MAROM 01
+112112501;Savings Account BPR KARYAJATNIKA SADAYA 01
+112112601;Savings Account BPR LESTARI 01
+113122701;Time Deposit Account BPR CEPER PERMATA ARTHA 01
+113122702;Time Deposit Account BPR CEPER PERMATA ARTHA 02
+113122703;Time Deposit Account BPR CEPER PERMATA ARTHA 03
+113122704;Time Deposit Account BPR CEPER PERMATA ARTHA 04
+113122801;Time Deposit Account BPR MITRA SEJAHTERA LESTARI 01
+113122802;Time Deposit Account BPR MITRA SEJAHTERA LESTARI 02
+113122803;Time Deposit Account BPR MITRA SEJAHTERA LESTARI 03
+113122901;Time Deposit Account BPRS ARTHA MADANI 01
+113122902;Time Deposit Account BPRS ARTHA MADANI 02
+113123001;Time Deposit Account BUANA ARTHA KASSITI 01
+113123002;Time Deposit Account BUANA ARTHA KASSITI 02
+113123101;Time Deposit Account BPR NUSUMMA JATIM 01
+113123102;Time Deposit Account BPR NUSUMMA JATIM 02
+113123201;Time Deposit Account BANK KROM 01
+113123202;Time Deposit Account BANK KROM 02
+113123301;Time Deposit Account ULIMA DJUMPA MAROM 01
+113123401;Time Deposit Account BPR FIANKA REZALINA FATMA 01
+113123501;Time Deposit Account BPR MODERN EXPRESS 01
+113123601;Time Deposit Account BPR Tata Asia 01
+113123701;Time Deposit Account BPR HASA MITRA 01
+113123801;Time Deposit Account BPRS DINAR ASHRI 01
+113123901;Time Deposit Account BANK BISNIS INTERNASIONAL 01
+113123902;Time Deposit Account BANK BISNIS INTERNASIONAL 02
+1141010;Provisioning Current Account BCA
+1141011;Provisioning Current Account Danamon
+1141012;Provisioning Current Account Mandiri
+1141013;Provisioning Current Account Permata
+1141014;Provisioning Current Account BPD Banten
+1141015;Provisioning Current Account Mayapada
+1141016;Provisioning Current Account J-trust
+1141017;Provisioning Current Account Permata BTB
+1141018;Provisioning Current Account BRI
+1141019;Provisioning Current Account BPD Jawa Barat
+1141020;Provisioning Current Account Maybank
+1141021;Provisioning Current Account Mandiri Taspen
+1141022;Provisioning Current Account Aladin Syariah
+1141023;Provisioning Current Account BNI
+1141024;Provisioning Current Account Niaga
+1141025;Provisioning Current Account BSI
+1141026;Provisioning Current Account BTN
+1141027;Provisioning Current Account Bank Tabungan Pensiunan Nasional
+1141028;Provisioning Current Account Woori Indonesia
+1141029;Provisioning Current Account DKI
+1141030;Provisioning Current Account BPD Jawa Tengah
+1141031;Provisioning Current Account BPR Sukawati Pancakanti
+1141032;Provisioning Current Account BPRS MULIA BERKAH ABADI TGR
+1141033;Provisioning Current Account BPR LESTARI BALI
+1141034;Provisioning Current Account BPR ULIMA DJUMPA MAROM
+1141035;Provisioning Current Account BPR KARYAJATNIKA SADAYA
+1141036;Provisioning Current Account BPR LESTARI
+1141037;Provisioning Current Account BPR CEPER PERMATA ARTHA
+1141038;Provisioning Current Account BPR MITRA SEJAHTERA LESTARI
+1141039;Provisioning Current Account BPRS ARTHA MADANI
+1141040;Provisioning Current Account BUANA ARTHA KASSITI
+1141041;Provisioning Current Account BPR NUSUMMA JATIM
+1141042;Provisioning Current Account BANK KROM
+1141043;Provisioning Current Account ULIMA DJUMPA MAROM
+1141044;Provisioning Current Account BPR FIANKA REZALINA FATMA
+1141045;Provisioning Current Account BPR MODERN EXPRESS
+1141046;Provisioning Current Account BPR Tata Asia
+1141047;Provisioning Current Account BPR HASA MITRA
+1141048;Provisioning Current Account Savings BCA
+1141049;Provisioning Current Account Savings Danamon
+1141050;Provisioning Current Account Savings Mandiri
+1141051;Provisioning Current Account Savings Permata
+1141052;Provisioning Current Account Savings BPD Banten
+1141053;Provisioning Current Account Savings Mayapada
+1141054;Provisioning Current Account Savings J-trust
+1141055;Provisioning Current Account Savings Permata BTB
+1141056;Provisioning Current Account Savings BRI
+1141057;Provisioning Current Account Savings BPD Jawa Barat
+1141058;Provisioning Current Account Savings Maybank
+1141059;Provisioning Current Account Savings Mandiri Taspen
+1141060;Provisioning Current Account Savings Aladin Syariah
+1141061;Provisioning Current Account Savings BNI
+1141062;Provisioning Current Account Savings Niaga
+1141063;Provisioning Current Account Savings BSI
+1141064;Provisioning Current Account Savings BTN
+1141065;Provisioning Current Account Savings Bank Tabungan Pensiunan Nasional
+1141066;Provisioning Current Account Savings Woori Indonesia
+1141067;Provisioning Current Account Savings DKI
+1141068;Provisioning Current Account Savings BPD Jawa Tengah
+1141069;Provisioning Current Account Savings BPR Sukawati Pancakanti
+1141070;Provisioning Current Account Savings BPRS MULIA BERKAH ABADI TGR
+1141071;Provisioning Current Account Savings BPR LESTARI BALI
+1141072;Provisioning Current Account Savings BPR ULIMA DJUMPA MAROM
+1141073;Provisioning Current Account Savings BPR KARYAJATNIKA SADAYA
+1141074;Provisioning Current Account Savings BPR LESTARI
+1141075;Provisioning Current Account Savings BPR CEPER PERMATA ARTHA
+1141076;Provisioning Current Account Savings BPR MITRA SEJAHTERA LESTARI
+1141077;Provisioning Current Account Savings BPRS ARTHA MADANI
+1141078;Provisioning Current Account Savings BUANA ARTHA KASSITI
+1141079;Provisioning Current Account Savings BPR NUSUMMA JATIM
+1141080;Provisioning Current Account Savings BANK KROM
+1141081;Provisioning Current Account Savings ULIMA DJUMPA MAROM
+1141082;Provisioning Current Account Savings BPR FIANKA REZALINA FATMA
+1141083;Provisioning Current Account Savings BPR MODERN EXPRESS
+1141084;Provisioning Current Account Savings BPR Tata Asia
+1141085;Provisioning Current Account Savings BPR HASA MITRA
+1141086;Provisioning Current Account Time Deposit BCA
+1141087;Provisioning Current Account Time Deposit Danamon
+1141088;Provisioning Current Account Time Deposit Mandiri
+1141089;Provisioning Current Account Time Deposit Permata
+1141090;Provisioning Current Account Time Deposit BPD Banten
+1141091;Provisioning Current Account Time Deposit Mayapada
+1141092;Provisioning Current Account Time Deposit J-trust
+1141093;Provisioning Current Account Time Deposit Permata BTB
+1141094;Provisioning Current Account Time Deposit BRI
+1141095;Provisioning Current Account Time Deposit BPD Jawa Barat
+1141096;Provisioning Current Account Time Deposit Maybank
+1141097;Provisioning Current Account Time Deposit Mandiri Taspen
+1141098;Provisioning Current Account Time Deposit Aladin Syariah
+1141099;Provisioning Current Account Time Deposit BNI
+1141100;Provisioning Current Account Time Deposit Niaga
+1141101;Provisioning Current Account Time Deposit BSI
+1141102;Provisioning Current Account Time Deposit BTN
+1141103;Provisioning Current Account Time Deposit Bank Tabungan Pensiunan Nasional
+1141104;Provisioning Current Account Time Deposit Woori Indonesia
+1141105;Provisioning Current Account Time Deposit DKI
+1141106;Provisioning Current Account Time Deposit BPD Jawa Tengah
+1141107;Provisioning Current Account Time Deposit BPR Sukawati Pancakanti
+1141108;Provisioning Current Account Time Deposit BPRS MULIA BERKAH ABADI TGR
+1141109;Provisioning Current Account Time Deposit BPR LESTARI BALI
+1141110;Provisioning Current Account Time Deposit BPR ULIMA DJUMPA MAROM
+1141111;Provisioning Current Account Time Deposit BPR KARYAJATNIKA SADAYA
+1141112;Provisioning Current Account Time Deposit BPR LESTARI
+1141113;Provisioning Current Account Time Deposit BPR CEPER PERMATA ARTHA
+1141114;Provisioning Current Account Time Deposit BPR MITRA SEJAHTERA LESTARI
+1141115;Provisioning Current Account Time Deposit BPRS ARTHA MADANI
+1141116;Provisioning Current Account Time Deposit BUANA ARTHA KASSITI
+1141117;Provisioning Current Account Time Deposit BPR NUSUMMA JATIM
+1141118;Provisioning Current Account Time Deposit BANK KROM
+1141119;Provisioning Current Account Time Deposit ULIMA DJUMPA MAROM
+1141120;Provisioning Current Account Time Deposit BPR FIANKA REZALINA FATMA
+1141121;Provisioning Current Account Time Deposit BPR MODERN EXPRESS
+1141122;Provisioning Current Account Time Deposit BPR Tata Asia
+1141123;Provisioning Current Account Time Deposit BPR HASA MITRA
+1141124;Provisioning Current Account Time Deposit BPRS DINAR ASHRI
+1141125;Provisioning Current Account Time Deposit BANK BISNIS INTERNASIONAL
+1212000;Loan Principal Kredit Pegawai Aktif
+1212001;Loan Principal Kredit Pensiunan
+1212002;Loan Principal Kredit Wiraswasta
+1212003;Loan Principal Kredit Regular Diskonto
+1212004;Loan Principal Kredit Pensiun Platinum
+1212005;Loan Principal Kredit Channeling Reguler Flat
+1212006;Loan Principal Kredit Channeling Platinum Flat
+1212007;Loan Principal Kredit Umroh
+1212008;Loan Principal Kresun Anuitas
+1212009;Loan Principal Kresun Platinum Anuitas
+1212010;Loan Principal Kredit Channeling Reguler Anuitas
+1212011;Loan Principal Kredit Channeling Platinum Anuitas
+1212012;Loan Principal Kredit Pegawai Aktif Anuitas
+1212013;Loan Principal Kredit Jande Reguler
+1212014;Loan Principal Kredit Pensiun Platinum Plus
+1212015;Loan Principal Kredit Tanpa Agunan
+1212016;Loan Principal Kredit Wiraswasta Anuitas
+1212017;Loan Principal Kredit Pensiun Platinum Plus Flat
+1212018;Loan Principal Kredit Hapus Buku
+1212019;Loan Principal Kredit Channeling Pensiun Platinum Plus Anuitas
+1212020;Loan Principal Kredit Jande Diskonto
+1222000;Principal Arrears Kredit Pegawai Aktif
+1222001;Principal Arrears Kredit Pensiunan
+1222002;Principal Arrears Kredit Wiraswasta
+1222003;Principal Arrears Kredit Regular Diskonto
+1222004;Principal Arrears Kredit Pensiun Platinum
+1222005;Principal Arrears Kredit Channeling Reguler Flat
+1222006;Principal Arrears Kredit Channeling Platinum Flat
+1222007;Principal Arrears Kredit Umroh
+1222008;Principal Arrears Kresun Anuitas
+1222009;Principal Arrears Kresun Platinum Anuitas
+1222010;Principal Arrears Kredit Channeling Reguler Anuitas
+1222011;Principal Arrears Kredit Channeling Platinum Anuitas
+1222012;Principal Arrears Kredit Pegawai Aktif Anuitas
+1222013;Principal Arrears Kredit Jande Reguler
+1222014;Principal Arrears Kredit Pensiun Platinum Plus
+1222015;Principal Arrears Kredit Tanpa Agunan
+1222016;Principal Arrears Kredit Wiraswasta Anuitas
+1222017;Principal Arrears Kredit Pensiun Platinum Plus Flat
+1222018;Principal Arrears Kredit Hapus Buku
+1222019;Principal Arrears Kredit Kredit Channeling Pensiun Platinum Plus Anuitas
+1222020;Principal Arrears Kredit Kredit Jande Diskonto
+1232000;Unamortized Provision Fee Income
+1242000;Unamortized Administration Fee Income
+1252000;Unamortized Loan Transaction Fee
+1262000;Deferred Income of Loan Restructuring
+1272000;Provisioning - Current
+1272001;Provisioning - Special Mention
+1272002;Provisioning - Substandard
+1272003;Provisioning - Doubtful
+1272004;Provisioning - Bad
+1272005;Provisioning - Loan Account - CKPN
+1282000;Loan Principal Write Off Kredit Pegawai Aktif
+1282001;Loan Principal Write Off Kredit Pensiunan
+1282002;Loan Principal Write Off Kredit Wiraswasta
+1282003;Loan Principal Write Off Kredit Regular Diskonto
+1282004;Loan Principal Write Off Kredit Pensiun Platinum
+1282005;Loan Principal Write Off Kredit Channeling Reguler Flat
+1282006;Loan Principal Write Off Kredit Channeling Platinum Flat
+1282007;Loan Principal Write Off Kredit Umroh
+1282008;Loan Principal Write Off Kresun Anuitas
+1282009;Loan Principal Write Off Kresun Platinum Anuitas
+1282010;Loan Principal Write Off Kredit Channeling Reguler Anuitas
+1282011;Loan Principal Write Off Kredit Channeling Platinum Anuitas
+1282012;Loan Principal Write Off Kredit Pegawai Aktif Anuitas
+1282013;Loan Principal Write Off Kredit Jande Reguler
+1282014;Loan Principal Write Off Kredit Pensiun Platinum Plus
+1282015;Loan Principal Write Off Kredit Tanpa Agunan
+1282016;Loan Principal Write Off Kredit Wiraswasta Anuitas
+1282017;Loan Principal Write Off Kredit Pensiun Platinum Plus Flat
+1282018;Loan Principal Write Off Kredit Hapus Buku
+1282019;Loan Principal Write Off Kredit Channeling Pensiun Platinum Plus Anuitas
+1282020;Loan Principal Write Off Kredit Jande Diskonto
+1312000;Loan Accrued Interest Kredit Pegawai Aktif
+1312001;Loan Accrued Interest Kredit Pensiunan
+1312002;Loan Accrued Interest Kredit Wiraswasta
+1312003;Loan Accrued Interest Kredit Regular Diskonto
+1312004;Loan Accrued Interest Kredit Pensiun Platinum
+1312005;Loan Accrued Interest Kredit Channeling Reguler Flat
+1312006;Loan Accrued Interest Kredit Channeling Platinum Flat
+1312007;Loan Accrued Interest Kredit Umroh
+1312008;Loan Accrued Interest Kresun Anuitas
+1312009;Loan Accrued Interest Kresun Platinum Anuitas
+1312010;Loan Accrued Interest Kredit Channeling Reguler Anuitas
+1312011;Loan Accrued Interest Kredit Channeling Platinum Anuitas
+1312012;Loan Accrued Interest Kredit Pegawai Aktif Anuitas
+1312013;Loan Accrued Interest Kredit Jande Reguler
+1312014;Loan Accrued Interest Kredit Pensiun Platinum Plus
+1312015;Loan Accrued Interest Kredit Tanpa Agunan
+1312016;Loan Accrued Interest Kredit Wiraswasta Anuitas
+1312017;Loan Accrued Interest Kredit Pensiun Platinum Plus Flat
+1312018;Loan Accrued Interest Kredit Hapus Buku
+1312019;Loan Accrued Interest Kredit Channeling Pensiun Platinum Plus Anuitas
+1312020;Loan Accrued Interest Kredit Jande Diskonto
+1322000;Loan Interest Arrears Kredit Pegawai Aktif
+1322001;Loan Interest Arrears Kredit Pensiunan
+1322002;Loan Interest Arrears Kredit Wiraswasta
+1322003;Loan Interest Arrears Kredit Regular Diskonto
+1322004;Loan Interest Arrears Kredit Pensiun Platinum
+1322005;Loan Interest Arrears Kredit Channeling Reguler Flat
+1322006;Loan Interest Arrears Kredit Channeling Platinum Flat
+1322007;Loan Interest Arrears Kredit Umroh
+1322008;Loan Interest Arrears Kresun Anuitas
+1322009;Loan Interest Arrears Kresun Platinum Anuitas
+1322010;Loan Interest Arrears Kredit Channeling Reguler Anuitas
+1322011;Loan Interest Arrears Kredit Channeling Platinum Anuitas
+1322012;Loan Interest Arrears Kredit Pegawai Aktif Anuitas
+1322013;Loan Interest Arrears Kredit Jande Reguler
+1322014;Loan Interest Arrears Kredit Pensiun Platinum Plus
+1322015;Loan Interest Arrears Kredit Tanpa Agunan
+1322016;Loan Interest Arrears Kredit Wiraswasta Anuitas
+1322017;Loan Interest Arrears Kredit Pensiun Platinum Plus Flat
+1322018;Loan Interest Arrears Kredit Hapus Buku
+1322019;Loan Interest Arrears Kredit Channeling Pensiun Platinum Plus Anuitas
+1322020;Loan Interest Arrears Kredit Jande Diskonto
+1411400;Interbranch - Headquarter
+1411401;Interbranch - KC PONDOK GEDE
+1411402;Interbranch - KC BOGOR
+1411403;Interbranch - KC DEPOK
+1411404;Interbranch - KC TANGERANG
+1411405;Interbranch - KC JAKARTA TIMUR
+1411406;Interbranch - KC KARAWANG
+1411407;Interbranch - KC CIKARANG
+1411408;Interbranch - KC PURWOKERTO
+1511000;Acquisition Assets - Building
+1511001;Acquisition Assets - Office Rent Fee
+1511002;Acquisition Assets - Renovation
+1521000;Acquisition Assets - Land
+1521001;Acquisition Assets - Land Purchasing
+1531000;Acquisition Assets - Equipment (FFE
+1531001;Acquisition Assets - Inventory
+1531002;Value of Intangible Assets
+1541000;Acquisition Assets - Motorcycle and Car
+1541001;Acquisition Assets - Car
+1551000;Accumulated Depreciation - Buildings
+1551001;Accumulated Depreciation - Office Rent
+1551002;Accumulated Depreciation - Renovation
+1561000;Accumulated Depreciation Fee - Lands
+1561001;Accumulated Depreciation Fee - Land Purchase
+1571000;Accumulated Depreciation - Equipments (FFE
+1571001;Accumulated Depreciation Fee - Inventory
+1571002;Accumulated Depreciation of Intangible Assets
+1581000;Accumulated Depreciation - Motorcycle and Car
+1581001;Accumulated Depreciation - Car
+1611000;Prepaid Building Rent
+1611001;Prepaid Equipment Rent
+1621000;Prepaid Fire Insurance
+1621001;Prepaid Burglary Insurance
+1621002;Prepaid Vehicle Insurance
+1621003;Prepaid Cash In Safe Insurance
+1621004;Prepaid Insurance
+1641000;Prepaid Advertising and Promotion Expense
+1641001;Prepaid LPS Expense
+1641002;Prepaid Building Renovation Expense
+1641003;Prepaid IT Services Expense
+1641004;Prepaid Tax Expense
+1641005;Prepaid Other Expense
+1641006;Prepaid Flagging Expense
+1641007;Prepaid Operation Expense KPM
+1641008;Prepaid Purchase Of Goods
+1711000;Suspended Expenses
+1811000;Money/Goods Used as Collateral
+1821000;Biller Deposit - FSDAP
+1821001;Deposit - PPOB
+1831000;Blockchain Deposit - Card Bank
+1841000;Agent Deposit
+1911000;Other Stamps
+1921000;Other Tax Honor
+1921001;Other Profit&Loss
+1921002;Other Uniform
+1921003;Other Promotion
+1931000;Time Deposit Accrued Interest Income
+1951000;Interest Income - PYAD Loan
+1951001;Interest Income - PYAD Placement in Other Bank
+1961000;Other Branch Loan Funds - KC PONDOK GEDE
+1961001;Other Branch Loan Funds - KC BOGOR
+1961002;Other Branch Loan Funds - KC DEPOK
+1961003;Other Branch Loan Funds - KC TANGERANG
+1961004;Other Branch Loan Funds - KC JAKARTA TIMUR
+1961005;Other Branch Loan Funds - KC KARAWANG
+1961006;Other Branch Loan Funds - KC CIKARANG
+1971000;Insurance Company Receivables Assets
+1971001;Reserves of Insurance Company Receivables Assets
+1971002;Other Assets - Compensation Dapem Purwokerto
+1971003;Other Assets - Recevaibles From Insurance Debitur
+1971004;Other Assets - DPLK BNI
+1971005;Other Assets - Stamp Supplies
+1971006;Other Assets - UMK
+1971007;Other Assets - UMK KPM
+1971008;Other Assets - Deposit PPOB
+1971009;Other Assets - Other
+2011000;Deposit - Previous Profit&Loss
+2011001;Deposit - Third Parties
+2011002;Deposit - Temporary Tax Services
+2011003;Deposit - Temporary Corp Tax
+2011004;Debtor Customer Deposit / Temporary
+2011005;Taspen Pension Customer Deposits
+2011006;Deposits for Retired Civil Servants
+2011007;DP Taspen Pension Deposit
+2011008;Deposit - Interest Due
+2011009;Other Deposits - Credit Marketing Fee
+2011010;Other Deposits - Others
+2021000;Government Retirement Fund
+2021001;Post-Employment Benefit Obligations
+2031000;Government Healthcare Fund
+2041000;Deposit - Credit Disbursement
+2051000;Deposit - Financing Installments
+2051001;Deposit - Financing Margin
+2051002;Deposit - Financing Fines
+2071000;Deposit Fidusia Fee
+2081000;Deposit - Seasonal Insurance
+2081001;Deposit - Insurance Fee
+2081002;Deposit - Premium Deposit GIB Reliance
+2081003;Deposit - Premium Deposit HEKSA Insurance
+2081004;Deposit - Premium Deposit ASEI
+2081005;Deposit - Non-formal BPJSTK Premium for BPR DP TASPEN Customers
+2081006;Deposit - Premium Deposit SDI
+2081007;Deposit - Premium Deposit Taspen Life
+2081008;Deposit - Premium Deposit Nasional Life
+2081009;Deposit - Premium Deposit AA Pialang Intra Asia
+2081010;Deposit - Premium Deposit AA Pialang Pan Pasific
+2081011;Deposit - Premium Deposit Asuransi Bhakti Bhayangkara
+2091000;Deposit - Others
+2091001;Deposit - Education Funds
+2091002;Deposit - Financial Authority
+2091003;Deposit - Bonus
+2091004;Deposit - IT Service
+2091005;Deposit - Public Accounting Service
+2091006;Deposit - Land and Building Tax
+2091007;Deposit - Others Reserve
+2091008;Deposit - Others CSR Reserve
+2112101;Tax Payable - Savings Interest Saving Account - main
+2112102;Tax Payable - Savings Interest Pension ASN
+2112103;Tax Payable - Savings Interest Pension Taspen
+2112104;Tax Payable - Savings Interest Simpel
+2112105;Tax Payable - Savings Interest Friend
+2112106;Tax Payable - Savings Interest SISETO PERORANGAN
+2112107;Tax Payable - Savings Interest IBADAH
+2112108;Tax Payable - Savings Interest QURBAN
+2112109;Tax Payable - Savings Interest TOUR
+2112110;Tax Payable - Savings Interest Tabungan Emas
+2112111;Tax Payable - Savings Interest ABP
+2112112;Tax Payable - Savings Interest TASIRA
+2112113;Tax Payable - Savings Interest Dpentas Vaganza
+2112114;Tax Payable - Savings Interest Mandiri Siswa
+2112115;Tax Payable - Savings Interest Tamastra Berjangka
+2112116;Tax Payable - Savings Interest SISETO ABP
+2112199;Tax Payable - Savings Interest Internal
+2122200;Tax Payable - Time Deposit Interest Time Deposit
+2122201;Tax Payable - Time Deposit Interest Time Deposit Compound
+2122202;Tax Payable - Time Deposit Interest Time Deposit ABP
+2122203;Tax Payable - Time Deposit Interest Time Deposit ABP Compound
+2131000;Tax Payable - Employees
+2141000;Tax Payable - Building Rent
+2171000;Tax Payable - Cleaning Service
+2171001;Tax Payable - Security
+2171002;Tax Payable - IT Service
+2171003;Tax Payable - Public Accountant
+2191000;Tax Payable - Honorary Team Leader Marketing
+2191001;Tax Payable - Honorary Marketing Agent
+2191002;Tax Payable - Honorary Others
+2191003;Tax Payable - PPh 23
+2191004;Tax Payable - Gift Tax
+2191005;Tax Payable - Others
+2212101;Savings Saving Account - main
+2212102;Savings Pension ASN
+2212103;Savings Pension Taspen
+2212104;Savings Simpel
+2212105;Savings Friend
+2212106;Savings SISETO PERORANGAN
+2212107;Savings IBADAH
+2212108;Savings QURBAN
+2212109;Savings TOUR
+2212110;Savings Tabungan Emas
+2212111;Savings ABP
+2212112;Savings TASIRA
+2212113;Savings Dpentas Vaganza
+2212114;Savings Mandiri Siswa
+2212115;Savings Tamastra Berjangka
+2212116;Savings SISETO ABP
+2212199;Savings Internal
+2312200;Time Deposit
+2312201;Time Deposit Compound
+2312202;Time Deposit ABP
+2312203;Time Deposit ABP Compound
+2322200;Unamortized Savings Transaction Expense in Other Bank
+2332200;Unamortized Time Deposit Transaction Expense in Other Bank
+2342200;Unamortized ABP Transaction Expense in Other Bank
+2352200;Unamortized Loan Provisions Expense in Other Bank
+2352201;Unamortized Loan Prepaid Interest in Other Bank
+2512101;Savings Accrued Interest - Saving Account - main
+2512102;Savings Accrued Interest - Pension ASN
+2512103;Savings Accrued Interest - Pension Taspen
+2512104;Savings Accrued Interest - Simpel
+2512105;Savings Accrued Interest - Friend
+2512106;Savings Accrued Interest - SISETO PERORANGAN
+2512107;Savings Accrued Interest - IBADAH
+2512108;Savings Accrued Interest - QURBAN
+2512109;Savings Accrued Interest - TOUR
+2512110;Savings Accrued Interest - Tabungan Emas
+2512111;Savings Accrued Interest - ABP
+2512112;Savings Accrued Interest - TASIRA
+2512113;Savings Accrued Interest - Dpentas Vaganza
+2512114;Savings Accrued Interest - Mandiri Siswa
+2512115;Savings Accrued Interest - Tamastra Berjangka
+2512116;Savings Accrued Interest - SISETO ABP
+2512199;Savings Accrued Interest - Internal
+2522200;Time Deposits Accrued Interest - Time Deposit
+2522201;Time Deposits Accrued Interest - Time Deposit Compound
+2522202;Time Deposits Accrued Interest - Time Deposit ABP
+2522203;Time Deposits Accrued Interest - Time Deposit ABP Compound
+261101001;Loan Principal - Maybank 01
+261101002;Loan Principal - Maybank 02
+261101401;Loan Principal - Niaga 01
+261101402;Loan Principal - Niaga 02
+261101403;Loan Principal - Niaga 03
+261101404;Loan Principal - Niaga 04
+261101405;Loan Principal - Niaga 05
+261101406;Loan Principal - Niaga 06
+261102501;Loan Principal - BPR KARYAJATNIKA SADAYA 01
+261102502;Loan Principal - BPR KARYAJATNIKA SADAYA 02
+261102503;Loan Principal - BPR KARYAJATNIKA SADAYA 03
+262101001;Loan Interest - Maybank 01
+262101002;Loan Interest - Maybank 02
+262101401;Loan Interest - Niaga 01
+262101402;Loan Interest - Niaga 02
+262101403;Loan Interest - Niaga 03
+262101404;Loan Interest - Niaga 04
+262101405;Loan Interest - Niaga 05
+262101406;Loan Interest - Niaga 06
+262102501;Loan Interest - BPR KARYAJATNIKA SADAYA 01
+262102502;Loan Interest - BPR KARYAJATNIKA SADAYA 02
+262102503;Loan Interest - BPR KARYAJATNIKA SADAYA 03
+2921000;Liabilities Interaccount
+2921001;BMHD : Deposito Pihak ke-3
+2921002;BMHD : Deposito Bank Lain
+2921003;Other Liabilities - Suspended Income
+3011000;Authorized Capital
+3021000;Unpaid Capital
+3031000;Additional Capital Deposited
+3111000;General Reserve
+3111001;Goal Reserve
+3121000;Estimated Income Tax
+3131000;Bad Debt Reserve
+3141000;Social & Educational Reserves
+3211980;Past Years Retained Earning
+3221981;Last Year Retained Earning
+3231982;Current Year Retained Earning
+401101101;Current Account Interest Income Danamon 01
+401101102;Current Account Interest Income Danamon 02
+401101201;Current Account Interest Income Mandiri 01
+401101202;Current Account Interest Income Mandiri 02
+401101203;Current Account Interest Income Mandiri 03
+401101204;Current Account Interest Income Mandiri 04
+401101205;Current Account Interest Income Mandiri 05
+401101206;Current Account Interest Income Mandiri 06
+401101207;Current Account Interest Income Mandiri 07
+401101301;Current Account Interest Income Permata 01
+401101601;Current Account Interest Income J-trust 01
+401101801;Current Account Interest Income BRI 01
+401101802;Current Account Interest Income BRI 02
+401101803;Current Account Interest Income BRI 03
+401101804;Current Account Interest Income BRI 04
+401101805;Current Account Interest Income BRI 05
+401101806;Current Account Interest Income BRI 06
+401101807;Current Account Interest Income BRI 07
+401101808;Current Account Interest Income BRI 08
+401101809;Current Account Interest Income BRI 09
+401101810;Current Account Interest Income BRI 10
+401101901;Current Account Interest Income BPD Jawa Barat 01
+401101902;Current Account Interest Income BPD Jawa Barat 02
+401101903;Current Account Interest Income BPD Jawa Barat 03
+401101904;Current Account Interest Income BPD Jawa Barat 04
+401102001;Current Account Interest Income Maybank 01
+401102002;Current Account Interest Income Maybank 02
+401102101;Current Account Interest Income Mandiri Taspen 01
+401102102;Current Account Interest Income Mandiri Taspen 02
+401102201;Current Account Interest Income Aladin Syariah 01
+401102301;Current Account Interest Income BNI 01
+401102401;Current Account Interest Income Niaga 01
+401102501;Current Account Interest Income BSI 01
+401102601;Current Account Interest Income BTN 01
+401102701;Current Account Interest Income Bank Tabungan Pensiunan Nasional 01
+401102801;Current Account Interest Income Woori Indonesia 01
+401102901;Current Account Interest Income DKI 01
+401103001;Current Account Interest Income BPD Jawa Tengah 01
+402110201;Savings Account Interest Income Mandiri 01
+402110202;Savings Account Interest Income Mandiri 02
+402110801;Savings Account Interest Income BRI 01
+402111101;Savings Account Interest Income Mandiri Taspen 01
+402112001;Savings Account Interest Income BPD Jawa Tengah 01
+402112101;Savings Account Interest Income BPR Sukawati Pancakanti 01
+402112102;Savings Account Interest Income BPR Sukawati Pancakanti 02
+402112103;Savings Account Interest Income BPR Sukawati Pancakanti 03
+402112104;Savings Account Interest Income BPR Sukawati Pancakanti 04
+402112105;Savings Account Interest Income BPR Sukawati Pancakanti 05
+402112106;Savings Account Interest Income BPR Sukawati Pancakanti 06
+402112201;Savings Account Interest Income BPRS MULIA BERKAH ABADI TGR 01
+402112301;Savings Account Interest Income BPR LESTARI BALI 01
+402112401;Savings Account Interest Income BPR ULIMA DJUMPA MAROM 01
+402112501;Savings Account Interest Income BPR KARYAJATNIKA SADAYA 01
+402112601;Savings Account Interest Income BPR LESTARI 01
+403122701;Time Deposit Account Interest Income BPR CEPER PERMATA ARTHA 01
+403122702;Time Deposit Account Interest Income BPR CEPER PERMATA ARTHA 02
+403122703;Time Deposit Account Interest Income BPR CEPER PERMATA ARTHA 03
+403122704;Time Deposit Account Interest Income BPR CEPER PERMATA ARTHA 04
+403122801;Time Deposit Account Interest Income BPR MITRA SEJAHTERA LESTARI 01
+403122802;Time Deposit Account Interest Income BPR MITRA SEJAHTERA LESTARI 02
+403122803;Time Deposit Account Interest Income BPR MITRA SEJAHTERA LESTARI 03
+403122901;Time Deposit Account Interest Income BPRS ARTHA MADANI 01
+403122902;Time Deposit Account Interest Income BPRS ARTHA MADANI 02
+403123001;Time Deposit Account Interest Income BUANA ARTHA KASSITI 01
+403123002;Time Deposit Account Interest Income BUANA ARTHA KASSITI 02
+403123101;Time Deposit Account Interest Income BPR NUSUMMA JATIM 01
+403123102;Time Deposit Account Interest Income BPR NUSUMMA JATIM 02
+403123201;Time Deposit Account Interest Income BANK KROM 01
+403123202;Time Deposit Account Interest Income BANK KROM 02
+403123301;Time Deposit Account Interest Income ULIMA DJUMPA MAROM 01
+403123401;Time Deposit Account Interest Income BPR FIANKA REZALINA FATMA 01
+403123501;Time Deposit Account Interest Income BPR MODERN EXPRESS 01
+403123601;Time Deposit Account Interest Income BPR Tata Asia 01
+403123701;Time Deposit Account Interest Income BPR HASA MITRA 01
+403123801;Time Deposit Account Interest Income BPRS DINAR ASHRI 01
+403123901;Time Deposit Account Interest Income BANK BISNIS INTERNASIONAL 01
+403123902;Time Deposit Account Interest Income BANK BISNIS INTERNASIONAL 02
+4112000;Loan Interest Income Kredit Pegawai Aktif
+4112001;Loan Interest Income Kredit Pensiunan
+4112002;Loan Interest Income Kredit Wiraswasta
+4112003;Loan Interest Income Kredit Regular Diskonto
+4112004;Loan Interest Income Kredit Pensiun Platinum
+4112005;Loan Interest Income Kredit Channeling Reguler Flat
+4112006;Loan Interest Income Kredit Channeling Platinum Flat
+4112007;Loan Interest Income Kredit Umroh
+4112008;Loan Interest Income Kresun Anuitas
+4112009;Loan Interest Income Kresun Platinum Anuitas
+4112010;Loan Interest Income Kredit Channeling Reguler Anuitas
+4112011;Loan Interest Income Kredit Channeling Platinum Anuitas
+4112012;Loan Interest Income Kredit Pegawai Aktif Anuitas
+4112013;Loan Interest Income Kredit Jande Reguler
+4112014;Loan Interest Income Kredit Pensiun Platinum Plus
+4112015;Loan Interest Income Kredit Tanpa Agunan
+4112016;Loan Interest Income Kredit Wiraswasta Anuitas
+4112017;Loan Interest Income Kredit Pensiun Platinum Plus Flat
+4112018;Loan Interest Income Kredit Hapus Buku
+4112019;Loan Interest Income Kredit Channeling Pensiun Platinum Plus Anuitas
+4112020;Loan Interest Income Kredit Jande Diskonto
+4122000;Loan Interest Write Off Income Kredit Pegawai Aktif
+4122001;Loan Interest Write Off Income Kredit Pensiunan
+4122002;Loan Interest Write Off Income Kredit Wiraswasta
+4122003;Loan Interest Write Off Income Kredit Regular Diskonto
+4122004;Loan Interest Write Off Income Kredit Pensiun Platinum
+4122005;Loan Interest Write Off Income Kredit Channeling Reguler Flat
+4122006;Loan Interest Write Off Income Kredit Channeling Platinum Flat
+4122007;Loan Interest Write Off Income Kredit Umroh
+4122008;Loan Interest Write Off Income Kresun Anuitas
+4122009;Loan Interest Write Off Income Kresun Platinum Anuitas
+4122010;Loan Interest Write Off Income Kredit Channeling Reguler Anuitas
+4122011;Loan Interest Write Off Income Kredit Channeling Platinum Anuitas
+4122012;Loan Interest Write Off Income Kredit Pegawai Aktif Anuitas
+4122013;Loan Interest Write Off Income Kredit Jande Reguler
+4122014;Loan Interest Write Off Income Kredit Pensiun Platinum Plus
+4122015;Loan Interest Write Off Income Kredit Tanpa Agunan
+4122016;Loan Interest Write Off Income Kredit Wiraswasta Anuitas
+4122017;Loan Interest Write Off Income Kredit Pensiun Platinum Plus Flat
+4122018;Loan Interest Write Off Income Kredit Hapus Buku
+4122019;Loan Interest Write Off Income Kredit Channeling Pensiun Platinum Plus Anuitas
+4122020;Loan Interest Write Off Income Kredit Jande Diskonto
+4132000;Loan Interest Income Deferred Income of Loan Restructuring
+4211000;Provision Fee Income
+4222000;Administration Fee Income
+4232000;Penalty Arrears Income Kredit Pegawai Aktif
+4232001;Penalty Arrears Income Kredit Pensiunan
+4232002;Penalty Arrears Income Kredit Wiraswasta
+4232003;Penalty Arrears Income Kredit Regular Diskonto
+4232004;Penalty Arrears Income Kredit Pensiun Platinum
+4232005;Penalty Arrears Income Kredit Channeling Reguler Flat
+4232006;Penalty Arrears Income Kredit Channeling Platinum Flat
+4232007;Penalty Arrears Income Kredit Umroh
+4232008;Penalty Arrears Income Kresun Anuitas
+4232009;Penalty Arrears Income Kresun Platinum Anuitas
+4232010;Penalty Arrears Income Kredit Channeling Reguler Anuitas
+4232011;Penalty Arrears Income Kredit Channeling Platinum Anuitas
+4232012;Penalty Arrears Income Kredit Pegawai Aktif Anuitas
+4232013;Penalty Arrears Income Kredit Jande Reguler
+4232014;Penalty Arrears Income Kredit Pensiun Platinum Plus
+4232015;Penalty Arrears Income Kredit Tanpa Agunan
+4232016;Penalty Arrears Income Kredit Wiraswasta Anuitas
+4232017;Penalty Arrears Income Kredit Pensiun Platinum Plus Flat
+4232018;Penalty Arrears Income Kredit Hapus Buku
+4232019;Penalty Arrears Income Kredit Channeling Pensiun Platinum Plus Anuitas
+4232020;Penalty Arrears Income Kredit Jande Diskonto
+4242000;Income - Early Termination Penalty Kredit Pegawai Aktif
+4242001;Income - Early Termination Penalty Kredit Pensiunan
+4242002;Income - Early Termination Penalty Kredit Wiraswasta
+4242003;Income - Early Termination Penalty Kredit Regular Diskonto
+4242004;Income - Early Termination Penalty Kredit Pensiun Platinum
+4242005;Income - Early Termination Penalty Kredit Channeling Reguler Flat
+4242006;Income - Early Termination Penalty Kredit Channeling Platinum Flat
+4242007;Income - Early Termination Penalty Kredit Umroh
+4242008;Income - Early Termination Penalty Kresun Anuitas
+4242009;Income - Early Termination Penalty Kresun Platinum Anuitas
+4242010;Income - Early Termination Penalty Kredit Channeling Reguler Anuitas
+4242011;Income - Early Termination Penalty Kredit Channeling Platinum Anuitas
+4242012;Income - Early Termination Penalty Kredit Pegawai Aktif Anuitas
+4242013;Income - Early Termination Penalty Kredit Jande Reguler
+4242014;Income - Early Termination Penalty Kredit Pensiun Platinum Plus
+4242015;Income - Early Termination Penalty Kredit Tanpa Agunan
+4242016;Income - Early Termination Penalty Kredit Wiraswasta Anuitas
+4242017;Income - Early Termination Penalty Kredit Pensiun Platinum Plus Flat
+4242018;Income - Early Termination Penalty Kredit Hapus Buku
+4242019;Income - Early Termination Penalty Kredit Channeling Pensiun Platinum Plus Anuitas
+4242020;Income - Early Termination Penalty Kredit Jande Diskonto
+4252000;Income - Penalty Write Off Kredit Pegawai Aktif
+4252001;Income - Penalty Write Off Kredit Pensiunan
+4252002;Income - Penalty Write Off Kredit Wiraswasta
+4252003;Income - Penalty Write Off Kredit Regular Diskonto
+4252004;Income - Penalty Write Off Kredit Pensiun Platinum
+4252005;Income - Penalty Write Off Kredit Channeling Reguler Flat
+4252006;Income - Penalty Write Off Kredit Channeling Platinum Flat
+4252007;Income - Penalty Write Off Kredit Umroh
+4252008;Income - Penalty Write Off Kresun Anuitas
+4252009;Income - Penalty Write Off Kresun Platinum Anuitas
+4252010;Income - Penalty Write Off Kredit Channeling Reguler Anuitas
+4252011;Income - Penalty Write Off Kredit Channeling Platinum Anuitas
+4252012;Income - Penalty Write Off Kredit Pegawai Aktif Anuitas
+4252013;Income - Penalty Write Off Kredit Jande Reguler
+4252014;Income - Penalty Write Off Kredit Pensiun Platinum Plus
+4252015;Income - Penalty Write Off Kredit Tanpa Agunan
+4252016;Income - Penalty Write Off Kredit Wiraswasta Anuitas
+4252017;Income - Penalty Write Off Kredit Pensiun Platinum Plus Flat
+4252018;Income - Penalty Write Off Kredit Hapus Buku
+4252019;Income - Penalty Write Off Kredit Channeling Pensiun Platinum Plus Anuitas
+4252020;Income - Penalty Write Off Kredit Jande Diskonto
+4262000;Income - Principal Write Off Kredit Pegawai Aktif
+4262001;Income - Principal Write Off Kredit Pensiunan
+4262002;Income - Principal Write Off Kredit Wiraswasta
+4262003;Income - Principal Write Off Kredit Regular Diskonto
+4262004;Income - Principal Write Off Kredit Pensiun Platinum
+4262005;Income - Principal Write Off Kredit Channeling Reguler Flat
+4262006;Income - Principal Write Off Kredit Channeling Platinum Flat
+4262007;Income - Principal Write Off Kredit Umroh
+4262008;Income - Principal Write Off Kresun Anuitas
+4262009;Income - Principal Write Off Kresun Platinum Anuitas
+4262010;Income - Principal Write Off Kredit Channeling Reguler Anuitas
+4262011;Income - Principal Write Off Kredit Channeling Platinum Anuitas
+4262012;Income - Principal Write Off Kredit Pegawai Aktif Anuitas
+4262013;Income - Principal Write Off Kredit Jande Reguler
+4262014;Income - Principal Write Off Kredit Pensiun Platinum Plus
+4262015;Income - Principal Write Off Kredit Tanpa Agunan
+4262016;Income - Principal Write Off Kredit Wiraswasta Anuitas
+4262017;Income - Principal Write Off Kredit Pensiun Platinum Plus Flat
+4262018;Income - Principal Write Off Kredit Hapus Buku
+4262019;Income - Principal Write Off Kredit Channeling Pensiun Platinum Plus Anuitas
+4262020;Income - Principal Write Off Kredit Jande Diskonto
+4272000;Transaction Loan Fee Income
+4282000;Correction of Interest Income
+4312101;Savings Income - Adm Fee Saving Account - main
+4312102;Savings Income - Adm Fee Pension ASN
+4312103;Savings Income - Adm Fee Pension Taspen
+4312104;Savings Income - Adm Fee Simpel
+4312105;Savings Income - Adm Fee Friend
+4312106;Savings Income - Adm Fee SISETO PERORANGAN
+4312107;Savings Income - Adm Fee IBADAH
+4312108;Savings Income - Adm Fee QURBAN
+4312109;Savings Income - Adm Fee TOUR
+4312110;Savings Income - Adm Fee Tabungan Emas
+4312111;Savings Income - Adm Fee ABP
+4312112;Savings Income - Adm Fee TASIRA
+4312113;Savings Income - Adm Fee Dpentas Vaganza
+4312114;Savings Income - Adm Fee Mandiri Siswa
+4312115;Savings Income - Adm Fee Tamastra Berjangka
+4312116;Savings Income - Adm Fee SISETO ABP
+4312199;Savings Income - Adm Fee Internal
+4322101;Income - Account Closing Fee Saving Account - main
+4322102;Income - Account Closing Fee Pension ASN
+4322103;Income - Account Closing Fee Pension Taspen
+4322104;Income - Account Closing Fee Simpel
+4322105;Income - Account Closing Fee Friend
+4322106;Income - Account Closing Fee SISETO PERORANGAN
+4322107;Income - Account Closing Fee IBADAH
+4322108;Income - Account Closing Fee QURBAN
+4322109;Income - Account Closing Fee TOUR
+4322110;Income - Account Closing Fee Tabungan Emas
+4322111;Income - Account Closing Fee ABP
+4322112;Income - Account Closing Fee TASIRA
+4322113;Income - Account Closing Fee Dpentas Vaganza
+4322114;Income - Account Closing Fee Mandiri Siswa
+4322115;Income - Account Closing Fee Tamastra Berjangka
+4322116;Income - Account Closing Fee SISETO ABP
+4322199;Income - Account Closing Fee Internal
+4332101;Income - Passbook Replacement Saving Account - main
+4332102;Income - Passbook Replacement Pension ASN
+4332103;Income - Passbook Replacement Pension Taspen
+4332104;Income - Passbook Replacement Simpel
+4332105;Income - Passbook Replacement Friend
+4332106;Income - Passbook Replacement SISETO PERORANGAN
+4332107;Income - Passbook Replacement IBADAH
+4332108;Income - Passbook Replacement QURBAN
+4332109;Income - Passbook Replacement TOUR
+4332110;Income - Passbook Replacement Tabungan Emas
+4332111;Income - Passbook Replacement ABP
+4332112;Income - Passbook Replacement TASIRA
+4332113;Income - Passbook Replacement Dpentas Vaganza
+4332114;Income - Passbook Replacement Mandiri Siswa
+4332115;Income - Passbook Replacement Tamastra Berjangka
+4332116;Income - Passbook Replacement SISETO ABP
+4332199;Income - Passbook Replacement Internal
+4342101;Penalty Income - No Transaction Saving Account - main
+4342102;Penalty Income - No Transaction Pension ASN
+4342103;Penalty Income - No Transaction Pension Taspen
+4342104;Penalty Income - No Transaction Simpel
+4342105;Penalty Income - No Transaction Friend
+4342106;Penalty Income - No Transaction SISETO PERORANGAN
+4342107;Penalty Income - No Transaction IBADAH
+4342108;Penalty Income - No Transaction QURBAN
+4342109;Penalty Income - No Transaction TOUR
+4342110;Penalty Income - No Transaction Tabungan Emas
+4342111;Penalty Income - No Transaction ABP
+4342112;Penalty Income - No Transaction TASIRA
+4342113;Penalty Income - No Transaction Dpentas Vaganza
+4342114;Penalty Income - No Transaction Mandiri Siswa
+4342115;Penalty Income - No Transaction Tamastra Berjangka
+4342116;Penalty Income - No Transaction SISETO ABP
+4342199;Penalty Income - No Transaction Internal
+4352100;Income PPAP ABA Recovery
+4352101;Income PPAP Loan Recovery
+4412200;Income - Penalty Closing Before Mature Time Deposit
+4412201;Income - Penalty Closing Before Mature Time Deposit Compound
+4412202;Income - Penalty Closing Before Mature Time Deposit ABP
+4412203;Income - Penalty Closing Before Mature Time Deposit ABP Compound
+4911000;Income - Stamp
+4921000;Income - Excess Cash Difference
+4931000;Provisioning Income
+4941000;Provisioning Recovery Income
+4951000;Administrative Interest Income
+4961000;Securities Income
+4971000;Transfer Income to Another Bank
+4971001;Transfer Income from Other Banks
+4981000;Biller Income
+4981001;EDC Income
+4981002;SKN/RTGS Income
+4981003;PAC Income
+4981004;ATMB Income
+4981005;Prima Income
+4981006;BIFast Income
+4981007;ATMFC Income
+4991000;Other Income
+4991001;Other Income - Insurance Fee
+4991002;Other Income - Fines
+4991003;Other Income - Penalty
+4991004;Other Income - Savings Administration
+4991005;Other Income - Collateral Withdrawal Payments
+4991006;Other Income - Collateral Exchange Administration
+4991007;Other Income - Vehicle Registration Number Certificate
+4991008;Other Income - Foreclosed Collateral
+4991009;Other Income - Loan Paid Off
+5012101;Savings Interest Expenses Saving Account - main
+5012102;Savings Interest Expenses Pension ASN
+5012103;Savings Interest Expenses Pension Taspen
+5012104;Savings Interest Expenses Simpel
+5012105;Savings Interest Expenses Friend
+5012106;Savings Interest Expenses SISETO PERORANGAN
+5012107;Savings Interest Expenses IBADAH
+5012108;Savings Interest Expenses QURBAN
+5012109;Savings Interest Expenses TOUR
+5012110;Savings Interest Expenses Tabungan Emas
+5012111;Savings Interest Expenses ABP
+5012112;Savings Interest Expenses TASIRA
+5012113;Savings Interest Expenses Dpentas Vaganza
+5012114;Savings Interest Expenses Mandiri Siswa
+5012115;Savings Interest Expenses Tamastra Berjangka
+5012116;Savings Interest Expenses SISETO ABP
+5012199;Savings Interest Expenses Internal
+5022200;Time Deposits Interest Expenses Time Deposit
+5022201;Time Deposits Interest Expenses Time Deposit Compound
+5022202;Time Deposits Interest Expenses Time Deposit ABP
+5022203;Time Deposits Interest Expenses Time Deposit ABP Compound
+511101001;Expenses - Loan Interest Fees Maybank 01
+511101002;Expenses - Loan Interest Fees Maybank 02
+511101401;Expenses - Loan Interest Fees Niaga 01
+511101402;Expenses - Loan Interest Fees Niaga 02
+511101403;Expenses - Loan Interest Fees Niaga 03
+511101404;Expenses - Loan Interest Fees Niaga 04
+511101405;Expenses - Loan Interest Fees Niaga 05
+511101406;Expenses - Loan Interest Fees Niaga 06
+511102501;Expenses - Loan Interest Fees BPR KARYAJATNIKA SADAYA 01
+511102502;Expenses - Loan Interest Fees BPR KARYAJATNIKA SADAYA 02
+511102503;Expenses - Loan Interest Fees BPR KARYAJATNIKA SADAYA 03
+512101001;Expenses - Loan Arrears Fees Maybank 01
+512101002;Expenses - Loan Arrears Fees Maybank 02
+512101401;Expenses - Loan Arrears Fees Niaga 01
+512101402;Expenses - Loan Arrears Fees Niaga 02
+512101403;Expenses - Loan Arrears Fees Niaga 03
+512101404;Expenses - Loan Arrears Fees Niaga 04
+512101405;Expenses - Loan Arrears Fees Niaga 05
+512101406;Expenses - Loan Arrears Fees Niaga 06
+512102501;Expenses - Loan Arrears Fees BPR KARYAJATNIKA SADAYA 01
+512102502;Expenses - Loan Arrears Fees BPR KARYAJATNIKA SADAYA 02
+512102503;Expenses - Loan Arrears Fees BPR KARYAJATNIKA SADAYA 03
+513101001;Expenses - Loan Adm Fees Maybank 01
+513101002;Expenses - Loan Adm Fees Maybank 02
+513101401;Expenses - Loan Adm Fees Niaga 01
+513101402;Expenses - Loan Adm Fees Niaga 02
+513101403;Expenses - Loan Adm Fees Niaga 03
+513101404;Expenses - Loan Adm Fees Niaga 04
+513101405;Expenses - Loan Adm Fees Niaga 05
+513101406;Expenses - Loan Adm Fees Niaga 06
+513102501;Expenses - Loan Adm Fees BPR KARYAJATNIKA SADAYA 01
+513102502;Expenses - Loan Adm Fees BPR KARYAJATNIKA SADAYA 02
+513102503;Expenses - Loan Adm Fees BPR KARYAJATNIKA SADAYA 03
+514101001;Expenses - Loan Provision Fees Maybank 01
+514101002;Expenses - Loan Provision Fees Maybank 02
+514101401;Expenses - Loan Provision Fees Niaga 01
+514101402;Expenses - Loan Provision Fees Niaga 02
+514101403;Expenses - Loan Provision Fees Niaga 03
+514101404;Expenses - Loan Provision Fees Niaga 04
+514101405;Expenses - Loan Provision Fees Niaga 05
+514101406;Expenses - Loan Provision Fees Niaga 06
+514102501;Expenses - Loan Provision Fees BPR KARYAJATNIKA SADAYA 01
+514102502;Expenses - Loan Provision Fees BPR KARYAJATNIKA SADAYA 02
+514102503;Expenses - Loan Provision Fees BPR KARYAJATNIKA SADAYA 03
+515101001;Expenses - Loan Insurance Fees Maybank 01
+515101002;Expenses - Loan Insurance Fees Maybank 02
+515101401;Expenses - Loan Insurance Fees Niaga 01
+515101402;Expenses - Loan Insurance Fees Niaga 02
+515101403;Expenses - Loan Insurance Fees Niaga 03
+515101404;Expenses - Loan Insurance Fees Niaga 04
+515101405;Expenses - Loan Insurance Fees Niaga 05
+515101406;Expenses - Loan Insurance Fees Niaga 06
+515102501;Expenses - Loan Insurance Fees BPR KARYAJATNIKA SADAYA 01
+515102502;Expenses - Loan Insurance Fees BPR KARYAJATNIKA SADAYA 02
+515102503;Expenses - Loan Insurance Fees BPR KARYAJATNIKA SADAYA 03
+516101001;Expenses - Loan Notary Fees Maybank 01
+516101002;Expenses - Loan Notary Fees Maybank 02
+516101401;Expenses - Loan Notary Fees Niaga 01
+516101402;Expenses - Loan Notary Fees Niaga 02
+516101403;Expenses - Loan Notary Fees Niaga 03
+516101404;Expenses - Loan Notary Fees Niaga 04
+516101405;Expenses - Loan Notary Fees Niaga 05
+516101406;Expenses - Loan Notary Fees Niaga 06
+516102501;Expenses - Loan Notary Fees BPR KARYAJATNIKA SADAYA 01
+516102502;Expenses - Loan Notary Fees BPR KARYAJATNIKA SADAYA 02
+516102503;Expenses - Loan Notary Fees BPR KARYAJATNIKA SADAYA 03
+5171001;Expenses - Deposit Insurance Agency (LPS
+5181001;Expenses - Transaction Fee Third Party Savings
+5181002;Expenses - Transaction Fee Third Party Loans
+5212000;Provisioning Expenses
+5311000;Provisioning Placement In Other Banks Expense
+5321000;Office Rental Expense
+5331000;Accumulated Depreciation Expenses - Buildings
+5331001;Accumulated Depreciation Expenses - Office Rent
+5331002;Accumulated Depreciation Expenses - Renovation
+5331003;Accumulated Depreciation Expenses Fee - Lands
+5331004;Accumulated Depreciation Expenses Fee - Land Purchase
+5331005;Accumulated Depreciation Expenses - Equipments (FFE
+5331006;Accumulated Depreciation Expenses Fee - Inventory
+5331007;Accumulated Depreciation Expenses of Intangible Assets
+5331008;Accumulated Depreciation Expenses - Motorcycle and Car
+5331009;Accumulated Depreciation Expenses - Car
+5341000;Vehicle Rental Expenses
+5411000;Meeting Expense
+5411001;Meeting Expense- Other Fees
+5411002;Annual Meeting Expense
+5421000;Educational Literacy Expense
+5431000;Training and Education Fund
+5431001;Education Expense
+5441000;Audit Expense
+5441002;Financial Authority Expense
+5451000;Travel Expense
+5471000;Guest Entertainment Fee
+5471001;Social Activity Fee
+5471002;Social Fund
+5511000;Basic Salaries Expenses
+5511000;Salaries Expenses
+5511001;Other Overtime Expense
+5511002;Other Employee Insurance Expenses
+5511003;Other Employee Welfare Expenses
+5511001;Positional Allowance Expenses
+5511002;Performance Allowance Expenses
+5511003;Religious Holiday Allowance Expense
+5511004;Honorarium Allowance
+5511005;Leave Allowance
+5511006;Long Leave Allowance
+5511007;Uniform Allowance
+5511008;PPh 21 Director's Allowance
+5511009;Long Service Award Allowance
+5511010;Director's Honorarium
+5511011;Housing telephone & Electricity Allowance
+5511012;Other Allowance
+5521000;Honorarium Expense
+5521001;PPh 21 Dekom
+5531000;Religious Holiday Allowance Expense
+5541000;Employees Bonus
+5541001;Other Overtime Expense
+5541002;Transport Allowance
+5541003;Incentive Allowance
+5551000;Other Employees Uniform Expense
+5561000;Government Retirement Fund Expense
+5561001;DPLK Retirement Fund Expense
+5571000;Medication Expense
+5571001;Government Healthcare Fund Expense
+5581000;Monthly Tax Expense
+5581001;Annual Tax Expense
+5591000;Credit Commission Expense
+5591001;Deposit Commission Expense
+5611000;Slip Printing Expense
+5611001;Office Stationery Expense
+5611002;Operational Transportation Expense
+5611003;Establishment Services Expense
+5611004;Computer Program Expense
+5611005;Stamp Expense
+5611006;Postal Expense
+5611007;Photocopy Expense
+5611008;office equipment and supplies
+5611009;Third Party Contracts
+5611010;Dapem Compensation
+5621000;Other Daily Consumtion Expense
+5631000;Telephone Expenses
+5631001;Electrical Expenses
+5631002;Office Cleaning Expenses
+5631003;Fuel Expenses
+5631004;Tap Water Expenses
+5631005;Drinking Water Expenses
+5631006;Internet Expense
+5641000;Office Rental Expense
+5641001;Other Rental Expense
+5651000;Vehicle Rental Expenses
+5661000;Office Furniture Expenses
+5671000;Promotion Expenses
+5671001;Deposit Insentive Expenses
+5671002;Friend Saving Account Expenses
+5681000;Notary Expense
+5681001;IT Service Expense
+5681002;Cleaning Service Expense
+5681003;Security Expense
+5691000;Administration Expense
+5691001;Other Costs Honorary Management
+5691002;News Paper & Magazine Expense
+5691003;Other Non Performing Loans Expense
+5691004;Traveling Expenses
+5691005;Interbranch Service Expense
+5691006;Non Operational Expenses
+5691007;Pre Operational Expenses
+5691008;Operational Expenses
+5691009;Rounding Expense
+5691010;Subsidy Fee
+5691011;Fee BILLER
+5691012;Other Non Performing CKPN ABA Expense
+5691013;Other Expense - ABA Administration
+5691014;Other Expense - Participation and Activities
+5691015;Other Expense - Customer Development
+5711000;Building Maintenance Expenses
+5721000;Car Maintenance Expenses
+5721001;Motorcycle Maintenance Expenses
+5731000;Equipment Maintenance Expenses
+5731001;Machine Maintenance Expenses
+5741000;Fire Insurance Expense
+5741001;Burglary Insurance Expense
+5741002;Loss Insurance Expense
+5751000;Vehicle Insurance Expenses
+5761000;Cash In Safe Insurance Expense
+5761001;Cash In Transit Insurance Expense
+5781000;Other Tax Expense
+5781001;Other Vehicle Registration Number Tax Expense
+5781002;Property Tax Expense
+5821000;Prod Act Provision Expense
+5911000;Other Bank Saving Expense
+5911001;Other Bank Time Deposit Expense
+5911002;Other Bank Expense
+5931000;Other Bank Loan Expense
+5941000;Goods and Services - Consumtion
+5941001;Goods and Services - Electricty
+5941002;Goods and Services - Water / PDAM
+5941003;Goods and Services - Telephone / Telegram / Telex
+5941004;Goods and Services - Stamps
+5941005;Goods and Services - Office Stationery and Print Materials
+5941006;Goods and Services - Newspapers and Magazines
+5941007;Goods and Services - Office Travel
+5941008;Goods and Services - Public Accounting and Consulting Services
+5941009;Goods and Services - Photo Copy
+5941010;Goods and Services - Equipment and Supplies
+5941011;Goods and Services - Safety and Cleanliness
+5941012;Goods and Services - Third Party Contract
+5941013;Goods and Services - Credit Collection
+5941014;Goods and Services - Dapem Compensation
+5941015;Goods and Services - VPN Network
+5941016;Goods and Services - Meeting Cost
+5991000;Credit Settlement Expense
+5991001;Amortization Expense
+5991002;Goods & Services Retribution Expense
+5991003;Goods & Services Tax Consultant Expense
+5991004;Contribution Expense
+5991005;Other Operating Expenses - Administration of Placement in Other Banks
+5991006;Other Operating Expenses - SIPO OJK
+5991007;Other Operating Expenses - Participation and Activities
+5991008;Other Operating Expenses - Customer Coaching
+5991009;Other Operating Expenses - Spirituality and Sports
+5991010;Other Operating Expenses - Others
+6011000;Profits From The Sale Of Fixed Assets
+6041000;Interbranch service Income
+6901001;Income Cash defference
+7011000;Fixed Asset Selling Expense
+7041000;Interbranch Service Expense
+7901000;Other Non Operating Expenses - Donation
+7901001;Other Non Operating Expenses - Rounding
+7901002;Other Non Operating Expenses - Relationship
+8012000;Adm - Interest Arrears Kredit Pegawai Aktif
+8012001;Adm - Interest Arrears Kredit Pensiunan
+8012002;Adm - Interest Arrears Kredit Wiraswasta
+8012003;Adm - Interest Arrears Kredit Regular Diskonto
+8012004;Adm - Interest Arrears Kredit Pensiun Platinum
+8012005;Adm - Interest Arrears Kredit Channeling Reguler Flat
+8012006;Adm - Interest Arrears Kredit Channeling Platinum Flat
+8012007;Adm - Interest Arrears Kredit Umroh
+8012008;Adm - Interest Arrears Kresun Anuitas
+8012009;Adm - Interest Arrears Kresun Platinum Anuitas
+8012010;Adm - Interest Arrears Kredit Channeling Reguler Anuitas
+8012011;Adm - Interest Arrears Kredit Channeling Platinum Anuitas
+8012012;Adm - Interest Arrears Kredit Pegawai Aktif Anuitas
+8012013;Adm - Interest Arrears Kredit Jande Reguler
+8012014;Adm - Interest Arrears Kredit Pensiun Platinum Plus
+8012015;Adm - Interest Arrears Kredit Tanpa Agunan
+8012016;Adm - Interest Arrears Kredit Wiraswasta Anuitas
+8012017;Adm - Interest Arrears Kredit Pensiun Platinum Plus Flat
+8012018;Adm - Interest Arrears Kredit Hapus Buku
+8012019;Adm - Interest Arrears Kredit Channeling Pensiun Platinum Plus Anuitas
+8012020;Adm - Interest Arrears Kredit Jande Diskonto
+8022000;Adm - Interest Accrual Kredit Pegawai Aktif
+8022001;Adm - Interest Accrual Kredit Pensiunan
+8022002;Adm - Interest Accrual Kredit Wiraswasta
+8022003;Adm - Interest Accrual Kredit Regular Diskonto
+8022004;Adm - Interest Accrual Kredit Pensiun Platinum
+8022005;Adm - Interest Accrual Kredit Channeling Reguler Flat
+8022006;Adm - Interest Accrual Kredit Channeling Platinum Flat
+8022007;Adm - Interest Accrual Kredit Umroh
+8022008;Adm - Interest Accrual Kresun Anuitas
+8022009;Adm - Interest Accrual Kresun Platinum Anuitas
+8022010;Adm - Interest Accrual Kredit Channeling Reguler Anuitas
+8022011;Adm - Interest Accrual Kredit Channeling Platinum Anuitas
+8022012;Adm - Interest Accrual Kredit Pegawai Aktif Anuitas
+8022013;Adm - Interest Accrual Kredit Jande Reguler
+8022014;Adm - Interest Accrual Kredit Pensiun Platinum Plus
+8022015;Adm - Interest Accrual Kredit Tanpa Agunan
+8022016;Adm - Interest Accrual Kredit Wiraswasta Anuitas
+8022017;Adm - Interest Accrual Kredit Pensiun Platinum Plus Flat
+8022018;Adm - Interest Accrual Kredit Hapus Buku
+8022019;Adm - Interest Accrual Kredit Channeling Pensiun Platinum Plus Anuitas
+8022020;Adm - Interest Accrual Kredit Jande Diskonto
+8112000;Extracom - Principal Write Off Kredit Pegawai Aktif
+8112001;Extracom - Principal Write Off Kredit Pensiunan
+8112002;Extracom - Principal Write Off Kredit Wiraswasta
+8112003;Extracom - Principal Write Off Kredit Regular Diskonto
+8112004;Extracom - Principal Write Off Kredit Pensiun Platinum
+8112005;Extracom - Principal Write Off Kredit Channeling Reguler Flat
+8112006;Extracom - Principal Write Off Kredit Channeling Platinum Flat
+8112007;Extracom - Principal Write Off Kredit Umroh
+8112008;Extracom - Principal Write Off Kresun Anuitas
+8112009;Extracom - Principal Write Off Kresun Platinum Anuitas
+8112010;Extracom - Principal Write Off Kredit Channeling Reguler Anuitas
+8112011;Extracom - Principal Write Off Kredit Channeling Platinum Anuitas
+8112012;Extracom - Principal Write Off Kredit Pegawai Aktif Anuitas
+8112013;Extracom - Principal Write Off Kredit Jande Reguler
+8112014;Extracom - Principal Write Off Kredit Pensiun Platinum Plus
+8112015;Extracom - Principal Write Off Kredit Tanpa Agunan
+8112016;Extracom - Principal Write Off Kredit Wiraswasta Anuitas
+8112017;Extracom - Principal Write Off Kredit Pensiun Platinum Plus Flat
+8112018;Extracom - Principal Write Off Kredit Hapus Buku
+8112019;Extracom - Principal Write Off Kredit Channeling Pensiun Platinum Plus Anuitas
+8112020;Extracom - Principal Write Off Kredit Jande Diskonto
+8122000;Extracom - Interest Write Off Kredit Pegawai Aktif
+8122001;Extracom - Interest Write Off Kredit Pensiunan
+8122002;Extracom - Interest Write Off Kredit Wiraswasta
+8122003;Extracom - Interest Write Off Kredit Regular Diskonto
+8122004;Extracom - Interest Write Off Kredit Pensiun Platinum
+8122005;Extracom - Interest Write Off Kredit Channeling Reguler Flat
+8122006;Extracom - Interest Write Off Kredit Channeling Platinum Flat
+8122007;Extracom - Interest Write Off Kredit Umroh
+8122008;Extracom - Interest Write Off Kresun Anuitas
+8122009;Extracom - Interest Write Off Kresun Platinum Anuitas
+8122010;Extracom - Interest Write Off Kredit Channeling Reguler Anuitas
+8122011;Extracom - Interest Write Off Kredit Channeling Platinum Anuitas
+8122012;Extracom - Interest Write Off Kredit Pegawai Aktif Anuitas
+8122013;Extracom - Interest Write Off Kredit Jande Reguler
+8122014;Extracom - Interest Write Off Kredit Pensiun Platinum Plus
+8122015;Extracom - Interest Write Off Kredit Tanpa Agunan
+8122016;Extracom - Interest Write Off Kredit Wiraswasta Anuitas
+8122017;Extracom - Interest Write Off Kredit Pensiun Platinum Plus Flat
+8122018;Extracom - Interest Write Off Kredit Hapus Buku
+8122019;Extracom - Interest Write Off Kredit Jande Diskonto
+8122020;Extracom - Interest Write Off Kredit Channeling Pensiun Platinum Plus Anuitas
+9012000;Contra Adm - Interest Arrears Kredit Pegawai Aktif
+9012001;Contra Adm - Interest Arrears Kredit Pensiunan
+9012002;Contra Adm - Interest Arrears Kredit Wiraswasta
+9012003;Contra Adm - Interest Arrears Kredit Regular Diskonto
+9012004;Contra Adm - Interest Arrears Kredit Pensiun Platinum
+9012005;Contra Adm - Interest Arrears Kredit Channeling Reguler Flat
+9012006;Contra Adm - Interest Arrears Kredit Channeling Platinum Flat
+9012007;Contra Adm - Interest Arrears Kredit Umroh
+9012008;Contra Adm - Interest Arrears Kresun Anuitas
+9012009;Contra Adm - Interest Arrears Kresun Platinum Anuitas
+9012010;Contra Adm - Interest Arrears Kredit Channeling Reguler Anuitas
+9012011;Contra Adm - Interest Arrears Kredit Channeling Platinum Anuitas
+9012012;Contra Adm - Interest Arrears Kredit Pegawai Aktif Anuitas
+9012013;Contra Adm - Interest Arrears Kredit Jande Reguler
+9012014;Contra Adm - Interest Arrears Kredit Pensiun Platinum Plus
+9012015;Contra Adm - Interest Arrears Kredit Tanpa Agunan
+9012016;Contra Adm - Interest Arrears Kredit Wiraswasta Anuitas
+9012017;Contra Adm - Interest Arrears Kredit Pensiun Platinum Plus Flat
+9012018;Contra Adm - Interest Arrears Kredit Hapus Buku
+9012019;Contra Adm - Interest Arrears Kredit Channeling Pensiun Platinum Plus Anuitas
+9012020;Contra Adm - Interest Arrears Kredit Jande Diskonto
+9022000;Contra Adm - Interest Accrual Kredit Pegawai Aktif
+9022001;Contra Adm - Interest Accrual Kredit Pensiunan
+9022002;Contra Adm - Interest Accrual Kredit Wiraswasta
+9022003;Contra Adm - Interest Accrual Kredit Regular Diskonto
+9022004;Contra Adm - Interest Accrual Kredit Pensiun Platinum
+9022005;Contra Adm - Interest Accrual Kredit Channeling Reguler Flat
+9022006;Contra Adm - Interest Accrual Kredit Channeling Platinum Flat
+9022007;Contra Adm - Interest Accrual Kredit Umroh
+9022008;Contra Adm - Interest Accrual Kresun Anuitas
+9022009;Contra Adm - Interest Accrual Kresun Platinum Anuitas
+9022010;Contra Adm - Interest Accrual Kredit Channeling Reguler Anuitas
+9022011;Contra Adm - Interest Accrual Kredit Channeling Platinum Anuitas
+9022012;Contra Adm - Interest Accrual Kredit Pegawai Aktif Anuitas
+9022013;Contra Adm - Interest Accrual Kredit Jande Reguler
+9022014;Contra Adm - Interest Accrual Kredit Pensiun Platinum Plus
+9022015;Contra Adm - Interest Accrual Kredit Tanpa Agunan
+9022016;Contra Adm - Interest Accrual Kredit Wiraswasta Anuitas
+9022017;Contra Adm - Interest Accrual Kredit Pensiun Platinum Plus Flat
+9022018;Contra Adm - Interest Accrual Kredit Hapus Buku
+9022019;Contra Adm - Interest Accrual Kredit Jande Diskonto
+9022020;Contra Adm - Interest Accrual Kredit Channeling Pensiun Platinum Plus Anuitas
+9112000;Contra Extracom - Principal Write Off Kredit Pegawai Aktif
+9112001;Contra Extracom - Principal Write Off Kredit Pensiunan
+9112002;Contra Extracom - Principal Write Off Kredit Wiraswasta
+9112003;Contra Extracom - Principal Write Off Kredit Regular Diskonto
+9112004;Contra Extracom - Principal Write Off Kredit Pensiun Platinum
+9112005;Contra Extracom - Principal Write Off Kredit Channeling Reguler Flat
+9112006;Contra Extracom - Principal Write Off Kredit Channeling Platinum Flat
+9112007;Contra Extracom - Principal Write Off Kredit Umroh
+9112008;Contra Extracom - Principal Write Off Kresun Anuitas
+9112009;Contra Extracom - Principal Write Off Kresun Platinum Anuitas
+9112010;Contra Extracom - Principal Write Off Kredit Channeling Reguler Anuitas
+9112011;Contra Extracom - Principal Write Off Kredit Channeling Platinum Anuitas
+9112012;Contra Extracom - Principal Write Off Kredit Pegawai Aktif Anuitas
+9112013;Contra Extracom - Principal Write Off Kredit Jande Reguler
+9112014;Contra Extracom - Principal Write Off Kredit Pensiun Platinum Plus
+9112015;Contra Extracom - Principal Write Off Kredit Tanpa Agunan
+9112016;Contra Extracom - Principal Write Off Kredit Wiraswasta Anuitas
+9112017;Contra Extracom - Principal Write Off Kredit Pensiun Platinum Plus Flat
+9112018;Contra Extracom - Principal Write Off Kredit Hapus Buku
+9112019;Contra Extracom - Principal Write Off Kredit Channeling Pensiun Platinum Plus Anuitas
+9112020;Contra Extracom - Principal Write Off Kredit Jande Diskonto
+9122000;Contra Extracom - Interest Write Off Kredit Pegawai Aktif
+9122001;Contra Extracom - Interest Write Off Kredit Pensiunan
+9122002;Contra Extracom - Interest Write Off Kredit Wiraswasta
+9122003;Contra Extracom - Interest Write Off Kredit Regular Diskonto
+9122004;Contra Extracom - Interest Write Off Kredit Pensiun Platinum
+9122005;Contra Extracom - Interest Write Off Kredit Channeling Reguler Flat
+9122006;Contra Extracom - Interest Write Off Kredit Channeling Platinum Flat
+9122007;Contra Extracom - Interest Write Off Kredit Umroh
+9122008;Contra Extracom - Interest Write Off Kresun Anuitas
+9122009;Contra Extracom - Interest Write Off Kresun Platinum Anuitas
+9122010;Contra Extracom - Interest Write Off Kredit Channeling Reguler Anuitas
+9122011;Contra Extracom - Interest Write Off Kredit Channeling Platinum Anuitas
+9122012;Contra Extracom - Interest Write Off Kredit Pegawai Aktif Anuitas
+9122013;Contra Extracom - Interest Write Off Kredit Jande Reguler
+9122014;Contra Extracom - Interest Write Off Kredit Pensiun Platinum Plus
+9122015;Contra Extracom - Interest Write Off Kredit Tanpa Agunan
+9122016;Contra Extracom - Interest Write Off Kredit Wiraswasta Anuitas
+9122017;Contra Extracom - Interest Write Off Kredit Pensiun Platinum Plus Flat
+9122018;Contra Extracom - Interest Write Off Kredit Hapus Buku
+9122019;Contra Extracom - Interest Write Off Kredit Channeling Pensiun Platinum Plus Anuitas
+9122020;Contra Extracom - Interest Write Off Kredit Jande Diskonto
