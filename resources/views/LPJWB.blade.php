@@ -196,7 +196,7 @@
     </table>
 
     <div style="position: fixed; bottom: 10px; right: 20px; font-size: 10px; font-style: italic;">
-        Dicetak pada {{ $tanggal_cetak }} oleh <strong>{{ $userName }}</strong>
+        Dicetak pada {{ $tanggal }} oleh <strong>{{ $userName }}</strong>
     </div>
 
 
