@@ -214,6 +214,7 @@ class ListTransaksiUMKS extends ListRecords
             'transaksis' => $finalDetail,
             'userName' => $userName,
             'tanggal_pengajuan' => $tanggal,
+            'tanggal' => $tanggal,
             'nomor' => $nomor_pengajuan,
             'total_pengajuan' => $totalpengajuan,
             'total_realisasi' => $totalrealisasi,
