@@ -83,7 +83,7 @@
 
     <p>
         Menunjuk perihal diatas, dengan ini diajukan Pertanggung jawaban
-        Uang Muka Kerja Umum Tanggal {{ $tanggal_pengajuan }} :
+        Uang Muka Kerja Umum Tanggal {{ $tanggal }} :
     </p>
     <p>
         dengan Nomor Pengajuan : <strong>{{ $nomor }}</strong>.
