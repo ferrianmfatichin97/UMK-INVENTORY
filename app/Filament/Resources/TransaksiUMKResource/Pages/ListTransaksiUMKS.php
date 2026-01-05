@@ -270,7 +270,9 @@ class ListTransaksiUMKS extends ListRecords
             'total' => $total,
             'terbilang' => $terbilang,
             'userName' => $userName,
-            'tanggal' => $tanggal,
+            // 'tanggal' => $tanggal,
+            'tanggal_pengajuan' => $tanggal,
+            'tanggal_cetak' => Carbon::now()->translatedFormat('d F Y'),
             'nomor' => $nomor_pengajuan,
         ])->output();
     }

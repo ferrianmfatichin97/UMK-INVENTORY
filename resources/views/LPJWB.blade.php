@@ -83,7 +83,7 @@
 
     <p>
         Menunjuk perihal diatas, dengan ini diajukan Pertanggung jawaban
-        Uang Muka Kerja Umum Tanggal {{ $tanggal }} :
+        Uang Muka Kerja Umum Tanggal {{ $tanggal_pengajuan }} :
     </p>
     <p>
         dengan Nomor Pengajuan : <strong>{{ $nomor }}</strong>.
@@ -196,7 +196,7 @@
     </table>
 
     <div style="position: fixed; bottom: 10px; right: 20px; font-size: 10px; font-style: italic;">
-        Dicetak pada {{ $tanggal }} oleh <strong>{{ $userName }}</strong>
+        Dicetak pada {{ $tanggal_cetak }} oleh <strong>{{ $userName }}</strong>
     </div>
 
 
