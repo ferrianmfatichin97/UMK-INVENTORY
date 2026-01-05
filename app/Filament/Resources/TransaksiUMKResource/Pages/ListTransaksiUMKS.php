@@ -195,18 +195,18 @@ class ListTransaksiUMKS extends ListRecords
         // Logging
         Log::info('Download Laporan PertanggungJawaban ' . $nomor_pengajuan . ' Oleh: ' . $userName);
 
-        dd([
-            'image' => $base64,
-            'transaksis' => $finalDetail,
-            'userName' => $userName,
-            'tanggal_pengajuan' => $tanggal,
-            'nomor' => $nomor_pengajuan,
-            'total_pengajuan' => $totalpengajuan,
-            'total_realisasi' => $totalrealisasi,
-            'total_selisih' => $totalselisih,
-            'terbilang' => $terbilang,
-            'tanggal_cetak' => Carbon::now()->translatedFormat('d F Y'),
-        ]);
+        // dd([
+        //     'image' => $base64,
+        //     'transaksis' => $finalDetail,
+        //     'userName' => $userName,
+        //     'tanggal_pengajuan' => $tanggal,
+        //     'nomor' => $nomor_pengajuan,
+        //     'total_pengajuan' => $totalpengajuan,
+        //     'total_realisasi' => $totalrealisasi,
+        //     'total_selisih' => $totalselisih,
+        //     'terbilang' => $terbilang,
+        //     'tanggal_cetak' => Carbon::now()->translatedFormat('d F Y'),
+        // ]);
 
         // Return PDF
         return Pdf::loadView('LPJWB', [
