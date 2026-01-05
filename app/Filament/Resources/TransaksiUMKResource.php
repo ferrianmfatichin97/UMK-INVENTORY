@@ -43,7 +43,8 @@ class TransaksiUMKResource extends Resource
                         Forms\Components\Select::make('no_pengajuan')
                             ->label('Nomor Pengajuan')
                             ->options(
-                                PengajuanUMK::orderByDesc('nomor_pengajuan')
+                                PengajuanUMK::query()
+                                    ->orderByDesc('tanggal_pengajuan')
                                     ->pluck('nomor_pengajuan', 'nomor_pengajuan')
                             )
                             ->required()

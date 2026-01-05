@@ -182,7 +182,7 @@ class PengajuanUMKResource extends Resource
                     ->sortable()
                     ->formatStateUsing(fn($state) => number_format($state, 0, ',', '.')),
             ])
-            ->defaultSort('nomor_pengajuan', 'desc')
+            ->defaultSort('tanggal_pengajuan', 'desc')
             ->filters([])
             ->actions([
                 Tables\Actions\ViewAction::make()->label('Detail')->icon('heroicon-o-eye'),
