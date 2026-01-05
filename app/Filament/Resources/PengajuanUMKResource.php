@@ -46,10 +46,18 @@ class PengajuanUMKResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $bulanTahun = date('m') . date('y');
-        $lastPengajuan = PengajuanUMK::orderBy('nomor_pengajuan', 'desc')->first();
-        $nomorUrut = $lastPengajuan ? intval(substr($lastPengajuan->nomor_pengajuan, 8, 5)) + 1 : 1;
+        $bulanTahun = date('my');
+
+        $lastPengajuan = PengajuanUMK::where('nomor_pengajuan', 'like', "%/{$bulanTahun}")
+            ->orderBy('nomor_pengajuan', 'desc')
+            ->first();
+
+        $nomorUrut = $lastPengajuan
+            ? intval(substr($lastPengajuan->nomor_pengajuan, 8, 5)) + 1
+            : 1;
+
         $formattedNomorUrut = str_pad($nomorUrut, 5, '0', STR_PAD_LEFT);
+
         $nomorPengajuan = "SP2UMKU-{$formattedNomorUrut}/K1.01/{$bulanTahun}";
 
         return $form->schema([
