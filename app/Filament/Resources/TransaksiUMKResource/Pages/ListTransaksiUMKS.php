@@ -212,7 +212,7 @@ class ListTransaksiUMKS extends ListRecords
             'image' => $base64,
             'transaksis' => $finalDetail,
             'userName' => $userName,
-            'tanggal' => $tanggal,
+            'tanggal_pengajuan' => $tanggal,
             'nomor' => $nomor_pengajuan,
             'total_pengajuan' => $totalpengajuan,
             'total_realisasi' => $totalrealisasi,
@@ -270,9 +270,7 @@ class ListTransaksiUMKS extends ListRecords
             'total' => $total,
             'terbilang' => $terbilang,
             'userName' => $userName,
-            // 'tanggal' => $tanggal,
-            'tanggal_pengajuan' => $tanggal,
-            'tanggal_cetak' => Carbon::now()->translatedFormat('d F Y'),
+            'tanggal' => $tanggal,
             'nomor' => $nomor_pengajuan,
         ])->output();
     }
