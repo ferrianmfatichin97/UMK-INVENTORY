@@ -208,7 +208,7 @@ class TransaksiUMKResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('no_pengajuan', 'desc')
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
